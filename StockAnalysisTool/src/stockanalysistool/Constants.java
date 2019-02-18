@@ -11,7 +11,7 @@ package stockanalysistool;
  */
 public class Constants {
     public static final String INVESTOPEDIA = "investopedia";
-    public static final String YAHOO = "investopedia";
+    public static final String YAHOO = "yahoo";
     public static final String TABLE_STOCKS = "stocks";
     public static final String FIELD_ID = "id";
     public static final String FIELD_SYMBOL = "symbol";
