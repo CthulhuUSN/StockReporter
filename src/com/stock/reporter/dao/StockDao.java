@@ -1,9 +1,9 @@
 package com.stock.reporter.dao;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Data implementation
@@ -12,41 +12,30 @@ import java.sql.SQLException;
 public class StockDao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private static Connection connect = null;
-	private static StockDao instance = null;
 	
 	/**
-	 * Initialize database connection
+	 * <TODO> remove this method later
+	 * Sample to test db connection and SQL
 	 */
-	private StockDao() {
+	public void selectFromStockTicker() {
+		
 		try {
-            String url = "jdbc:sqlite:stockreporter.db";
-            connect = DriverManager.getConnection(url);  
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+			Statement stmt = DBConnect.getInstance().createStatement();
+			ResultSet rs = stmt.executeQuery("select * from stock_ticker");
+			while(rs.next()) {
+				System.out.println(rs.getInt("TICKER_ID"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	/**
-	 * get database connection instance
-	 * @return db connection instance
+	 * <TODO> remove this method later
+	 * To test db connection.
 	 */
-	public static StockDao getInstance() {
-		if(instance == null) {
-			instance = new StockDao();
-		}
-		return instance;
-	}
-	
-    private void disconnect(){
-        try {
-            if (connect != null) {
-            	connect.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+    public static void main(String ar[]) {
+    	StockDao obj = new StockDao();
+    	obj.selectFromStockTicker();
     }
 }
