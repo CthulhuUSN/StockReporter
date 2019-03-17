@@ -22,7 +22,8 @@ public class StockDao implements Serializable {
 	private StockDao() {
 		try {
             String url = "jdbc:sqlite:stockreporter.db";
-            connect = DriverManager.getConnection(url);            
+            connect = DriverManager.getConnection(url);  
+            System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
