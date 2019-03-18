@@ -92,7 +92,7 @@ public class StockDao implements Serializable {
 			pstmt.setLong(19,  obj.getStockDtMapId());
 			result = pstmt.executeUpdate();
 			
-			System.out.println("Record inserted with id " + obj.getSummaryId());
+			System.out.println("Record inserted...");
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
@@ -138,7 +138,7 @@ public class StockDao implements Serializable {
 			pstmt.setString(2, obj.getName());
 			result = pstmt.executeUpdate();
 			
-			System.out.println("Record inserted with id " + obj.getTickerId());
+			System.out.println("Record inserted...");
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
@@ -184,6 +184,8 @@ public class StockDao implements Serializable {
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		}finally {
+			DBConnect.disconnect();
 		}
 	}
 	
@@ -194,11 +196,10 @@ public class StockDao implements Serializable {
     public static void main(String ar[]) {
     	StockDao obj = new StockDao();
     	StockSummary summary = new StockSummary();
-    	summary.setSummaryId(100);
     	summary.setPrevClosePrice(15.21f);
     	summary.setEarningDate("2019-05-12");
 
-    	System.out.println(obj.insert(summary));
-    	//obj.selectFromStockTicker();
+    	//System.out.println(obj.insert(summary));
+    	obj.selectFromStockTicker();
     }
 }
