@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.stock.reporter.db.table.constant.StockSummaryTblCol;
+import com.stock.reporter.db.table.constant.StockTickerTblCol;
 import com.stock.reporter.domain.StockDateMap;
 import com.stock.reporter.domain.StockHistorical;
 import com.stock.reporter.domain.StockSource;
@@ -35,7 +36,7 @@ public class StockDao implements Serializable {
 		}else if(object instanceof StockHistorical) {
 			
 		}else if(object instanceof StockTicker) {
-			
+			result = insertStockTicker((StockTicker)object);
 		}else if(object instanceof StockSource) {
 			
 		}else if(object instanceof StockDateMap) {
@@ -53,7 +54,7 @@ public class StockDao implements Serializable {
 	public <T> int insertStockSummary(StockSummary obj) {
 		int result = 0;
 		builder = new StringBuilder();
-		
+	
 		builder.append("INSERT INTO STOCK_SUMMARY (");
 		
 		
@@ -119,6 +120,32 @@ public class StockDao implements Serializable {
 	 */
 	public <T> int insertStockTicker(StockTicker obj) {
 		int result = 0;
+		builder = new StringBuilder();
+		
+		builder.append("INSERT INTO STOCK_TICKER (");
+		for(StockTickerTblCol col: StockTickerTblCol.values()) {
+			builder.append(col + ",");
+		}
+		//remove last extra comma
+		builder.setLength(builder.length()-1);
+		
+		builder.append(") VALUES (?,?,?)");
+		
+		System.out.println(builder.toString());
+		
+		try {
+			pstmt = DBConnect.getInstance().prepareStatement(builder.toString());
+			pstmt.setLong(1, obj.getTickerId());
+			pstmt.setString(2, obj.getSymbol());
+			pstmt.setString(3, obj.getName());
+			result = pstmt.executeUpdate();
+			
+			System.out.println("Record inserted with id " + obj.getTickerId());
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			DBConnect.disconnect();
+		}
 		
 		return result;
 	}
