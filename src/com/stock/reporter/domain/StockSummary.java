@@ -1,7 +1,6 @@
 package com.stock.reporter.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Summary domain class to store summary data
@@ -41,13 +40,15 @@ public class StockSummary implements Serializable {
 	
 	private float eps;
 	
-	private Date earningDate;
+	private String earningDate;
 	
 	private float dividentYield;
 	
-	private Date exDividentDate;
+	private String exDividentDate;
 	
 	private float oneYearTargetEst;
+	
+	private long stockDtMapId;
 
 	public long getSummaryId() {
 		return summaryId;
@@ -169,11 +170,11 @@ public class StockSummary implements Serializable {
 		this.eps = eps;
 	}
 
-	public Date getEarningDate() {
+	public String getEarningDate() {
 		return earningDate;
 	}
 
-	public void setEarningDate(Date earningDate) {
+	public void setEarningDate(String earningDate) {
 		this.earningDate = earningDate;
 	}
 
@@ -185,11 +186,11 @@ public class StockSummary implements Serializable {
 		this.dividentYield = dividentYield;
 	}
 
-	public Date getExDividentDate() {
+	public String getExDividentDate() {
 		return exDividentDate;
 	}
 
-	public void setExDividentDate(Date exDividentDate) {
+	public void setExDividentDate(String exDividentDate) {
 		this.exDividentDate = exDividentDate;
 	}
 
@@ -199,5 +200,13 @@ public class StockSummary implements Serializable {
 
 	public void setOneYearTargetEst(float oneYearTargetEst) {
 		this.oneYearTargetEst = oneYearTargetEst;
+	}
+
+	public long getStockDtMapId() {
+		return stockDtMapId;
+	}
+
+	public void setStockDtMapId(long stockDtMapId) {
+		this.stockDtMapId = stockDtMapId;
 	}
 }

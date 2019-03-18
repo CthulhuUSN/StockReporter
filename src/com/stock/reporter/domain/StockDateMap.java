@@ -1,7 +1,6 @@
 package com.stock.reporter.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Stock date mapper
@@ -13,7 +12,7 @@ public class StockDateMap implements Serializable {
 
 	private long stockDtMapId;
 	
-	private Date stockDate;
+	private String stockDate;
 	
 	private long tickerId;
 	
@@ -27,11 +26,11 @@ public class StockDateMap implements Serializable {
 		this.stockDtMapId = stockDtMapId;
 	}
 
-	public Date getStockDate() {
+	public String getStockDate() {
 		return stockDate;
 	}
 
-	public void setStockDate(Date stockDate) {
+	public void setStockDate(String stockDate) {
 		this.stockDate = stockDate;
 	}
 

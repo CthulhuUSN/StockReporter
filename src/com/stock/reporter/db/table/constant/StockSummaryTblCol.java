@@ -1,0 +1,29 @@
+package com.stock.reporter.db.table.constant;
+
+/**
+ * Column names for STOCK_SUMMARY table
+ * @date Mar 17, 2019
+ */
+public enum StockSummaryTblCol {
+	
+	SUMMARY_ID,
+	PREV_CLOSE_PRICE,
+	OPEN_PRICE,
+	BID_PRICE,
+	ASK_PRICE,
+	DAYS_RANGE_MIN,
+	DAYS_RANGE_MAX,
+	FIFTY_TWO_WEEKS_MIN,
+	FIFTY_TWO_WEEKS_MAX,
+	VOLUME,
+	AVG_VOLUME,
+	MARKET_CAP,
+	BETA_COEFFICIENT,
+	PE_RATIO,
+	EPS,
+	EARNING_DATE,
+	DIVIDEND_YIELD,
+	EX_DIVIDEND_DATE,
+	ONE_YEAR_TARGET_EST,
+	STOCK_DT_MAP_ID;
+}

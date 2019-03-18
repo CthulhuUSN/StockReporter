@@ -44,7 +44,7 @@ public class DBConnect {
 	/**
 	 * Disconnect the connection
 	 */
-    private void disconnect(){
+    public static void disconnect(){
         try {
             if (connect != null) {
             	connect.close();

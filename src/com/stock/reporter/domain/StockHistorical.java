@@ -23,6 +23,8 @@ public class StockHistorical implements Serializable {
 	private float adjClose;
 	
 	private long volume;
+	
+	private long stockDtMapId;
 
 	public long getHistoricalId() {
 		return historicalId;
@@ -78,5 +80,13 @@ public class StockHistorical implements Serializable {
 
 	public void setVolume(long volume) {
 		this.volume = volume;
+	}
+
+	public long getStockDtMapId() {
+		return stockDtMapId;
+	}
+
+	public void setStockDtMapId(long stockDtMapId) {
+		this.stockDtMapId = stockDtMapId;
 	}
 }
