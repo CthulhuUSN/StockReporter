@@ -6,7 +6,6 @@ package com.stock.reporter.db.table.constant;
  */
 public enum StockSummaryTblCol {
 	
-	SUMMARY_ID,
 	PREV_CLOSE_PRICE,
 	OPEN_PRICE,
 	BID_PRICE,

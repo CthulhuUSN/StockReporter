@@ -6,7 +6,6 @@ package com.stock.reporter.db.table.constant;
  */
 public enum StockTickerTblCol {
 
-	TICKER_ID,
 	SYMBOL,
 	NAME;
 }

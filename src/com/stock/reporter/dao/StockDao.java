@@ -64,33 +64,32 @@ public class StockDao implements Serializable {
 		//remove last extra comma
 		builder.setLength(builder.length()-1);
 		
-		builder.append(") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		builder.append(") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		
 		System.out.println(builder.toString());
 		
 		try {
 			pstmt = DBConnect.getInstance().prepareStatement(builder.toString());
 			
-			pstmt.setLong(1, obj.getSummaryId());
-			pstmt.setFloat(2, obj.getPrevClosePrice());
-			pstmt.setFloat(3, obj.getOpenPrice());
-			pstmt.setFloat(4, obj.getBidPrice());
-			pstmt.setFloat(5, obj.getAskPrice());
-			pstmt.setFloat(6, obj.getDaysRangeMin());
-			pstmt.setFloat(7, obj.getDaysRangeMax());
-			pstmt.setFloat(8, obj.getFiftyTwoWeeksMin());
-			pstmt.setFloat(9, obj.getFiftyTwoWeeksMax());
-			pstmt.setFloat(10, obj.getVolume());
-			pstmt.setFloat(11, obj.getAvgVolume());
-			pstmt.setFloat(12, obj.getMarketCap());
-			pstmt.setFloat(13, obj.getBetaCoefficient());
-			pstmt.setFloat(14, obj.getPeRatio());
-			pstmt.setFloat(15, obj.getEps());
-			pstmt.setString(16, obj.getEarningDate());
-			pstmt.setFloat(17, obj.getDividentYield());
-			pstmt.setString(18, obj.getExDividentDate());
-			pstmt.setFloat(19, obj.getOneYearTargetEst());
-			pstmt.setLong(20,  obj.getStockDtMapId());
+			pstmt.setFloat(1, obj.getPrevClosePrice());
+			pstmt.setFloat(2, obj.getOpenPrice());
+			pstmt.setFloat(3, obj.getBidPrice());
+			pstmt.setFloat(4, obj.getAskPrice());
+			pstmt.setFloat(5, obj.getDaysRangeMin());
+			pstmt.setFloat(6, obj.getDaysRangeMax());
+			pstmt.setFloat(7, obj.getFiftyTwoWeeksMin());
+			pstmt.setFloat(8, obj.getFiftyTwoWeeksMax());
+			pstmt.setFloat(9, obj.getVolume());
+			pstmt.setFloat(10, obj.getAvgVolume());
+			pstmt.setFloat(11, obj.getMarketCap());
+			pstmt.setFloat(12, obj.getBetaCoefficient());
+			pstmt.setFloat(13, obj.getPeRatio());
+			pstmt.setFloat(14, obj.getEps());
+			pstmt.setString(15, obj.getEarningDate());
+			pstmt.setFloat(16, obj.getDividentYield());
+			pstmt.setString(17, obj.getExDividentDate());
+			pstmt.setFloat(18, obj.getOneYearTargetEst());
+			pstmt.setLong(19,  obj.getStockDtMapId());
 			result = pstmt.executeUpdate();
 			
 			System.out.println("Record inserted with id " + obj.getSummaryId());
@@ -129,15 +128,14 @@ public class StockDao implements Serializable {
 		//remove last extra comma
 		builder.setLength(builder.length()-1);
 		
-		builder.append(") VALUES (?,?,?)");
+		builder.append(") VALUES (?,?)");
 		
 		System.out.println(builder.toString());
 		
 		try {
 			pstmt = DBConnect.getInstance().prepareStatement(builder.toString());
-			pstmt.setLong(1, obj.getTickerId());
-			pstmt.setString(2, obj.getSymbol());
-			pstmt.setString(3, obj.getName());
+			pstmt.setString(1, obj.getSymbol());
+			pstmt.setString(2, obj.getName());
 			result = pstmt.executeUpdate();
 			
 			System.out.println("Record inserted with id " + obj.getTickerId());

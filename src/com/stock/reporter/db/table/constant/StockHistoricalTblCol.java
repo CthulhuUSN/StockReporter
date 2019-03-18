@@ -6,7 +6,6 @@ package com.stock.reporter.db.table.constant;
  */
 public enum StockHistoricalTblCol {
 	
-	HISTORICAL_ID,
 	OPEN,
 	HIGH,
 	LOW,

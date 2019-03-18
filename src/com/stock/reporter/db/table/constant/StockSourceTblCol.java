@@ -6,6 +6,5 @@ package com.stock.reporter.db.table.constant;
  */
 public enum StockSourceTblCol {
 
-	SOURCE_ID,
 	NAME;
 }

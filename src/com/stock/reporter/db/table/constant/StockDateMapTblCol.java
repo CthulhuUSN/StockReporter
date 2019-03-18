@@ -6,7 +6,6 @@ package com.stock.reporter.db.table.constant;
  */
 public enum StockDateMapTblCol {
 
-	STOCK_DT_MAP_ID,
 	STOCK_DATE,
 	TICKER_ID,
 	SOURCE_ID;
