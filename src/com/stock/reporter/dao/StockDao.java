@@ -7,7 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.stock.reporter.db.table.constant.StockSummaryTblCol;
+import com.stock.reporter.domain.StockDateMap;
+import com.stock.reporter.domain.StockHistorical;
+import com.stock.reporter.domain.StockSource;
 import com.stock.reporter.domain.StockSummary;
+import com.stock.reporter.domain.StockTicker;
 
 /**
  * Data Access Layer implementation implementation
@@ -27,20 +31,28 @@ public class StockDao implements Serializable {
 	public <T> int insert(T object) {
 		int result = 0;
 		if(object instanceof StockSummary) {
-			result = insertSummary((StockSummary)object);
+			result = insertStockSummary((StockSummary)object);
+		}else if(object instanceof StockHistorical) {
+			
+		}else if(object instanceof StockTicker) {
+			
+		}else if(object instanceof StockSource) {
+			
+		}else if(object instanceof StockDateMap) {
+			
 		}
 		
 		return result;
 	}
 	
 	/**
-	 * Save method for a specific class
+	 * Insert method for a stock summary class
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertSummary(StockSummary obj) {
-		builder = new StringBuilder();
+	public <T> int insertStockSummary(StockSummary obj) {
 		int result = 0;
+		builder = new StringBuilder();
 		
 		builder.append("INSERT INTO STOCK_SUMMARY (");
 		
@@ -86,6 +98,50 @@ public class StockDao implements Serializable {
 		}finally {
 			DBConnect.disconnect();
 		}
+		return result;
+	}
+	
+	/**
+	 * Insert method for a stock historical class
+	 * @param obj
+	 * @return
+	 */
+	public <T> int insertStockHistorical(StockHistorical obj) {
+		int result = 0;
+		
+		return result;
+	}
+	
+	/**
+	 * Insert method for a stock ticker class
+	 * @param obj
+	 * @return
+	 */
+	public <T> int insertStockTicker(StockTicker obj) {
+		int result = 0;
+		
+		return result;
+	}
+	
+	/**
+	 * Insert method for a stock source class
+	 * @param obj
+	 * @return
+	 */
+	public <T> int insertStockSource(StockSource obj) {
+		int result = 0;
+		
+		return result;
+	}
+	
+	/**
+	 * Insert method for a stock date mapper class
+	 * @param obj
+	 * @return
+	 */
+	public <T> int insertStockDateMap(StockDateMap obj) {
+		int result = 0;
+		
 		return result;
 	}
 	

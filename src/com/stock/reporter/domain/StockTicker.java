@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Load and store stock ticker names
  * @date Mar 17, 2019
  */
-public class StcokTicker implements Serializable {
+public class StockTicker implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
