@@ -32,9 +32,6 @@ public class StockDao implements Serializable {
 		conn = DBConnect.getInstance(); 
 	}
 	
-	public <T> int insert(T object) {
-		return insert(object, true);
-	}
 	/**
 	 * Generic save method for all classes
 	 * @param object
@@ -58,7 +55,7 @@ public class StockDao implements Serializable {
 	}
 	
 	/**
-	 * Insert method for a stock summary class
+	 * Insert method for a stock summary with transactional flag
 	 * @param obj
 	 * @return
 	 */
@@ -139,7 +136,7 @@ public class StockDao implements Serializable {
 	}
 	
 	/**
-	 * Insert method for a stock ticker class
+	 * Insert method for a stock ticker with transactional flag
 	 * @param obj
 	 * @return
 	 */
@@ -192,17 +189,6 @@ public class StockDao implements Serializable {
 	}
 	
 	/**
-	 * Insert method for a stock source class
-	 * @param obj
-	 * @return
-	 */
-	public <T> int insertStockSource(StockSource obj, boolean isTransactional) {
-		int result = 0;
-		
-		return result;
-	}
-	
-	/**
 	 * Insert method for a stock date mapper class
 	 * @param obj
 	 * @return
@@ -211,6 +197,84 @@ public class StockDao implements Serializable {
 		int result = 0;
 		
 		return result;
+	}
+	
+	/**
+	 * Delete stock ticker by id with transactional flag
+	 * @param id
+	 */
+	public void deleteStockTickerById(long id, boolean isTransactional) {
+		builder = new StringBuilder();
+		builder.append("DELETE FROM STOCK_TICKER WHERE TICKER_ID=?");
+		System.out.println(builder.toString());
+		
+		try {
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+				System.out.println("Autocommit set to false...");
+			}
+			
+			pstmt = conn.prepareStatement(builder.toString());
+			pstmt.setLong(1,  id);
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				System.out.println("Record deleted for id " + id);
+			}else {
+				System.out.println("Record not deleted matching record not found for id " + id);
+			}
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+					System.out.println("Transaction rollback...");
+				}
+				
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+	}
+	
+	/**
+	 * Delete all records from stock ticker with transactional flag
+	 */
+	public void deleteAllFromStockTicker(boolean isTransactional) {
+		builder = new StringBuilder();
+		builder.append("DELETE FROM STOCK_TICKER");
+		System.out.println(builder.toString());
+		
+		try {
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+				System.out.println("Autocommit set to false...");
+			}
+			
+			pstmt = conn.prepareStatement(builder.toString());
+			int result = pstmt.executeUpdate();
+			if(result == 1) {
+				System.out.println("Records deleted");
+			}else {
+				System.out.println("Records not deleted...");
+			}
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+					System.out.println("Transaction rollback...");
+				}
+				
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
 	}
 	
 	/**
@@ -283,6 +347,35 @@ public class StockDao implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Count all records 
+	 * @return
+	 */
+	public long countAllForStockTicker() {
+		long records = 0;
+		
+		builder = new StringBuilder();
+		builder.append("SELECT COUNT(*) FROM STOCK_TICKER");
+		System.out.println(builder.toString());
+		
+		try {
+			pstmt = conn.prepareStatement(builder.toString());
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				records = rs.getInt(1);
+			}
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return records;
+	}
 	/**
 	 * <TODO> remove this method later
 	 * To test db connection.

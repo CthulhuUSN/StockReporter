@@ -43,6 +43,40 @@ public class StockTickerService {
 	}
 	
 	/**
+	 * Delete stock ticker by id
+	 * @param id
+	 */
+	public void deleteStockTickerById(long id) {
+		deleteStockTickerById(id, true);
+	}
+	
+	/**
+	 * Delete stock ticker by id with transactional flag
+	 * @param id
+	 * @param isTransactional
+	 */
+	public void deleteStockTickerById(long id, boolean isTransactional) {
+		System.out.println("Inside StockTickerService -> deleteStockTickerById");
+		stockDao.deleteStockTickerById(id, isTransactional);
+	}
+	
+	/**
+	 * Delete all from stock ticker
+	 */
+	public void deleteAllFromStockTicker() {
+		deleteAllFromStockTicker(true);
+	}
+	
+	/**
+	 * Delete all from stock ticker with transactional flag
+	 * @param isTransactional
+	 */
+	public void deleteAllFromStockTicker(boolean isTransactional) {
+		System.out.println("Inside StockTickerService -> deleteAllFromStockTicker");
+		stockDao.deleteAllFromStockTicker(true);
+	}
+	
+	/**
 	 * find stock ticker by symbol
 	 * @param symbol
 	 * @return
@@ -60,5 +94,14 @@ public class StockTickerService {
 	public StockTicker findById(long id) {
 		System.out.println("Inside StockTickerService -> findById");
 		return stockDao.findStockTickerById(id);
+	}
+	
+	/**
+	 * Count all stock ticker records
+	 * @return
+	 */
+	public long countAllForStockTicker() {
+		System.out.println("Inside StockTickerService -> countAllForStockTicker");
+		return stockDao.countAllForStockTicker();
 	}
 }
