@@ -30,8 +30,8 @@ class StockTickerSpec {
 	@DisplayName("Insert StockTicker data")
 	@Test
 	void insertData() {
-		stockTicker.setSymbol("MSFT");
-		stockTicker.setName("Microsoft");
+		stockTicker.setSymbol("BAC");
+		stockTicker.setName("Bank of America Corporation");
 		int result = stockTickerService.insert(stockTicker, false);
 		
 		assertTrue(() -> result == 1, "Insert opoeration failed for ticker id:" + stockTicker.getTickerId());

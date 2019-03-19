@@ -26,6 +26,13 @@ public class StockDao implements Serializable {
 	PreparedStatement pstmt = null;
 	Connection conn;
 	
+	/**
+	 * Retrieve database connection
+	 */
+	public StockDao() {
+		conn = DBConnect.getInstance(); 
+	}
+	
 	public <T> int insert(T object) {
 		return insert(object, true);
 	}
@@ -74,7 +81,6 @@ public class StockDao implements Serializable {
 		System.out.println(builder.toString());
 		
 		try {
-			conn = DBConnect.getInstance();
 			if(!isTransactional) {
 				conn.setAutoCommit(false);
 			}
@@ -101,7 +107,10 @@ public class StockDao implements Serializable {
 			pstmt.setLong(19,  obj.getStockDtMapId());
 			result = pstmt.executeUpdate();
 			
-			System.out.println("Record inserted...");
+			//Execution success
+			if(result == 1)
+				System.out.println("Record inserted...");
+			
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
@@ -109,10 +118,12 @@ public class StockDao implements Serializable {
 				if(!isTransactional) {
 					conn.rollback();
 				}
+				
+				if(pstmt != null)
+					pstmt.close();
 			}catch(SQLException ex) {
 				System.out.println(ex.getMessage());
 			}
-			DBConnect.disconnect();
 		}
 		return result;
 	}
@@ -149,7 +160,6 @@ public class StockDao implements Serializable {
 		System.out.println(builder.toString());
 		
 		try {
-			conn = DBConnect.getInstance();
 			if(!isTransactional) {
 				conn.setAutoCommit(false);
 				System.out.println("Autocommit set to false...");
@@ -160,7 +170,10 @@ public class StockDao implements Serializable {
 			pstmt.setString(2, obj.getName());
 			result = pstmt.executeUpdate();
 			
-			System.out.println("Record inserted...");
+			//Execution success
+			if(result == 1)
+				System.out.println("Record inserted...");
+			
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
@@ -169,10 +182,11 @@ public class StockDao implements Serializable {
 					conn.rollback();
 					System.out.println("Transaction rollback...");
 				}
+				if(pstmt != null)
+					pstmt.close();
 			}catch(SQLException ex) {
 				System.out.println(ex.getMessage());
 			}
-			DBConnect.disconnect();
 		}
 		
 		return result;
@@ -205,9 +219,9 @@ public class StockDao implements Serializable {
 	 * Sample to test db connection and SQL
 	 */
 	public void selectFromStockTicker() {
-		
+		Statement stmt = null;
 		try {
-			Statement stmt = DBConnect.getInstance().createStatement();
+			stmt = DBConnect.getInstance().createStatement();
 			ResultSet rs = stmt.executeQuery("select * from stock_ticker");
 			while(rs.next()) {
 				System.out.println(rs.getInt("TICKER_ID") + "," + rs.getString("SYMBOL")  + "," + rs.getString("NAME"));
@@ -215,6 +229,13 @@ public class StockDao implements Serializable {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}finally {
+			try {
+				if(stmt != null)
+					stmt.close();
+				
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
 			DBConnect.disconnect();
 		}
 	}
