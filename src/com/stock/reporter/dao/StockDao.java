@@ -1,6 +1,7 @@
 package com.stock.reporter.dao;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,20 +24,24 @@ public class StockDao implements Serializable {
 	private static final long serialVersionUID = 1L;
 	StringBuilder builder = null;
 	PreparedStatement pstmt = null;
+	Connection conn;
 	
+	public <T> int insert(T object) {
+		return insert(object, true);
+	}
 	/**
 	 * Generic save method for all classes
 	 * @param object
 	 * @return
 	 */
-	public <T> int insert(T object) {
+	public <T> int insert(T object, boolean isTransactional) {
 		int result = 0;
 		if(object instanceof StockSummary) {
-			result = insertStockSummary((StockSummary)object);
+			result = insertStockSummary((StockSummary)object, isTransactional);
 		}else if(object instanceof StockHistorical) {
 			
 		}else if(object instanceof StockTicker) {
-			result = insertStockTicker((StockTicker)object);
+			result = insertStockTicker((StockTicker)object, isTransactional);
 		}else if(object instanceof StockSource) {
 			
 		}else if(object instanceof StockDateMap) {
@@ -51,7 +56,7 @@ public class StockDao implements Serializable {
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertStockSummary(StockSummary obj) {
+	public <T> int insertStockSummary(StockSummary obj, boolean isTransactional) {
 		int result = 0;
 		builder = new StringBuilder();
 	
@@ -69,7 +74,11 @@ public class StockDao implements Serializable {
 		System.out.println(builder.toString());
 		
 		try {
-			pstmt = DBConnect.getInstance().prepareStatement(builder.toString());
+			conn = DBConnect.getInstance();
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+			}
+			pstmt = conn.prepareStatement(builder.toString());
 			
 			pstmt.setFloat(1, obj.getPrevClosePrice());
 			pstmt.setFloat(2, obj.getOpenPrice());
@@ -96,6 +105,13 @@ public class StockDao implements Serializable {
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+				}
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
 			DBConnect.disconnect();
 		}
 		return result;
@@ -106,7 +122,7 @@ public class StockDao implements Serializable {
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertStockHistorical(StockHistorical obj) {
+	public <T> int insertStockHistorical(StockHistorical obj, boolean isTransactional) {
 		int result = 0;
 		
 		return result;
@@ -117,7 +133,7 @@ public class StockDao implements Serializable {
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertStockTicker(StockTicker obj) {
+	public <T> int insertStockTicker(StockTicker obj, boolean isTransactional) {
 		int result = 0;
 		builder = new StringBuilder();
 		
@@ -133,7 +149,13 @@ public class StockDao implements Serializable {
 		System.out.println(builder.toString());
 		
 		try {
-			pstmt = DBConnect.getInstance().prepareStatement(builder.toString());
+			conn = DBConnect.getInstance();
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+				System.out.println("Autocommit set to false...");
+			}
+			
+			pstmt = conn.prepareStatement(builder.toString());
 			pstmt.setString(1, obj.getSymbol());
 			pstmt.setString(2, obj.getName());
 			result = pstmt.executeUpdate();
@@ -142,6 +164,14 @@ public class StockDao implements Serializable {
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());
 		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+					System.out.println("Transaction rollback...");
+				}
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
 			DBConnect.disconnect();
 		}
 		
@@ -153,7 +183,7 @@ public class StockDao implements Serializable {
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertStockSource(StockSource obj) {
+	public <T> int insertStockSource(StockSource obj, boolean isTransactional) {
 		int result = 0;
 		
 		return result;
@@ -164,7 +194,7 @@ public class StockDao implements Serializable {
 	 * @param obj
 	 * @return
 	 */
-	public <T> int insertStockDateMap(StockDateMap obj) {
+	public <T> int insertStockDateMap(StockDateMap obj, boolean isTransactional) {
 		int result = 0;
 		
 		return result;
@@ -180,7 +210,7 @@ public class StockDao implements Serializable {
 			Statement stmt = DBConnect.getInstance().createStatement();
 			ResultSet rs = stmt.executeQuery("select * from stock_ticker");
 			while(rs.next()) {
-				System.out.println(rs.getInt("TICKER_ID"));
+				System.out.println(rs.getInt("TICKER_ID") + "," + rs.getString("SYMBOL")  + "," + rs.getString("NAME"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -195,11 +225,11 @@ public class StockDao implements Serializable {
 	 */
     public static void main(String ar[]) {
     	StockDao obj = new StockDao();
-    	StockSummary summary = new StockSummary();
-    	summary.setPrevClosePrice(15.21f);
-    	summary.setEarningDate("2019-05-12");
+    	/*StockTicker ticker = new StockTicker();
+    	ticker.setSymbol("GOOG");
+    	ticker.setName("Google");
 
-    	//System.out.println(obj.insert(summary));
+    	obj.insert(ticker);*/
     	obj.selectFromStockTicker();
     }
 }

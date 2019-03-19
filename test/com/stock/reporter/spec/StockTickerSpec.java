@@ -32,7 +32,7 @@ class StockTickerSpec {
 	void insertData() {
 		stockTicker.setSymbol("MSFT");
 		stockTicker.setName("Microsoft");
-		int result = stockTickerService.insert(stockTicker);
+		int result = stockTickerService.insert(stockTicker, false);
 		
 		assertTrue(() -> result == 1, "Insert opoeration failed for ticker id:" + stockTicker.getTickerId());
 	}

@@ -16,9 +16,12 @@ public class StockTickerService {
 	}
 	
 	public int insert(StockTicker stockTicker) {
+		return insert(stockTicker, true);
+	}
+	public int insert(StockTicker stockTicker, boolean isTransactional) {
 		
 		System.out.println("Inside StockTickerService -> insert");
-		int result = stockDao.insert(stockTicker);
+		int result = stockDao.insert(stockTicker, isTransactional);
 		
 		return result;
 	}
