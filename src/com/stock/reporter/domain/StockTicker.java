@@ -39,4 +39,9 @@ public class StockTicker implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Override
+	public String toString() {
+		return "StockTicker [tickerId=" + tickerId + ", symbol=" + symbol + ", name=" + name + "]";
+	}
 }

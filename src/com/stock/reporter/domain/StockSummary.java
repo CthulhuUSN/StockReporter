@@ -209,4 +209,15 @@ public class StockSummary implements Serializable {
 	public void setStockDtMapId(long stockDtMapId) {
 		this.stockDtMapId = stockDtMapId;
 	}
+
+	@Override
+	public String toString() {
+		return "StockSummary [summaryId=" + summaryId + ", prevClosePrice=" + prevClosePrice + ", openPrice="
+				+ openPrice + ", bidPrice=" + bidPrice + ", askPrice=" + askPrice + ", daysRangeMin=" + daysRangeMin
+				+ ", daysRangeMax=" + daysRangeMax + ", fiftyTwoWeeksMin=" + fiftyTwoWeeksMin + ", fiftyTwoWeeksMax="
+				+ fiftyTwoWeeksMax + ", volume=" + volume + ", avgVolume=" + avgVolume + ", marketCap=" + marketCap
+				+ ", betaCoefficient=" + betaCoefficient + ", peRatio=" + peRatio + ", eps=" + eps + ", earningDate="
+				+ earningDate + ", dividentYield=" + dividentYield + ", exDividentDate=" + exDividentDate
+				+ ", oneYearTargetEst=" + oneYearTargetEst + ", stockDtMapId=" + stockDtMapId + "]";
+	}
 }

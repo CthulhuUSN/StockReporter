@@ -48,5 +48,11 @@ public class StockDateMap implements Serializable {
 
 	public void setSourceId(long sourceId) {
 		this.sourceId = sourceId;
-	} 
+	}
+
+	@Override
+	public String toString() {
+		return "StockDateMap [stockDtMapId=" + stockDtMapId + ", stockDate=" + stockDate + ", tickerId=" + tickerId
+				+ ", sourceId=" + sourceId + "]";
+	}
 }

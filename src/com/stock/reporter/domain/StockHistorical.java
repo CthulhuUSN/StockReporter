@@ -89,4 +89,11 @@ public class StockHistorical implements Serializable {
 	public void setStockDtMapId(long stockDtMapId) {
 		this.stockDtMapId = stockDtMapId;
 	}
+
+	@Override
+	public String toString() {
+		return "StockHistorical [historicalId=" + historicalId + ", open=" + open + ", high=" + high + ", low=" + low
+				+ ", close=" + close + ", adjClose=" + adjClose + ", volume=" + volume + ", stockDtMapId="
+				+ stockDtMapId + "]";
+	}
 }

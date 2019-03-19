@@ -215,29 +215,73 @@ public class StockDao implements Serializable {
 	}
 	
 	/**
-	 * <TODO> remove this method later
-	 * Sample to test db connection and SQL
+	 * find stock ticker by name
+	 * @param name
+	 * @return
 	 */
-	public void selectFromStockTicker() {
-		Statement stmt = null;
+	public StockTicker findStockTickerBySymbol(String symbol) {
+		StockTicker result = null;
+		
+		builder = new StringBuilder();
+		builder.append("SELECT * FROM STOCK_TICKER WHERE SYMBOL=?");
+		System.out.println(builder.toString());
+		
 		try {
-			stmt = DBConnect.getInstance().createStatement();
-			ResultSet rs = stmt.executeQuery("select * from stock_ticker");
+			pstmt = conn.prepareStatement(builder.toString());
+			pstmt.setString(1,  symbol);
+			ResultSet rs = pstmt.executeQuery();
+			result = new StockTicker();
 			while(rs.next()) {
-				System.out.println(rs.getInt("TICKER_ID") + "," + rs.getString("SYMBOL")  + "," + rs.getString("NAME"));
+				result.setTickerId(rs.getLong("TICKER_ID"));
+				result.setSymbol(rs.getString("SYMBOL"));
+				result.setName(rs.getString("NAME"));
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
 		}finally {
 			try {
-				if(stmt != null)
-					stmt.close();
-				
+				if(pstmt != null)
+					pstmt.close();
 			}catch(SQLException ex) {
 				System.out.println(ex.getMessage());
 			}
-			DBConnect.disconnect();
 		}
+		return result;
+	}
+	
+	/**
+	 * find stock ticker by id
+	 * @param name
+	 * @return
+	 */
+	public StockTicker findStockTickerById(long id) {
+		StockTicker result = null;
+		
+		builder = new StringBuilder();
+		builder.append("SELECT * FROM STOCK_TICKER WHERE TICKER_ID=?");
+		System.out.println(builder.toString());
+		
+		try {
+			pstmt = conn.prepareStatement(builder.toString());
+			pstmt.setLong(1,  id);
+			ResultSet rs = pstmt.executeQuery();
+			result = new StockTicker();
+			while(rs.next()) {
+				result.setTickerId(rs.getLong("TICKER_ID"));
+				result.setSymbol(rs.getString("SYMBOL"));
+				result.setName(rs.getString("NAME"));
+			}
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return result;
 	}
 	
 	/**
@@ -251,6 +295,11 @@ public class StockDao implements Serializable {
     	ticker.setName("Google");
 
     	obj.insert(ticker);*/
-    	obj.selectFromStockTicker();
+    	//obj.selectFromStockTicker();
+    	/*StockTicker ticker = obj.findStockTickerBySymbol("MSFT");
+    	System.out.println(ticker.toString());*/
+    	
+    	StockTicker ticker = obj.findStockTickerById(10);
+    	System.out.println(ticker.toString());
     }
 }
