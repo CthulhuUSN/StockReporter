@@ -78,19 +78,16 @@ public class StockTickerInitialStocks {
 		
 		stockTickerService =  new StockTickerService();
 		
-		
-		for(StockTicker obj: tickerList) {
-			
-			/**
-			 * check initial data in the db table
-			 */
-			if(stockTickerService.findBySymbol(obj.getSymbol()).getName() != null) {
-				System.out.println("Initial data already exist in STOCK_TICKER table?");
-				return;
-			}
-			System.out.println("Inserting record for " + obj.getName());
-			stockTickerService.insert(obj);
+		/**
+		 * check initial data in the db table
+		 */
+		if(!tickerList.isEmpty() && stockTickerService.findBySymbol(tickerList.get(0).getSymbol()).getName() != null) {
+			System.out.println("Initial data already exist in STOCK_TICKER table?");
+			return;
 		}
+		System.out.println("Inserting stock ticker record(s)");
+		stockTickerService.insertBatch(tickerList);
+		
 		System.out.println("Initialize stock ticker data insertion completed...");
 	}
 	

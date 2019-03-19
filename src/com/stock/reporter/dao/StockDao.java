@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.stock.reporter.db.table.constant.StockSummaryTblCol;
 import com.stock.reporter.db.table.constant.StockTickerTblCol;
@@ -51,6 +52,23 @@ public class StockDao implements Serializable {
 			
 		}
 		
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> int[] insertBatch(List<T> objectList, boolean isTransactional) {
+		int[] result = null;
+		if(!objectList.isEmpty() && objectList.get(0) instanceof StockSummary) {
+			
+		}else if(!objectList.isEmpty() && objectList.get(0) instanceof StockHistorical) {
+			
+		}else if(!objectList.isEmpty() && objectList.get(0) instanceof StockTicker) {
+			result = insertBatchStockTicker((List<StockTicker>) objectList, isTransactional);
+		}else if(!objectList.isEmpty() && objectList.get(0) instanceof StockSource) {
+			
+		}else if(!objectList.isEmpty() && objectList.get(0) instanceof StockDateMap) {
+			
+		}
 		return result;
 	}
 	
@@ -125,6 +143,76 @@ public class StockDao implements Serializable {
 	}
 	
 	/**
+	 * Insert batch method for a stock summary with transactional flag
+	 * @param obj
+	 * @return
+	 */
+	public <T> int[] insertBatchStockSummary(List<StockSummary> objList, boolean isTransactional) {
+		int[] result = null;
+		builder = new StringBuilder();
+	
+		builder.append("INSERT INTO STOCK_SUMMARY (");
+		
+		
+		for(StockSummaryTblCol col: StockSummaryTblCol.values()) {
+			builder.append(col + ",");
+		}
+		//remove last extra comma
+		builder.setLength(builder.length()-1);
+		
+		builder.append(") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		
+		System.out.println(builder.toString());
+		
+		try {
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+			}
+			pstmt = conn.prepareStatement(builder.toString());
+			for(StockSummary obj: objList) {
+				pstmt.setFloat(1, obj.getPrevClosePrice());
+				pstmt.setFloat(2, obj.getOpenPrice());
+				pstmt.setFloat(3, obj.getBidPrice());
+				pstmt.setFloat(4, obj.getAskPrice());
+				pstmt.setFloat(5, obj.getDaysRangeMin());
+				pstmt.setFloat(6, obj.getDaysRangeMax());
+				pstmt.setFloat(7, obj.getFiftyTwoWeeksMin());
+				pstmt.setFloat(8, obj.getFiftyTwoWeeksMax());
+				pstmt.setFloat(9, obj.getVolume());
+				pstmt.setFloat(10, obj.getAvgVolume());
+				pstmt.setFloat(11, obj.getMarketCap());
+				pstmt.setFloat(12, obj.getBetaCoefficient());
+				pstmt.setFloat(13, obj.getPeRatio());
+				pstmt.setFloat(14, obj.getEps());
+				pstmt.setString(15, obj.getEarningDate());
+				pstmt.setFloat(16, obj.getDividentYield());
+				pstmt.setString(17, obj.getExDividentDate());
+				pstmt.setFloat(18, obj.getOneYearTargetEst());
+				pstmt.setLong(19,  obj.getStockDtMapId());
+				pstmt.addBatch();
+			}
+			result = pstmt.executeBatch();
+			
+			System.out.println("Record(s) inserted...");
+			
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+				}
+				
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return result;
+	}
+	
+	/**
 	 * Insert method for a stock historical class
 	 * @param obj
 	 * @return
@@ -169,6 +257,61 @@ public class StockDao implements Serializable {
 			//Execution success
 			if(result == 1)
 				System.out.println("Record inserted...");
+			
+		}catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}finally {
+			try {
+				if(!isTransactional) {
+					conn.rollback();
+					System.out.println("Transaction rollback...");
+				}
+				if(pstmt != null)
+					pstmt.close();
+			}catch(SQLException ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Insert batch method for a stock ticker with transactional flag
+	 * @param obj
+	 * @return
+	 */
+	public <T> int[] insertBatchStockTicker(List<StockTicker> objList, boolean isTransactional) {
+		int[] result = null;
+		builder = new StringBuilder();
+		
+		builder.append("INSERT INTO STOCK_TICKER (");
+		for(StockTickerTblCol col: StockTickerTblCol.values()) {
+			builder.append(col + ",");
+		}
+		//remove last extra comma
+		builder.setLength(builder.length()-1);
+		
+		builder.append(") VALUES (?,?)");
+		
+		System.out.println(builder.toString());
+		
+		try {
+			if(!isTransactional) {
+				conn.setAutoCommit(false);
+				System.out.println("Autocommit set to false...");
+			}
+			
+			pstmt = conn.prepareStatement(builder.toString());
+			for(StockTicker obj: objList) {
+				pstmt.setString(1, obj.getSymbol());
+				pstmt.setString(2, obj.getName());
+				pstmt.addBatch();
+			}
+
+			result = pstmt.executeBatch();
+			
+			System.out.println("Record(s) inserted...");
 			
 		}catch(SQLException ex) {
 			System.out.println(ex.getMessage());

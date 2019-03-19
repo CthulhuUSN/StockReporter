@@ -1,5 +1,7 @@
 package com.stock.reporter.service;
 
+import java.util.List;
+
 import com.stock.reporter.dao.StockDao;
 import com.stock.reporter.domain.StockTicker;
 
@@ -38,6 +40,30 @@ public class StockTickerService {
 		
 		System.out.println("Inside StockTickerService -> insert");
 		int result = stockDao.insert(stockTicker, isTransactional);
+		
+		return result;
+	}
+	
+	/**
+	 * Transaction enabled
+	 * @param stockTicker
+	 * @return
+	 */
+	public int[] insertBatch(List<StockTicker> stockTicker) {
+		return insertBatch(stockTicker, true);
+	}
+	
+	/**
+	 * Transaction flag is set
+	 * Will be useful for running unit test cases with transaction off
+	 * @param stockTicker
+	 * @param isTransactional
+	 * @return
+	 */
+	public int[] insertBatch(List<StockTicker> stockTicker, boolean isTransactional) {
+		
+		System.out.println("Inside StockTickerService -> insert");
+		int[] result = stockDao.insertBatch(stockTicker, isTransactional);
 		
 		return result;
 	}
