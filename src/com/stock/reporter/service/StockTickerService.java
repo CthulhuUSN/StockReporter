@@ -41,4 +41,24 @@ public class StockTickerService {
 		
 		return result;
 	}
+	
+	/**
+	 * find stock ticker by symbol
+	 * @param symbol
+	 * @return
+	 */
+	public StockTicker findBySymbol(String symbol) {
+		System.out.println("Inside StockTickerService -> findBySymbol");
+		return stockDao.findStockTickerBySymbol(symbol);
+	}
+	
+	/**
+	 * find stock ticker by id
+	 * @param id
+	 * @return
+	 */
+	public StockTicker findById(long id) {
+		System.out.println("Inside StockTickerService -> findById");
+		return stockDao.findStockTickerById(id);
+	}
 }
