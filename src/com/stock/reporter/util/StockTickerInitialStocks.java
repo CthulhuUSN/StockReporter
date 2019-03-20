@@ -3,6 +3,7 @@ package com.stock.reporter.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.stock.reporter.dao.DBConnect;
 import com.stock.reporter.domain.StockTicker;
 import com.stock.reporter.service.StockTickerService;
 
@@ -89,6 +90,11 @@ public class StockTickerInitialStocks {
 		stockTickerService.insertBatch(tickerList);
 		
 		System.out.println("Initialize stock ticker data insertion completed...");
+		
+		// Make sure to close the connection at the end of the program
+		if(DBConnect.getInstance() != null) {
+			DBConnect.disconnect();
+		}
 	}
 	
 	public static void main(String[] args) {
