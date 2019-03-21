@@ -6,8 +6,6 @@
 package stockanalysistool;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jsoup.Connection;
@@ -21,11 +19,9 @@ import org.jsoup.select.Elements;
  * @author Herve Tchoufong
  */
 public class InvestopediaScrapper extends JsoupScrapper {
-    private Database db;
     
     public InvestopediaScrapper(){
-        db = new Database();
-        db.deleteAll();
+        super();
     }
     
     public void scrape(){
@@ -88,5 +84,5 @@ public class InvestopediaScrapper extends JsoupScrapper {
         } catch (IOException ex) {
             Logger.getLogger(StockAnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+    }
 }

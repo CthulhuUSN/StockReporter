@@ -16,15 +16,64 @@ import java.sql.Statement;
  *
  * @author Herve Thcoufong
  */
-public class Database {
+public class StockDao {
+    private static StockDao instance = null;
     private Connection conn = null;
     
-    public void connect() {
+    public static StockDao getInstance(){
+        if(instance == null){
+            instance = new StockDao();
+        }
+        return instance;
+    }
+    
+    public void connect() {   //Connects to the database
         try {
             String url = "jdbc:sqlite:stocksdb.sqlite";
             conn = DriverManager.getConnection(url);            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    private void disconnect(){//Disconnects from the database
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void insert(HistoricalData historicalData){
+        String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
+                + Constants.FIELD_SYMBOL + ","
+                + Constants.FIELD_SOURCE + ","
+                + Constants.FIELD_DATE + ","
+                + Constants.FIELD_OPEN + ","
+                + Constants.FIELD_HIGH + ","
+                + Constants.FIELD_LOW + ","
+                + Constants.FIELD_CLOSE + ","
+                + Constants.FIELD_ADJUSTED_CLOSE + ","
+                + Constants.FIELD_VOLUME + ")"
+                + " values (?,?,?,?,?,?,?,?,?)";
+        try{
+            connect(); //<--CONNECTS TO DATABASE BEFORE STARTING AN OPERATION
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, historicalData.getSymbol());
+            pstmt.setString(2, historicalData.getSource());
+            pstmt.setString(3, historicalData.getDate());
+            pstmt.setString(4, historicalData.getOpen());
+            pstmt.setString(5, historicalData.getHigh());
+            pstmt.setString(6, historicalData.getLow());
+            pstmt.setString(7, historicalData.getClose());
+            pstmt.setString(8, historicalData.getAdjusted_close());
+            pstmt.setString(9, historicalData.getVolume());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            disconnect(); //<--DISCONNECTS FROM DATABASE AFTER COMPLETING THE OPERATION
         }
     }
     
@@ -73,47 +122,6 @@ public class Database {
             System.out.println(e.getMessage());
         } finally {
             disconnect();
-        }
-    }
-    
-    public void insert(HistoricalData historicalData){
-        String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
-                + Constants.FIELD_SYMBOL + ","
-                + Constants.FIELD_SOURCE + ","
-                + Constants.FIELD_DATE + ","
-                + Constants.FIELD_OPEN + ","
-                + Constants.FIELD_HIGH + ","
-                + Constants.FIELD_LOW + ","
-                + Constants.FIELD_CLOSE + ","
-                + Constants.FIELD_ADJUSTED_CLOSE + ","
-                + Constants.FIELD_VOLUME + ")"
-                + " values (?,?,?,?,?,?,?,?,?)";
-        try{
-            connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, historicalData.getSymbol());
-            pstmt.setString(2, historicalData.getSource());
-            pstmt.setString(3, historicalData.getDate());
-            pstmt.setString(4, historicalData.getOpen());
-            pstmt.setString(5, historicalData.getHigh());
-            pstmt.setString(6, historicalData.getLow());
-            pstmt.setString(7, historicalData.getClose());
-            pstmt.setString(8, historicalData.getAdjusted_close());
-            pstmt.setString(9, historicalData.getVolume());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            disconnect();
-        }
-    }
-    private void disconnect(){
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
     }
 }
