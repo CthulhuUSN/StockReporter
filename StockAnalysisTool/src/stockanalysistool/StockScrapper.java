@@ -12,11 +12,11 @@ import java.util.List;
  *
  * @author Herve Tchoufong
  */
-public class JsoupScrapper {
+public class StockScrapper {
     protected StockDao db;
     protected List<String> symbols = new ArrayList();
     
-    public JsoupScrapper(){
+    public StockScrapper(){
         db = StockDao.getInstance();
         db.deleteAll();
     }

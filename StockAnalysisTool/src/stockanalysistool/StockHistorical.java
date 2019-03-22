@@ -9,7 +9,7 @@ package stockanalysistool;
  *
  * @author Herve Tchoufong
  */
-public class HistoricalData {
+public class StockHistorical {
     private String id;
     private String symbol;
     private String date;

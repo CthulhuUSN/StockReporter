@@ -18,7 +18,7 @@ import org.jsoup.select.Elements;
  *
  * @author Herve Tchoufong
  */
-public class InvestopediaScrapper extends JsoupScrapper {
+public class InvestopediaScrapper extends StockScrapper {
     
     public InvestopediaScrapper(){
         super();
@@ -66,7 +66,7 @@ public class InvestopediaScrapper extends JsoupScrapper {
             Elements rows = table.select("tr"); 
             for(int i=1; i<rows.size()-1; i++){
                 Element row = rows.get(i);
-                HistoricalData historicalData = new HistoricalData();
+                StockHistorical historicalData = new StockHistorical();
                 Elements columns = row.select("td");
                 if(columns.size() == 6){
                     historicalData.setSymbol(symbolString);

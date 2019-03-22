@@ -45,7 +45,7 @@ public class StockDao {
         }
     }
     
-    public void insert(HistoricalData historicalData){
+    public void insert(StockHistorical historicalData){
         String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
                 + Constants.FIELD_SYMBOL + ","
                 + Constants.FIELD_SOURCE + ","
