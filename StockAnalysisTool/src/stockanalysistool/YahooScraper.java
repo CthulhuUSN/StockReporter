@@ -7,8 +7,9 @@ package stockanalysistool;
 
 /**
  *
- * @author jasonarvidson
+ * @author
  */
 public class YahooScraper {
-    
+    public void scrapeAllSummaryData(){}
+    public void scrapeAllHistoricalData(){}
 }

@@ -78,7 +78,7 @@ public class InvestopediaScraper extends StockScraper {
                     historicalData.setClose(columns.get(4).text());
                     historicalData.setAdjusted_close(columns.get(4).text());
                     historicalData.setVolume(columns.get(5).text());
-                    db.insert(historicalData);
+                    dao.insertStockHistoricalData(historicalData);
                 }
             }
         } catch (IOException ex) {

@@ -10,15 +10,15 @@ package stockanalysistool;
  * @author Herve Tchoufong
  */
 public class StockAnalysisTool {
-    //Still need to add the stock symbols and names to the array.
-    private String stockArray[][];
-    private String databasePath;
-    private String databaseUrl = "jdbc:sqlite:stocksdb.sqlite";
-    public StockDao dao = new StockDao(databasePath, databaseUrl);
-    public InvestopediaScraper investopediaScraper = new InvestopediaScraper();
-    public YahooScraper yahooScraper = new YahooScraper();
     
     public static void main(String[] args) {
+        //Still need to add the stock symbols and names to the array.
+        String[][] stockArray = new String[5][2];
+                
+        StockDao dao = StockDao.getInstance();
+        InvestopediaScraper investopediaScraper = new InvestopediaScraper();
+        YahooScraper yahooScraper = new YahooScraper();
+        
         investopediaScraper.scrapeAllSummaryData();
         yahooScraper.scrapeAllSummaryData();
     }

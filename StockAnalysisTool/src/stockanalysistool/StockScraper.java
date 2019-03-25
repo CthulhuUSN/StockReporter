@@ -17,6 +17,8 @@ public class StockScraper {
     public StockSummary ss = new StockSummary();
     public StockHistorical sh = new StockHistorical();
     
+    StockDao dao = StockDao.getInstance();
+    
     public void scrapeAllSummaryData(){}
     public void scrapeAllHistoricalData(){}
     

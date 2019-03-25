@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author jasonarvidson
+ * @author ArvidsJE
  */
 public class StockDaoTest {
     
@@ -63,14 +63,91 @@ public class StockDaoTest {
     }
 
     /**
+     * Test of setStockTickerData method, of class StockDao.
+     */
+    @Test
+    public void testSetStockTickerData() {
+        System.out.println("setStockTickerData");
+        String stockName = "";
+        String stockSymbol = "";
+        StockDao instance = new StockDao();
+        instance.setStockTickerData(stockName, stockSymbol);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
      * Test of insertStockHistoricalData method, of class StockDao.
      */
     @Test
-    public void testInsert() {
-        System.out.println("insert");
-        StockHistorical historicalData = null;
+    public void testInsertStockHistoricalData() {
+        System.out.println("insertStockHistoricalData");
+        StockHistorical stockHistorical = null;
         StockDao instance = new StockDao();
-        instance.insertStockHistoricalData(historicalData);
+        instance.insertStockHistoricalData(stockHistorical);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of insertStockSummaryData method, of class StockDao.
+     */
+    @Test
+    public void testInsertStockSummaryData() {
+        System.out.println("insertStockSummaryData");
+        StockSummary stockSummary = null;
+        StockDao instance = new StockDao();
+        instance.insertStockSummaryData(stockSummary);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of updateStockHistoricalData method, of class StockDao.
+     */
+    @Test
+    public void testUpdateStockHistoricalData() {
+        System.out.println("updateStockHistoricalData");
+        StockHistorical stockHistorical = null;
+        StockDao instance = new StockDao();
+        instance.updateStockHistoricalData(stockHistorical);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of updateStockSummaryData method, of class StockDao.
+     */
+    @Test
+    public void testUpdateStockSummaryData() {
+        System.out.println("updateStockSummaryData");
+        StockSummary stockSummary = null;
+        StockDao instance = new StockDao();
+        instance.updateStockSummaryData(stockSummary);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAvgStockSummaryView method, of class StockDao.
+     */
+    @Test
+    public void testGetAvgStockSummaryView() {
+        System.out.println("getAvgStockSummaryView");
+        StockDao instance = new StockDao();
+        instance.getAvgStockSummaryView();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAvgStockHistoricalView method, of class StockDao.
+     */
+    @Test
+    public void testGetAvgStockHistoricalView() {
+        System.out.println("getAvgStockHistoricalView");
+        StockDao instance = new StockDao();
+        instance.getAvgStockHistoricalView();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -83,18 +160,6 @@ public class StockDaoTest {
         System.out.println("deleteAll");
         StockDao instance = new StockDao();
         instance.deleteAll();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of selectAll method, of class StockDao.
-     */
-    @Test
-    public void testSelectAll() {
-        System.out.println("selectAll");
-        StockDao instance = new StockDao();
-        instance.selectAll();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

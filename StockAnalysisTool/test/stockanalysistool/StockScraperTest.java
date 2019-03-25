@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author jasonarvidson
+ * @author ArvidsJE
  */
-public class StockScraperTestStockScraperTest {
+public class StockScraperTest {
     
-    public StockScraperTestStockScraperTest() {
+    public StockScraperTest() {
     }
     
     @BeforeAll
@@ -37,8 +37,26 @@ public class StockScraperTestStockScraperTest {
     public void tearDown() {
     }
 
+    /**
+     * Test of scrapeAllSummaryData method, of class StockScraper.
+     */
     @Test
-    public void testSomeMethod() {
+    public void testScrapeAllSummaryData() {
+        System.out.println("scrapeAllSummaryData");
+        StockScraper instance = new StockScraper();
+        instance.scrapeAllSummaryData();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of scrapeAllHistoricalData method, of class StockScraper.
+     */
+    @Test
+    public void testScrapeAllHistoricalData() {
+        System.out.println("scrapeAllHistoricalData");
+        StockScraper instance = new StockScraper();
+        instance.scrapeAllHistoricalData();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -19,13 +19,10 @@ import java.sql.Statement;
 public class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
-    private String databaseUrl;
-    private String databasePath;
+    private static String databasePath = "StockAnalysisTool/stocksdb.sqlite";
+    private static String databaseUrl = "jdbc:sqlite:stocksdb.sqlite";
     
-    public StockDao(String databasePath, String databaseUrl){
-        this.databasePath = databasePath;
-        this.databaseUrl = databaseUrl;
-    }
+    public StockDao(){}
     
     public static StockDao getInstance(){
         if(instance == null){
@@ -54,7 +51,7 @@ public class StockDao {
     public void setStockTickerData(String stockName, String stockSymbol){}
     
     public void insertStockHistoricalData(StockHistorical stockHistorical){
-        //Commenting this out until we get to the historical data part of the project.
+        //Commenting this out until we get to the historical data part of the project. -Jason
         /*
         String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
                 + Constants.FIELD_SYMBOL + ","
@@ -96,22 +93,10 @@ public class StockDao {
     
     public void getAvgStockSummaryView(){}
     
-    public void getAvgStockHistoricalView(){}
-    
-    public void deleteAll(){
-        String sql ="DELETE FROM "+ Constants.TABLE_STOCKS;
-        try{
-            connect();
-            Statement stmt  = conn.createStatement();
-            stmt.executeQuery(sql);
-        }catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            disconnect();
-        }
-    }
-    
-    public void selectAll(){
+    public void getAvgStockHistoricalView(){
+    //Moved this here from selectAll() to keep the class organized and to keep the code - Jason
+    //Commenting this out until we get to the historical data part of the project -Jason
+    /*
         String sql = "SELECT "+Constants.FIELD_ID+", "
                 +Constants.FIELD_SYMBOL+", "
                 +Constants.FIELD_SOURCE+", "
@@ -144,5 +129,20 @@ public class StockDao {
         } finally {
             disconnect();
         }
+    */
     }
+    
+    public void deleteAll(){
+        String sql ="DELETE FROM "+ Constants.TABLE_STOCKS;
+        try{
+            connect();
+            Statement stmt  = conn.createStatement();
+            stmt.executeQuery(sql);
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            disconnect();
+        }
+    }
+    
 }

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author jasonarvidson
+ * @author ArvidsJE
  */
 public class StockAnalysisToolTest {
     
