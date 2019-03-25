@@ -40,7 +40,7 @@ public class InvestopediaScraper extends StockScraper {
                 Elements symbolsElements = allSymbolsContent.select("a[href]");
                 
                 for(int j=0; j<symbolsElements.size()-1; j++){
-                   symbols.add(symbolsElements.get(j).text());
+                   stockSymbols.add(symbolsElements.get(j).text());
                 }
             } catch (IOException ex) {
                 Logger.getLogger(InvestopediaScraper.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,7 +49,7 @@ public class InvestopediaScraper extends StockScraper {
     }
     
     private void scapeAllHistoricalTables(){
-        for(String symbolString: symbols)
+        for(String symbolString: stockSymbols)
             scapeSingleHistoricalTables(symbolString);
     }
     

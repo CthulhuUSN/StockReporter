@@ -63,14 +63,14 @@ public class StockDaoTest {
     }
 
     /**
-     * Test of insert method, of class StockDao.
+     * Test of insertStockHistoricalData method, of class StockDao.
      */
     @Test
     public void testInsert() {
         System.out.println("insert");
         StockHistorical historicalData = null;
         StockDao instance = new StockDao();
-        instance.insert(historicalData);
+        instance.insertStockHistoricalData(historicalData);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -19,8 +19,13 @@ import java.sql.Statement;
 public class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
-    private String datbaseUrl = "jdbc:sqlite:stocksdb.sqlite";
+    private String databaseUrl;
     private String databasePath;
+    
+    public StockDao(String databasePath, String databaseUrl){
+        this.databasePath = databasePath;
+        this.databaseUrl = databaseUrl;
+    }
     
     public static StockDao getInstance(){
         if(instance == null){
@@ -31,7 +36,7 @@ public class StockDao {
     
     public void connect() {   //Connects to the database
         try {
-            conn = DriverManager.getConnection(datbaseUrl);            
+            conn = DriverManager.getConnection(databaseUrl);            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -46,7 +51,11 @@ public class StockDao {
         }
     }
     
-    public void insert(StockHistorical historicalData){
+    public void setStockTickerData(String stockName, String stockSymbol){}
+    
+    public void insertStockHistoricalData(StockHistorical stockHistorical){
+        //Commenting this out until we get to the historical data part of the project.
+        /*
         String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
                 + Constants.FIELD_SYMBOL + ","
                 + Constants.FIELD_SOURCE + ","
@@ -61,22 +70,33 @@ public class StockDao {
         try{
             connect(); //<--CONNECTS TO DATABASE BEFORE STARTING AN OPERATION
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, historicalData.getSymbol());
-            pstmt.setString(2, historicalData.getSource());
-            pstmt.setString(3, historicalData.getDate());
-            pstmt.setString(4, historicalData.getOpen());
-            pstmt.setString(5, historicalData.getHigh());
-            pstmt.setString(6, historicalData.getLow());
-            pstmt.setString(7, historicalData.getClose());
-            pstmt.setString(8, historicalData.getAdjusted_close());
-            pstmt.setString(9, historicalData.getVolume());
+            pstmt.setString(1, stockHistorical.getSymbol());
+            pstmt.setString(2, stockHistorical.getSource());
+            pstmt.setDate(3, stockHistorical.getDate());
+            pstmt.setInt(4, stockHistorical.getOpen());
+            pstmt.setInt(5, stockHistorical.getHigh());
+            pstmt.setInt(6, stockHistorical.getLow());
+            pstmt.setInt(7, stockHistorical.getClose());
+            pstmt.setInt(8, stockHistorical.getAdjClose());
+            pstmt.setInt(9, stockHistorical.getVolume());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             disconnect(); //<--DISCONNECTS FROM DATABASE AFTER COMPLETING THE OPERATION
         }
+        */
     }
+    
+    public void insertStockSummaryData(StockSummary stockSummary){}
+    
+    public void updateStockHistoricalData(StockHistorical stockHistorical){}
+    
+    public void updateStockSummaryData(StockSummary stockSummary){}
+    
+    public void getAvgStockSummaryView(){}
+    
+    public void getAvgStockHistoricalView(){}
     
     public void deleteAll(){
         String sql ="DELETE FROM "+ Constants.TABLE_STOCKS;
