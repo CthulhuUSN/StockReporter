@@ -9,6 +9,6 @@ package stockanalysistool;
  *
  * @author jasonarvidson
  */
-public class YahooScrapper {
+public class YahooScraper {
     
 }

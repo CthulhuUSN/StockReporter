@@ -11,6 +11,11 @@ package stockanalysistool;
  */
 public class StockAnalysisTool {
     public static void main(String[] args) {
-        new InvestopediaScrapper().scrape();
+        String stockArray[][];
+        String databasePath;
+        StockDao dao = new StockDao();
+        InvestopediaScraper investopediaScrapper = new InvestopediaScraper();
+        YahooScraper yahooScrapper = new YahooScraper();
+        //Add the actual work here.
     }
 }

@@ -18,9 +18,9 @@ import org.jsoup.select.Elements;
  *
  * @author Herve Tchoufong
  */
-public class InvestopediaScrapper extends StockScrapper {
+public class InvestopediaScraper extends StockScraper {
     
-    public InvestopediaScrapper(){
+    public InvestopediaScraper(){
         super();
     }
     
@@ -43,7 +43,7 @@ public class InvestopediaScrapper extends StockScrapper {
                    symbols.add(symbolsElements.get(j).text());
                 }
             } catch (IOException ex) {
-                Logger.getLogger(InvestopediaScrapper.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InvestopediaScraper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

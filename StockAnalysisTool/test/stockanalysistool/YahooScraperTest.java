@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author jasonarvidson
  */
-public class YahooScrapperTest {
+public class YahooScraperTest {
     
-    public YahooScrapperTest() {
+    public YahooScraperTest() {
     }
     
     @BeforeAll

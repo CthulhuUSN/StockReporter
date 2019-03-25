@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author jasonarvidson
  */
-public class StockScrapperTest {
+public class StockScraperTestStockScraperTest {
     
-    public StockScrapperTest() {
+    public StockScraperTestStockScraperTest() {
     }
     
     @BeforeAll

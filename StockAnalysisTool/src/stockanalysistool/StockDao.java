@@ -19,6 +19,8 @@ import java.sql.Statement;
 public class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
+    private String datbaseUrl = "jdbc:sqlite:stocksdb.sqlite";
+    private String databasePath;
     
     public static StockDao getInstance(){
         if(instance == null){
@@ -29,8 +31,7 @@ public class StockDao {
     
     public void connect() {   //Connects to the database
         try {
-            String url = "jdbc:sqlite:stocksdb.sqlite";
-            conn = DriverManager.getConnection(url);            
+            conn = DriverManager.getConnection(datbaseUrl);            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -306,5 +306,59 @@ public class StockHistoricalTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of getHistoricalId method, of class StockHistorical.
+     */
+    @Test
+    public void testGetHistoricalId() {
+        System.out.println("getHistoricalId");
+        StockHistorical instance = new StockHistorical();
+        int expResult = 0;
+        int result = instance.getHistoricalId();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setHistoricalId method, of class StockHistorical.
+     */
+    @Test
+    public void testSetHistoricalId() {
+        System.out.println("setHistoricalId");
+        int historicalId = 0;
+        StockHistorical instance = new StockHistorical();
+        instance.setHistoricalId(historicalId);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getAdjClose method, of class StockHistorical.
+     */
+    @Test
+    public void testGetAdjClose() {
+        System.out.println("getAdjClose");
+        StockHistorical instance = new StockHistorical();
+        int expResult = 0;
+        int result = instance.getAdjClose();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of setAdjClose method, of class StockHistorical.
+     */
+    @Test
+    public void testSetAdjClose() {
+        System.out.println("setAdjClose");
+        int adjClose = 0;
+        StockHistorical instance = new StockHistorical();
+        instance.setAdjClose(adjClose);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
     
 }

@@ -16,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author jasonarvidson
  */
-public class InvestopediaScrapperTest {
+public class InvestopediaScraperTest {
     
-    public InvestopediaScrapperTest() {
+    public InvestopediaScraperTest() {
     }
     
     @BeforeAll
@@ -38,25 +38,25 @@ public class InvestopediaScrapperTest {
     }
 
     /**
-     * Test of scrape method, of class InvestopediaScrapper.
+     * Test of scrape method, of class InvestopediaScraper.
      */
     @Test
     public void testScrape() {
         System.out.println("scrape");
-        InvestopediaScrapper instance = new InvestopediaScrapper();
+        InvestopediaScraper instance = new InvestopediaScraper();
         instance.scrape();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of scapeSingleHistoricalTables method, of class InvestopediaScrapper.
+     * Test of scapeSingleHistoricalTables method, of class InvestopediaScraper.
      */
     @Test
     public void testScapeSingleHistoricalTables() {
         System.out.println("scapeSingleHistoricalTables");
         String symbolString = "";
-        InvestopediaScrapper instance = new InvestopediaScrapper();
+        InvestopediaScraper instance = new InvestopediaScraper();
         instance.scapeSingleHistoricalTables(symbolString);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

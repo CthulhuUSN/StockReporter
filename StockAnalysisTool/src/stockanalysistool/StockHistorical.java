@@ -10,96 +10,68 @@ package stockanalysistool;
  * @author Herve Tchoufong
  */
 public class StockHistorical {
-    private String id;
-    private String symbol;
-    private String date;
-    private String source;
-    private String open;
-    private String high;
-    private String low;
-    private String close;
-    private String adjusted_close;
-    private String volume;
+    private int historicalId;
+    private int open;
+    private int high;
+    private int low;
+    private int close;
+    private int adjClose;
+    private int volume;
 
-    public String getId() {
-        return id;
+    public int getHistoricalId() {
+        return historicalId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setHistoricalId(int historicalId) {
+        this.historicalId = historicalId;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getOpen() {
+    public int getOpen() {
         return open;
     }
 
-    public void setOpen(String open) {
+    public void setOpen(int open) {
         this.open = open;
     }
 
-    public String getHigh() {
+    public int getHigh() {
         return high;
     }
 
-    public void setHigh(String high) {
+    public void setHigh(int high) {
         this.high = high;
     }
 
-    public String getLow() {
+    public int getLow() {
         return low;
     }
 
-    public void setLow(String low) {
+    public void setLow(int low) {
         this.low = low;
     }
 
-    public String getClose() {
+    public int getClose() {
         return close;
     }
 
-    public void setClose(String close) {
+    public void setClose(int close) {
         this.close = close;
     }
 
-    public String getAdjusted_close() {
-        return adjusted_close;
+    public int getAdjClose() {
+        return adjClose;
     }
 
-    public void setAdjusted_close(String adjusted_close) {
-        this.adjusted_close = adjusted_close;
+    public void setAdjClose(int adjClose) {
+        this.adjClose = adjClose;
     }
 
-    public String getVolume() {
+    public int getVolume() {
         return volume;
     }
 
-    public void setVolume(String volume) {
+    public void setVolume(int volume) {
         this.volume = volume;
     }
-    
     
 }
