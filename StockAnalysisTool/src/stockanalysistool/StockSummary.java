@@ -5,165 +5,223 @@
  */
 package stockanalysistool;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
- *
- * @author 
+ * Domain class to hold stock summary data
  */
-public class StockSummary {
-    private int summaryId;
-    private int prevClosePrice;
-    private float openPrice;
-    private float bidPrice;
-    private float askPrice;
-    private int daysRange;
-    private int fiftytwoWeeksRange;
-    private int volume;
-    private int avgVolume;
-    private int marketCap;
-    private int betaCoefficient;
-    private int peRatio;
-    private int eps;
-    private Date earningDate;
-    private int dividendYield;
-    private Date exDividendDate;
-    private Date oneYearTargetEst;
+public class StockSummary implements Serializable {
+        
+        private long summaryId;
+	
+	private float prevClosePrice;
+	
+	private float openPrice;
+	
+	private float bidPrice;
+	
+	private float askPrice;
+	
+	private float daysRangeMin;
+	
+	private float daysRangeMax;
+	
+	private float fiftyTwoWeeksMin;
+	
+	private float fiftyTwoWeeksMax;
+	
+	private long volume;
+	
+	private long avgVolume;
+	
+	private float marketCap;
+	
+	private float betaCoefficient;
+	
+	private float peRatio;
+	
+	private float eps;
+	
+	private LocalDate earningDate;
+	
+	private float dividentYield;
+	
+	private LocalDate exDividentDate;
+	
+	private float oneYearTargetEst;
+	
+	private long stockDtMapId;
 
-    public int getSummaryId() {
-        return summaryId;
-    }
+	public long getSummaryId() {
+		return summaryId;
+	}
 
-    public void setSummaryId(int summaryId) {
-        this.summaryId = summaryId;
-    }
+	public void setSummaryId(long summaryId) {
+		this.summaryId = summaryId;
+	}
 
-    public int getPrevClosePrice() {
-        return prevClosePrice;
-    }
+	public float getPrevClosePrice() {
+		return prevClosePrice;
+	}
 
-    public void setPrevClosePrice(int prevClosePrice) {
-        this.prevClosePrice = prevClosePrice;
-    }
+	public void setPrevClosePrice(float prevClosePrice) {
+		this.prevClosePrice = prevClosePrice;
+	}
 
-    public float getOpenPrice() {
-        return openPrice;
-    }
+	public float getOpenPrice() {
+		return openPrice;
+	}
 
-    public void setOpenPrice(float openPrice) {
-        this.openPrice = openPrice;
-    }
+	public void setOpenPrice(float openPrice) {
+		this.openPrice = openPrice;
+	}
 
-    public float getBidPrice() {
-        return bidPrice;
-    }
+	public float getBidPrice() {
+		return bidPrice;
+	}
 
-    public void setBidPrice(float bidPrice) {
-        this.bidPrice = bidPrice;
-    }
+	public void setBidPrice(float bidPrice) {
+		this.bidPrice = bidPrice;
+	}
 
-    public float getAskPrice() {
-        return askPrice;
-    }
+	public float getAskPrice() {
+		return askPrice;
+	}
 
-    public void setAskPrice(float askPrice) {
-        this.askPrice = askPrice;
-    }
+	public void setAskPrice(float askPrice) {
+		this.askPrice = askPrice;
+	}
 
-    public int getDaysRange() {
-        return daysRange;
-    }
+	public float getDaysRangeMin() {
+		return daysRangeMin;
+	}
 
-    public void setDaysRange(int daysRange) {
-        this.daysRange = daysRange;
-    }
+	public void setDaysRangeMin(float daysRangeMin) {
+		this.daysRangeMin = daysRangeMin;
+	}
 
-    public int getFiftytwoWeeksRange() {
-        return fiftytwoWeeksRange;
-    }
+	public float getDaysRangeMax() {
+		return daysRangeMax;
+	}
 
-    public void setFiftytwoWeeksRange(int fiftytwoWeeksRange) {
-        this.fiftytwoWeeksRange = fiftytwoWeeksRange;
-    }
+	public void setDaysRangeMax(float daysRangeMax) {
+		this.daysRangeMax = daysRangeMax;
+	}
 
-    public int getVolume() {
-        return volume;
-    }
+	public float getFiftyTwoWeeksMin() {
+		return fiftyTwoWeeksMin;
+	}
 
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
+	public void setFiftyTwoWeeksMin(float fiftyTwoWeeksMin) {
+		this.fiftyTwoWeeksMin = fiftyTwoWeeksMin;
+	}
 
-    public int getAvgVolume() {
-        return avgVolume;
-    }
+	public float getFiftyTwoWeeksMax() {
+		return fiftyTwoWeeksMax;
+	}
 
-    public void setAvgVolume(int avgVolume) {
-        this.avgVolume = avgVolume;
-    }
+	public void setFiftyTwoWeeksMax(float fiftyTwoWeeksMax) {
+		this.fiftyTwoWeeksMax = fiftyTwoWeeksMax;
+	}
 
-    public int getMarketCap() {
-        return marketCap;
-    }
+	public long getVolume() {
+		return volume;
+	}
 
-    public void setMarketCap(int marketCap) {
-        this.marketCap = marketCap;
-    }
+	public void setVolume(long volume) {
+		this.volume = volume;
+	}
 
-    public int getBetaCoefficient() {
-        return betaCoefficient;
-    }
+	public long getAvgVolume() {
+		return avgVolume;
+	}
 
-    public void setBetaCoefficient(int betaCoefficient) {
-        this.betaCoefficient = betaCoefficient;
-    }
+	public void setAvgVolume(long avgVolume) {
+		this.avgVolume = avgVolume;
+	}
 
-    public int getPeRatio() {
-        return peRatio;
-    }
+	public float getMarketCap() {
+		return marketCap;
+	}
 
-    public void setPeRatio(int peRatio) {
-        this.peRatio = peRatio;
-    }
+	public void setMarketCap(float marketCap) {
+		this.marketCap = marketCap;
+	}
 
-    public int getEps() {
-        return eps;
-    }
+	public float getBetaCoefficient() {
+		return betaCoefficient;
+	}
 
-    public void setEps(int eps) {
-        this.eps = eps;
-    }
+	public void setBetaCoefficient(float betaCoefficient) {
+		this.betaCoefficient = betaCoefficient;
+	}
 
-    public Date getEarningDate() {
-        return earningDate;
-    }
+	public float getPeRatio() {
+		return peRatio;
+	}
 
-    public void setEarningDate(Date earningDate) {
-        this.earningDate = earningDate;
-    }
+	public void setPeRatio(float peRatio) {
+		this.peRatio = peRatio;
+	}
 
-    public int getDividendYield() {
-        return dividendYield;
-    }
+	public float getEps() {
+		return eps;
+	}
 
-    public void setDividendYield(int dividendYield) {
-        this.dividendYield = dividendYield;
-    }
+	public void setEps(float eps) {
+		this.eps = eps;
+	}
 
-    public Date getExDividendDate() {
-        return exDividendDate;
-    }
+	public LocalDate getEarningDate() {
+		return earningDate;
+	}
 
-    public void setExDividendDate(Date exDividendDate) {
-        this.exDividendDate = exDividendDate;
-    }
+	public void setEarningDate(LocalDate earningDate) {
+		this.earningDate = earningDate;
+	}
 
-    public Date getOneYearTargetEst() {
-        return oneYearTargetEst;
-    }
+	public float getDividentYield() {
+		return dividentYield;
+	}
 
-    public void setOneYearTargetEst(Date oneYearTargetEst) {
-        this.oneYearTargetEst = oneYearTargetEst;
-    }
+	public void setDividentYield(float dividentYield) {
+		this.dividentYield = dividentYield;
+	}
+
+	public LocalDate getExDividentDate() {
+		return exDividentDate;
+	}
+
+	public void setExDividentDate(LocalDate exDividentDate) {
+		this.exDividentDate = exDividentDate;
+	}
+
+	public float getOneYearTargetEst() {
+		return oneYearTargetEst;
+	}
+
+	public void setOneYearTargetEst(float oneYearTargetEst) {
+		this.oneYearTargetEst = oneYearTargetEst;
+	}
+
+	public long getStockDtMapId() {
+		return stockDtMapId;
+	}
+
+	public void setStockDtMapId(long stockDtMapId) {
+		this.stockDtMapId = stockDtMapId;
+	}
+
+	@Override
+	public String toString() {
+		return "StockSummary [summaryId=" + summaryId + ", prevClosePrice=" + prevClosePrice + ", openPrice="
+				+ openPrice + ", bidPrice=" + bidPrice + ", askPrice=" + askPrice + ", daysRangeMin=" + daysRangeMin
+				+ ", daysRangeMax=" + daysRangeMax + ", fiftyTwoWeeksMin=" + fiftyTwoWeeksMin + ", fiftyTwoWeeksMax="
+				+ fiftyTwoWeeksMax + ", volume=" + volume + ", avgVolume=" + avgVolume + ", marketCap=" + marketCap
+				+ ", betaCoefficient=" + betaCoefficient + ", peRatio=" + peRatio + ", eps=" + eps + ", earningDate="
+				+ earningDate + ", dividentYield=" + dividentYield + ", exDividentDate=" + exDividentDate
+				+ ", oneYearTargetEst=" + oneYearTargetEst + ", stockDtMapId=" + stockDtMapId + "]";
+	}
     
 }
