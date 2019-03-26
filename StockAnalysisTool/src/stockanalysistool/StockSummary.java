@@ -25,7 +25,7 @@ public class StockSummary {
     private int betaCoefficient;
     private int peRatio;
     private int eps;
-    private int earningDate;
+    private Date earningDate;
     private int dividendYield;
     private Date exDividendDate;
     private Date oneYearTargetEst;
@@ -134,11 +134,11 @@ public class StockSummary {
         this.eps = eps;
     }
 
-    public int getEarningDate() {
+    public Date getEarningDate() {
         return earningDate;
     }
 
-    public void setEarningDate(int earningDate) {
+    public void setEarningDate(Date earningDate) {
         this.earningDate = earningDate;
     }
 

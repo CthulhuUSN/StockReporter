@@ -5,49 +5,26 @@
  */
 package stockanalysistool;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Date;
+import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.*;
 
-/**
- *
- * @author ArvidsJE
- */
 public class StockDaoTest {
     
-    public StockDaoTest() {
-    }
+    StockDao dao;
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
+    public StockDaoTest() {}
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
     /**
      * Test of getInstance method, of class StockDao.
      */
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
-        StockDao expResult = null;
+        StockDao expResult = dao;
         StockDao result = StockDao.getInstance();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,10 +33,8 @@ public class StockDaoTest {
     @Test
     public void testConnect() {
         System.out.println("connect");
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.connect();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -70,10 +45,8 @@ public class StockDaoTest {
         System.out.println("setStockTickerData");
         String stockName = "";
         String stockSymbol = "";
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.setStockTickerData(stockName, stockSymbol);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -83,10 +56,8 @@ public class StockDaoTest {
     public void testInsertStockHistoricalData() {
         System.out.println("insertStockHistoricalData");
         StockHistorical stockHistorical = null;
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.insertStockHistoricalData(stockHistorical);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -96,10 +67,8 @@ public class StockDaoTest {
     public void testInsertStockSummaryData() {
         System.out.println("insertStockSummaryData");
         StockSummary stockSummary = null;
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.insertStockSummaryData(stockSummary);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -109,10 +78,8 @@ public class StockDaoTest {
     public void testUpdateStockHistoricalData() {
         System.out.println("updateStockHistoricalData");
         StockHistorical stockHistorical = null;
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.updateStockHistoricalData(stockHistorical);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -122,10 +89,8 @@ public class StockDaoTest {
     public void testUpdateStockSummaryData() {
         System.out.println("updateStockSummaryData");
         StockSummary stockSummary = null;
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.updateStockSummaryData(stockSummary);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -134,10 +99,8 @@ public class StockDaoTest {
     @Test
     public void testGetAvgStockSummaryView() {
         System.out.println("getAvgStockSummaryView");
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.getAvgStockSummaryView();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -146,10 +109,8 @@ public class StockDaoTest {
     @Test
     public void testGetAvgStockHistoricalView() {
         System.out.println("getAvgStockHistoricalView");
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.getAvgStockHistoricalView();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -158,10 +119,8 @@ public class StockDaoTest {
     @Test
     public void testDeleteAll() {
         System.out.println("deleteAll");
-        StockDao instance = new StockDao();
+        StockDao instance = StockDao.getInstance();
         instance.deleteAll();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

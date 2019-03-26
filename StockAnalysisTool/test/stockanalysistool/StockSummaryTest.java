@@ -6,50 +6,46 @@
 package stockanalysistool;
 
 import java.util.Date;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
 
-/**
- *
- * @author ArvidsJE
- */
 public class StockSummaryTest {
     
+    StockSummary master;
+    
     public StockSummaryTest() {
+        master = new StockSummary();
+        master.setAskPrice(1);
+        master.setAvgVolume(1);
+        master.setBetaCoefficient(1);
+        master.setBidPrice(1);
+        master.setDaysRange(1);
+        master.setDividendYield(1);
+        master.setEarningDate(null);
+        master.setExDividendDate(null);
+        master.setEps(1);
+        master.setFiftytwoWeeksRange(1);
+        master.setMarketCap(1);
+        master.setOneYearTargetEst(null);
+        master.setOpenPrice(1);
+        master.setPeRatio(1);
+        master.setPrevClosePrice(1);
+        master.setSummaryId(1);
+        master.setVolume(1);
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
     
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
     /**
      * Test of getSummaryId method, of class StockSummary.
      */
     @Test
     public void testGetSummaryId() {
         System.out.println("getSummaryId");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getSummaryId();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,11 +54,10 @@ public class StockSummaryTest {
     @Test
     public void testSetSummaryId() {
         System.out.println("setSummaryId");
-        int summaryId = 0;
+        int summaryId = 1;
         StockSummary instance = new StockSummary();
         instance.setSummaryId(summaryId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getSummaryId(), instance.getSummaryId());
     }
 
     /**
@@ -71,12 +66,11 @@ public class StockSummaryTest {
     @Test
     public void testGetPrevClosePrice() {
         System.out.println("getPrevClosePrice");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getPrevClosePrice();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -85,11 +79,10 @@ public class StockSummaryTest {
     @Test
     public void testSetPrevClosePrice() {
         System.out.println("setPrevClosePrice");
-        int prevClosePrice = 0;
+        int prevClosePrice = 1;
         StockSummary instance = new StockSummary();
         instance.setPrevClosePrice(prevClosePrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getPrevClosePrice(), instance.getPrevClosePrice());
     }
 
     /**
@@ -98,12 +91,11 @@ public class StockSummaryTest {
     @Test
     public void testGetOpenPrice() {
         System.out.println("getOpenPrice");
-        StockSummary instance = new StockSummary();
-        float expResult = 0.0F;
+        StockSummary instance;
+        instance = master;
+        float expResult = 1.0F;
         float result = instance.getOpenPrice();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -112,11 +104,10 @@ public class StockSummaryTest {
     @Test
     public void testSetOpenPrice() {
         System.out.println("setOpenPrice");
-        float openPrice = 0.0F;
+        float openPrice = 1.0F;
         StockSummary instance = new StockSummary();
         instance.setOpenPrice(openPrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getOpenPrice(), instance.getOpenPrice());
     }
 
     /**
@@ -125,12 +116,11 @@ public class StockSummaryTest {
     @Test
     public void testGetBidPrice() {
         System.out.println("getBidPrice");
-        StockSummary instance = new StockSummary();
-        float expResult = 0.0F;
+        StockSummary instance;
+        instance = master;
+        float expResult = 1.0F;
         float result = instance.getBidPrice();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -139,11 +129,10 @@ public class StockSummaryTest {
     @Test
     public void testSetBidPrice() {
         System.out.println("setBidPrice");
-        float bidPrice = 0.0F;
+        float bidPrice = 1.0F;
         StockSummary instance = new StockSummary();
         instance.setBidPrice(bidPrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getBidPrice(), instance.getBidPrice());
     }
 
     /**
@@ -152,12 +141,11 @@ public class StockSummaryTest {
     @Test
     public void testGetAskPrice() {
         System.out.println("getAskPrice");
-        StockSummary instance = new StockSummary();
-        float expResult = 0.0F;
+        StockSummary instance;
+        instance = master;
+        float expResult = 1.0F;
         float result = instance.getAskPrice();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -166,11 +154,10 @@ public class StockSummaryTest {
     @Test
     public void testSetAskPrice() {
         System.out.println("setAskPrice");
-        float askPrice = 0.0F;
+        float askPrice = 1.0F;
         StockSummary instance = new StockSummary();
         instance.setAskPrice(askPrice);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getAskPrice(), instance.getAskPrice());
     }
 
     /**
@@ -179,12 +166,11 @@ public class StockSummaryTest {
     @Test
     public void testGetDaysRange() {
         System.out.println("getDaysRange");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getDaysRange();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -193,11 +179,10 @@ public class StockSummaryTest {
     @Test
     public void testSetDaysRange() {
         System.out.println("setDaysRange");
-        int daysRange = 0;
+        int daysRange = 1;
         StockSummary instance = new StockSummary();
         instance.setDaysRange(daysRange);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getDaysRange(), instance.getDaysRange());
     }
 
     /**
@@ -206,12 +191,11 @@ public class StockSummaryTest {
     @Test
     public void testGetFiftytwoWeeksRange() {
         System.out.println("getFiftytwoWeeksRange");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getFiftytwoWeeksRange();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -220,11 +204,10 @@ public class StockSummaryTest {
     @Test
     public void testSetFiftytwoWeeksRange() {
         System.out.println("setFiftytwoWeeksRange");
-        int fiftytwoWeeksRange = 0;
+        int fiftytwoWeeksRange = 1;
         StockSummary instance = new StockSummary();
         instance.setFiftytwoWeeksRange(fiftytwoWeeksRange);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getFiftytwoWeeksRange(), instance.getFiftytwoWeeksRange());
     }
 
     /**
@@ -233,12 +216,11 @@ public class StockSummaryTest {
     @Test
     public void testGetVolume() {
         System.out.println("getVolume");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getVolume();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -247,11 +229,10 @@ public class StockSummaryTest {
     @Test
     public void testSetVolume() {
         System.out.println("setVolume");
-        int volume = 0;
+        int volume = 1;
         StockSummary instance = new StockSummary();
         instance.setVolume(volume);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getVolume(), instance.getVolume());
     }
 
     /**
@@ -260,12 +241,11 @@ public class StockSummaryTest {
     @Test
     public void testGetAvgVolume() {
         System.out.println("getAvgVolume");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getAvgVolume();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -274,11 +254,10 @@ public class StockSummaryTest {
     @Test
     public void testSetAvgVolume() {
         System.out.println("setAvgVolume");
-        int avgVolume = 0;
+        int avgVolume = 1;
         StockSummary instance = new StockSummary();
         instance.setAvgVolume(avgVolume);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getAvgVolume(), instance.getAvgVolume());
     }
 
     /**
@@ -287,12 +266,11 @@ public class StockSummaryTest {
     @Test
     public void testGetMarketCap() {
         System.out.println("getMarketCap");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getMarketCap();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -301,11 +279,10 @@ public class StockSummaryTest {
     @Test
     public void testSetMarketCap() {
         System.out.println("setMarketCap");
-        int marketCap = 0;
+        int marketCap = 1;
         StockSummary instance = new StockSummary();
         instance.setMarketCap(marketCap);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getMarketCap(), instance.getMarketCap());
     }
 
     /**
@@ -314,12 +291,11 @@ public class StockSummaryTest {
     @Test
     public void testGetBetaCoefficient() {
         System.out.println("getBetaCoefficient");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getBetaCoefficient();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -328,11 +304,10 @@ public class StockSummaryTest {
     @Test
     public void testSetBetaCoefficient() {
         System.out.println("setBetaCoefficient");
-        int betaCoefficient = 0;
+        int betaCoefficient = 1;
         StockSummary instance = new StockSummary();
         instance.setBetaCoefficient(betaCoefficient);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getBetaCoefficient(), instance.getBetaCoefficient());
     }
 
     /**
@@ -341,12 +316,11 @@ public class StockSummaryTest {
     @Test
     public void testGetPeRatio() {
         System.out.println("getPeRatio");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getPeRatio();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -355,11 +329,10 @@ public class StockSummaryTest {
     @Test
     public void testSetPeRatio() {
         System.out.println("setPeRatio");
-        int peRatio = 0;
+        int peRatio = 1;
         StockSummary instance = new StockSummary();
         instance.setPeRatio(peRatio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getPeRatio(), instance.getPeRatio());
     }
 
     /**
@@ -368,12 +341,11 @@ public class StockSummaryTest {
     @Test
     public void testGetEps() {
         System.out.println("getEps");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getEps();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -382,11 +354,10 @@ public class StockSummaryTest {
     @Test
     public void testSetEps() {
         System.out.println("setEps");
-        int eps = 0;
+        int eps = 1;
         StockSummary instance = new StockSummary();
         instance.setEps(eps);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getEps(), instance.getEps());
     }
 
     /**
@@ -395,12 +366,11 @@ public class StockSummaryTest {
     @Test
     public void testGetEarningDate() {
         System.out.println("getEarningDate");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
-        int result = instance.getEarningDate();
+        StockSummary instance;
+        instance = master;
+        Date expResult = null;
+        Date result = instance.getEarningDate();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -409,11 +379,10 @@ public class StockSummaryTest {
     @Test
     public void testSetEarningDate() {
         System.out.println("setEarningDate");
-        int earningDate = 0;
+        Date earningDate = null;
         StockSummary instance = new StockSummary();
         instance.setEarningDate(earningDate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getEarningDate(), instance.getEarningDate());
     }
 
     /**
@@ -422,12 +391,11 @@ public class StockSummaryTest {
     @Test
     public void testGetDividendYield() {
         System.out.println("getDividendYield");
-        StockSummary instance = new StockSummary();
-        int expResult = 0;
+        StockSummary instance;
+        instance = master;
+        int expResult = 1;
         int result = instance.getDividendYield();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -436,11 +404,10 @@ public class StockSummaryTest {
     @Test
     public void testSetDividendYield() {
         System.out.println("setDividendYield");
-        int dividendYield = 0;
+        int dividendYield = 1;
         StockSummary instance = new StockSummary();
         instance.setDividendYield(dividendYield);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getDividendYield(), instance.getDividendYield());
     }
 
     /**
@@ -449,12 +416,11 @@ public class StockSummaryTest {
     @Test
     public void testGetExDividendDate() {
         System.out.println("getExDividendDate");
-        StockSummary instance = new StockSummary();
+        StockSummary instance;
+        instance = master;
         Date expResult = null;
         Date result = instance.getExDividendDate();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -466,8 +432,7 @@ public class StockSummaryTest {
         Date exDividendDate = null;
         StockSummary instance = new StockSummary();
         instance.setExDividendDate(exDividendDate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getExDividendDate(), instance.getExDividendDate());
     }
 
     /**
@@ -476,12 +441,11 @@ public class StockSummaryTest {
     @Test
     public void testGetOneYearTargetEst() {
         System.out.println("getOneYearTargetEst");
-        StockSummary instance = new StockSummary();
+        StockSummary instance;
+        instance = master;
         Date expResult = null;
         Date result = instance.getOneYearTargetEst();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -493,8 +457,7 @@ public class StockSummaryTest {
         Date oneYearTargetEst = null;
         StockSummary instance = new StockSummary();
         instance.setOneYearTargetEst(oneYearTargetEst);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(master.getOneYearTargetEst(), instance.getOneYearTargetEst());
     }
     
 }

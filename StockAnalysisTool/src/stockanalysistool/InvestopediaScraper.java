@@ -30,6 +30,7 @@ public class InvestopediaScraper extends StockScraper {
     }
     
     private void scrapeAllSymbols(){
+        /*
         for(int i=0; i<47; i++){
             try {
                 Connection jsoupConn = Jsoup.connect("https://www.investopedia.com/markets/stocks/?page="+i);
@@ -46,14 +47,18 @@ public class InvestopediaScraper extends StockScraper {
                 Logger.getLogger(InvestopediaScraper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        */
     }
     
     private void scapeAllHistoricalTables(){
+        /*
         for(String symbolString: stockSymbols)
             scapeSingleHistoricalTables(symbolString);
+        */
     }
     
     public void scapeSingleHistoricalTables(String symbolString){
+        /*
         System.out.println(symbolString);
         String url = "https://www.investopedia.com/markets/stocks/"+symbolString.toLowerCase()+"#Historical";
         try {
@@ -84,5 +89,6 @@ public class InvestopediaScraper extends StockScraper {
         } catch (IOException ex) {
             Logger.getLogger(StockAnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
     }
 }
