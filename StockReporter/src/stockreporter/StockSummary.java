@@ -6,8 +6,8 @@
 package stockreporter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 /**
  * Domain class to hold stock summary data
@@ -44,11 +44,11 @@ public class StockSummary implements Serializable {
 	
 	private BigDecimal eps;
 	
-	private LocalDate earningDate;
+	private Date earningDate;
 	
 	private BigDecimal dividentYield;
 	
-	private LocalDate exDividentDate;
+	private Date exDividentDate;
 	
 	private BigDecimal oneYearTargetEst;
 	
@@ -174,11 +174,11 @@ public class StockSummary implements Serializable {
 		this.eps = eps;
 	}
 
-	public LocalDate getEarningDate() {
+	public Date getEarningDate() {
 		return earningDate;
 	}
 
-	public void setEarningDate(LocalDate earningDate) {
+	public void setEarningDate(Date earningDate) {
 		this.earningDate = earningDate;
 	}
 
@@ -190,11 +190,11 @@ public class StockSummary implements Serializable {
 		this.dividentYield = dividentYield;
 	}
 
-	public LocalDate getExDividentDate() {
+	public Date getExDividentDate() {
 		return exDividentDate;
 	}
 
-	public void setExDividentDate(LocalDate exDividentDate) {
+	public void setExDividentDate(Date exDividentDate) {
 		this.exDividentDate = exDividentDate;
 	}
 

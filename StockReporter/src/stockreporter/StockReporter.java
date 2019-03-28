@@ -5,20 +5,15 @@
  */
 package stockreporter;
 
-/**
- *
- * @author Herve Tchoufong
- */
 public class StockReporter {
     
-    public static void main(String[] args) {
-        //Still need to add the stock symbols and names to the array.
-        String[][] stockArray = new String[5][2];
-                
+    public static void main(String[] args) {    
+        //create the database oject
         StockDao dao = StockDao.getInstance();
+        //create the scrapers
         InvestopediaScraper investopediaScraper = new InvestopediaScraper();
         YahooScraper yahooScraper = new YahooScraper();
-        
+        //scrape the data
         investopediaScraper.scrapeAllSummaryData();
         yahooScraper.scrapeAllSummaryData();
     }

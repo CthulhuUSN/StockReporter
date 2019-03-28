@@ -211,7 +211,53 @@ public final class StockDao {
         */
     }
     
-    public void insertStockSummaryData(StockSummary stockSummary){}
+    public void insertStockSummaryData(StockSummary stockSummary){
+        String sql = "INSERT INTO STOCK_TICKER (SUMMARY_ID,"
+                + " PREV_CLOSE_PRICE,"
+                + " OPEN_PRICE,"
+                + " BID_PRICE,"
+                + " ASK_PRICE,"
+                + " DAYS_RANGE_MIN,"
+                + " DAYS_RANGE_MAX,"
+                + " FIFTY_TWO_WEEKS_MIN,"
+                + " FIFTY_TWO_WEEKS_MAX,"
+                + " VOLUME,"
+                + " AVG_VOLUME,"
+                + " MARKET_CAP,"
+                + " BETA_COEFFICIENT,"
+                + " PE_RATIO,"
+                + " EPS,"
+                + " EARNING_DATE,"
+                + " DIVIDEND_YIELD,"
+                + " EX_DIVIDEND_DATE,"
+                + " ONE_YEAR_TARGET) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, stockSummary.getSummaryId());
+            pstmt.setBigDecimal(2, stockSummary.getPrevClosePrice());
+            pstmt.setBigDecimal(3, stockSummary.getOpenPrice());
+            pstmt.setBigDecimal(4, stockSummary.getBidPrice());
+            pstmt.setBigDecimal(5, stockSummary.getAskPrice());
+            pstmt.setBigDecimal(6, stockSummary.getDaysRangeMax());
+            pstmt.setBigDecimal(7, stockSummary.getDaysRangeMin());
+            pstmt.setBigDecimal(8, stockSummary.getFiftyTwoWeeksMax());
+            pstmt.setBigDecimal(9, stockSummary.getFiftyTwoWeeksMin());
+            pstmt.setLong(10,stockSummary.getVolume());
+            pstmt.setLong(11,stockSummary.getAvgVolume());
+            pstmt.setBigDecimal(12,stockSummary.getMarketCap());
+            pstmt.setBigDecimal(13,stockSummary.getBetaCoefficient());
+            pstmt.setBigDecimal(14,stockSummary.getPeRatio());
+            pstmt.setBigDecimal(15,stockSummary.getEps());
+            pstmt.setDate(16,stockSummary.getEarningDate());
+            pstmt.setBigDecimal(17,stockSummary.getDividentYield());
+            pstmt.setDate(18,stockSummary.getExDividentDate());
+            pstmt.setBigDecimal(19,stockSummary.getOneYearTargetEst());
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public void updateStockHistoricalData(StockHistorical stockHistorical){}
     
