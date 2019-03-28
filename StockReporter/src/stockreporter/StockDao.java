@@ -41,7 +41,7 @@ public final class StockDao {
             System.out.println(e.getMessage());
         }
         
-        ArrayList<String> sqlStrings = new ArrayList<String>();
+        ArrayList<String> sqlStrings = new ArrayList<>();
         
         //Create the tables
         String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"

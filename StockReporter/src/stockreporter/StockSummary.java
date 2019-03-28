@@ -7,6 +7,7 @@ package stockreporter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.math.BigDecimal;
 
 /**
  * Domain class to hold stock summary data
@@ -15,41 +16,41 @@ public class StockSummary implements Serializable {
         
         private long summaryId;
 	
-	private float prevClosePrice;
+	private BigDecimal prevClosePrice;
 	
-	private float openPrice;
+	private BigDecimal openPrice;
 	
-	private float bidPrice;
+	private BigDecimal bidPrice;
 	
-	private float askPrice;
+	private BigDecimal askPrice;
 	
-	private float daysRangeMin;
+	private BigDecimal daysRangeMin;
 	
-	private float daysRangeMax;
+	private BigDecimal daysRangeMax;
 	
-	private float fiftyTwoWeeksMin;
+	private BigDecimal fiftyTwoWeeksMin;
 	
-	private float fiftyTwoWeeksMax;
+	private BigDecimal fiftyTwoWeeksMax;
 	
 	private long volume;
 	
 	private long avgVolume;
 	
-	private float marketCap;
+	private BigDecimal marketCap;
 	
-	private float betaCoefficient;
+	private BigDecimal betaCoefficient;
 	
-	private float peRatio;
+	private BigDecimal peRatio;
 	
-	private float eps;
+	private BigDecimal eps;
 	
 	private LocalDate earningDate;
 	
-	private float dividentYield;
+	private BigDecimal dividentYield;
 	
 	private LocalDate exDividentDate;
 	
-	private float oneYearTargetEst;
+	private BigDecimal oneYearTargetEst;
 	
 	private long stockDtMapId;
 
@@ -61,67 +62,67 @@ public class StockSummary implements Serializable {
 		this.summaryId = summaryId;
 	}
 
-	public float getPrevClosePrice() {
+	public BigDecimal getPrevClosePrice() {
 		return prevClosePrice;
 	}
 
-	public void setPrevClosePrice(float prevClosePrice) {
+	public void setPrevClosePrice(BigDecimal prevClosePrice) {
 		this.prevClosePrice = prevClosePrice;
 	}
 
-	public float getOpenPrice() {
+	public BigDecimal getOpenPrice() {
 		return openPrice;
 	}
 
-	public void setOpenPrice(float openPrice) {
+	public void setOpenPrice(BigDecimal openPrice) {
 		this.openPrice = openPrice;
 	}
 
-	public float getBidPrice() {
+	public BigDecimal getBidPrice() {
 		return bidPrice;
 	}
 
-	public void setBidPrice(float bidPrice) {
+	public void setBidPrice(BigDecimal bidPrice) {
 		this.bidPrice = bidPrice;
 	}
 
-	public float getAskPrice() {
+	public BigDecimal getAskPrice() {
 		return askPrice;
 	}
 
-	public void setAskPrice(float askPrice) {
+	public void setAskPrice(BigDecimal askPrice) {
 		this.askPrice = askPrice;
 	}
 
-	public float getDaysRangeMin() {
+	public BigDecimal getDaysRangeMin() {
 		return daysRangeMin;
 	}
 
-	public void setDaysRangeMin(float daysRangeMin) {
+	public void setDaysRangeMin(BigDecimal daysRangeMin) {
 		this.daysRangeMin = daysRangeMin;
 	}
 
-	public float getDaysRangeMax() {
+	public BigDecimal getDaysRangeMax() {
 		return daysRangeMax;
 	}
 
-	public void setDaysRangeMax(float daysRangeMax) {
+	public void setDaysRangeMax(BigDecimal daysRangeMax) {
 		this.daysRangeMax = daysRangeMax;
 	}
 
-	public float getFiftyTwoWeeksMin() {
+	public BigDecimal getFiftyTwoWeeksMin() {
 		return fiftyTwoWeeksMin;
 	}
 
-	public void setFiftyTwoWeeksMin(float fiftyTwoWeeksMin) {
+	public void setFiftyTwoWeeksMin(BigDecimal fiftyTwoWeeksMin) {
 		this.fiftyTwoWeeksMin = fiftyTwoWeeksMin;
 	}
 
-	public float getFiftyTwoWeeksMax() {
+	public BigDecimal getFiftyTwoWeeksMax() {
 		return fiftyTwoWeeksMax;
 	}
 
-	public void setFiftyTwoWeeksMax(float fiftyTwoWeeksMax) {
+	public void setFiftyTwoWeeksMax(BigDecimal fiftyTwoWeeksMax) {
 		this.fiftyTwoWeeksMax = fiftyTwoWeeksMax;
 	}
 
@@ -141,35 +142,35 @@ public class StockSummary implements Serializable {
 		this.avgVolume = avgVolume;
 	}
 
-	public float getMarketCap() {
+	public BigDecimal getMarketCap() {
 		return marketCap;
 	}
 
-	public void setMarketCap(float marketCap) {
+	public void setMarketCap(BigDecimal marketCap) {
 		this.marketCap = marketCap;
 	}
 
-	public float getBetaCoefficient() {
+	public BigDecimal getBetaCoefficient() {
 		return betaCoefficient;
 	}
 
-	public void setBetaCoefficient(float betaCoefficient) {
+	public void setBetaCoefficient(BigDecimal betaCoefficient) {
 		this.betaCoefficient = betaCoefficient;
 	}
 
-	public float getPeRatio() {
+	public BigDecimal getPeRatio() {
 		return peRatio;
 	}
 
-	public void setPeRatio(float peRatio) {
+	public void setPeRatio(BigDecimal peRatio) {
 		this.peRatio = peRatio;
 	}
 
-	public float getEps() {
+	public BigDecimal getEps() {
 		return eps;
 	}
 
-	public void setEps(float eps) {
+	public void setEps(BigDecimal eps) {
 		this.eps = eps;
 	}
 
@@ -181,11 +182,11 @@ public class StockSummary implements Serializable {
 		this.earningDate = earningDate;
 	}
 
-	public float getDividentYield() {
+	public BigDecimal getDividentYield() {
 		return dividentYield;
 	}
 
-	public void setDividentYield(float dividentYield) {
+	public void setDividentYield(BigDecimal dividentYield) {
 		this.dividentYield = dividentYield;
 	}
 
@@ -197,11 +198,11 @@ public class StockSummary implements Serializable {
 		this.exDividentDate = exDividentDate;
 	}
 
-	public float getOneYearTargetEst() {
+	public BigDecimal getOneYearTargetEst() {
 		return oneYearTargetEst;
 	}
 
-	public void setOneYearTargetEst(float oneYearTargetEst) {
+	public void setOneYearTargetEst(BigDecimal oneYearTargetEst) {
 		this.oneYearTargetEst = oneYearTargetEst;
 	}
 
