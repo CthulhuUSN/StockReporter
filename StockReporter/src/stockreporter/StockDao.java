@@ -5,10 +5,9 @@
  */
 package stockreporter;
 
+import com.stock.reporter.dao.DBConnect;
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,16 +18,14 @@ import java.util.ArrayList;
 public final class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
-    private static String databaseName = "stocksdb.sqlite";
-    private static String databaseUrl = "jdbc:sqlite:stocksdb.sqlite";
-    
+
     public StockDao(){
         
+        conn = DBConnect.getInstance();
+        
         //check to see if the DB already exists
-        File file = new File(databaseName);
+        File file = new File("stockreporter.prod");
         if (!file.exists()) {
-        //Create the database
-        this.connect();
         
         try {
             if (conn != null) {
@@ -122,7 +119,7 @@ public final class StockDao {
             }
         }
         
-        this.disconnect();
+        //this.disconnect();
       }
     }
     
@@ -133,7 +130,7 @@ public final class StockDao {
         return instance;
     }
     
-    public void connect() {   //Connects to the database
+   /* public void connect() {   //Connects to the database
         try {
             conn = DriverManager.getConnection(databaseUrl);            
         } catch (SQLException e) {
@@ -148,7 +145,7 @@ public final class StockDao {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
     
     public void setStockTickerData(String stockName, String stockSymbol){
         String sql = "INSERT INTO STOCK_TICKER (SYMBOL, NAME) VALUES (?, ?);";
@@ -323,13 +320,11 @@ public final class StockDao {
     public void deleteAll(){
         String sql ="DELETE FROM "+ Constants.TABLE_STOCKS;
         try{
-            connect();
             Statement stmt  = conn.createStatement();
             stmt.executeQuery(sql);
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            disconnect();
         }
     }
     
