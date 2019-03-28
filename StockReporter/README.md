@@ -6,7 +6,11 @@ Step 1: On local, git clone https://github.com/kennylg2/swen_sa_tool.git.
 
 Step 2: Open "StockReporter" project.
 
-Step 3: You need to add project dependencies. (Netbeans): Right click the project -> properties -> libraries -> Add Jar/Folder and select "jarfiles" folder. (Eclipse): Right click the project -> properties -> Java Build Path -> Add JARs and select the project name and "jarfiles" folder.
+Step 3: You need to add project dependencies. 
+
+  (Netbeans): Right click the project -> properties -> libraries -> Add Jar/Folder and select "jarfiles" folder. 
+
+  (Eclipse): Right click the project -> properties -> Java Build Path -> Add JARs and select the project name and "jarfiles"                folder.
 
 Databases
 ---------
