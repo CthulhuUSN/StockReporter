@@ -150,7 +150,31 @@ public final class StockDao {
         }
     }
     
-    public void setStockTickerData(String stockName, String stockSymbol){}
+    public void setStockTickerData(String stockName, String stockSymbol){
+        String sql = "INSERT INTO STOCK_TICKER (SYMBOL, NAME) VALUES (?, ?);";
+                    
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, stockName);
+            pstmt.setString(2, stockSymbol);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void setStockSource(String stockSource){
+        String sql = "INSERT INTO STOCK_SOURCE (NAME) VALUES (?);";
+        
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, stockSource);
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public void insertStockHistoricalData(StockHistorical stockHistorical){
         //Commenting this out until we get to the historical data part of the project. -Jason
@@ -193,7 +217,23 @@ public final class StockDao {
     
     public void updateStockSummaryData(StockSummary stockSummary){}
     
-    public void getAvgStockSummaryView(){}
+    public void getAvgStockSummaryView(){
+        String sql = "SELECT * FROM STOCK_SUMMARY_VIEW;";
+        
+        try (
+             Statement statement  = conn.createStatement();
+             ResultSet results    = statement.executeQuery(sql)){
+            System.out.println(results);
+            while (results.next()) {
+                //Still working on this, need an example of what the data looks liek and is displayed to finish.
+                System.out.println(results.getInt("id") +  "\t" + 
+                                   results.getString("name") + "\t" +
+                                   results.getDouble("capacity"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public void getAvgStockHistoricalView(){
     //Moved this here from selectAll() to keep the class organized and to keep the code - Jason
