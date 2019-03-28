@@ -5,24 +5,126 @@
  */
 package stockanalysistool;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.DatabaseMetaData;
+import java.util.ArrayList;
 
-/**
- *
- * @author Herve Thcoufong
- */
-public class StockDao {
+public final class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
-    private static String databasePath = "StockAnalysisTool/stocksdb.sqlite";
+    private static String databaseName = "stocksdb.sqlite";
     private static String databaseUrl = "jdbc:sqlite:stocksdb.sqlite";
     
-    public StockDao(){}
+    public StockDao(){
+        
+        //check to see if the DB already exists
+        File file = new File(databaseName);
+        if (!file.exists()) {
+        //Create the database
+        this.connect();
+        
+        try {
+            if (conn != null) {
+                DatabaseMetaData meta = conn.getMetaData();
+                System.out.println("The driver name is " + meta.getDriverName());
+                System.out.println("The database has been created");
+            }
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        ArrayList<String> sqlStrings = new ArrayList<String>();
+        
+        //Create the tables
+        String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"
+                + "	TICKER_ID INTEGER PRIMARY KEY,\n"
+                + "	SYMBOL TEXT NOT NULL UNIQUE,\n"
+                + "	NAME TEXT NOT NULL UNIQUE\n"
+                + ");";
+        
+        sqlStrings.add(stockTicker);
+        
+        String stockSource = "CREATE TABLE IF NOT EXISTS STOCK_SOURCE (\n"
+                + "	SOURCE_ID INTEGER PRIMARY KEY,\n"
+                + "	NAME TEXT NOT NULL UNIQUE\n"
+                + ");";
+        
+        sqlStrings.add(stockSource);
+        
+        String stockDateMap = "CREATE TABLE IF NOT EXISTS STOCK_DATE_MAP (\n"
+                + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY,\n"
+                + "	STOCK_DATE INTEGER,\n"
+                + "	TICKER_ID INTEGER REFERENCES STOCK_TICKET(TICKET_ID),\n"
+                + "	SOURCE_ID INTEGER REFERENCES STOCK_SOURCE(SOURCE_ID)\n"
+                + ");";
+        
+        sqlStrings.add(stockDateMap);
+        
+        String stockSummary = "CREATE TABLE IF NOT EXISTS STOCK_SUMMARY (\n"
+                + "	SUMMARY_ID INTEGER PRIMARY KEY,\n"
+                + "	PREV_CLOSE_PRICE REAL,\n"
+                + "	OPEN_PRICE REAL,\n"
+                + "	BID_PRICE REAL,\n"
+                + "	ASK_PRICE REAL,\n"
+                + "	DAYS_RANGE_MIN REAL,\n"
+                + "	DAYS_RANGE_MAX REAL,\n"
+                + "	FIFTY_TWO_WEEKS_MIN REAL,\n"
+                + "	FIFTY_TWO_WEEKS_MAX REAL,\n"
+                + "	VOLUME INTEGER,\n"
+                + "	AVG_VOLUME INTEGER,\n"
+                + "	MARKET_CAP REAL,\n"
+                + "	BETA_COEFFICIENT REAL,\n"
+                + "	PE_RATIO REAL,\n"
+                + "	EPS REAL,\n"
+                + "	EARNING_DATE INTEGER,\n"
+                + "	DIVIDEND_YIELD REAL,\n"
+                + "	EX_DIVIDEND_DATE INTEGER,\n"
+                + "	ONE_YEAR_TARGET_EST REAL,\n"
+                + "	STOCK_DT_MAP_ID INTEGER REFERENCES STOCK_DATE_MAP(STOCK_DT_MAP_ID)\n"
+                + ");";
+        
+        sqlStrings.add(stockSummary);
+        
+        //Placeholder for the StockHistorical string.
+        
+        //Creating the index
+        String index = "CREATE INDEX STOCK_DATE_IDX ON STOCK_DATE_MAP(STOCK_DATE);";
+        
+        sqlStrings.add(index);
+        
+        //Creating the View strings
+        String stockSummaryView = "CREATE OR REPLACE VIEW STOCK_SUMMARY_VIEW AS\n"
+                + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
+                + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
+                + "	FROM STOCK_SUMMARY SS\n"
+                + "	INNER JOIN STOCK_DATE_MAP SDP ON SS.STOCK_DT_MAP_ID =\n"
+                + "	SDP.STOCK_DT_MAP_ID\n"
+                + "	GROUP BY STOCK_DATE, SDP.SOURCE_ID;";
+        
+        sqlStrings.add(stockSummaryView);
+        
+        //Placeholder for stockhistorical view
+        
+        //Execute the SQL strings in the DB.
+        for(String str:sqlStrings){
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute(str);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        this.disconnect();
+      }
+    }
     
     public static StockDao getInstance(){
         if(instance == null){
