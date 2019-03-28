@@ -5,7 +5,6 @@
  */
 package stockreporter;
 
-import com.stock.reporter.dao.DBConnect;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,18 +12,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 
 public final class StockDao {
     private static StockDao instance = null;
     private Connection conn = null;
+    String fileName = "stockreporter.prod";
+    String url = "jdbc:sqlite:stockreporter.prod";
 
     public StockDao(){
         
-        conn = DBConnect.getInstance();
+        connect();
         
         //check to see if the DB already exists
-        File file = new File("stockreporter.prod");
+        File file = new File(fileName);
         if (!file.exists()) {
         
         try {
@@ -130,9 +132,9 @@ public final class StockDao {
         return instance;
     }
     
-   /* public void connect() {   //Connects to the database
+   public void connect() {   //Connects to the database
         try {
-            conn = DriverManager.getConnection(databaseUrl);            
+            conn = DriverManager.getConnection(url);            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -145,7 +147,7 @@ public final class StockDao {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-    }*/
+    }
     
     public void setStockTickerData(String stockName, String stockSymbol){
         String sql = "INSERT INTO STOCK_TICKER (SYMBOL, NAME) VALUES (?, ?);";
