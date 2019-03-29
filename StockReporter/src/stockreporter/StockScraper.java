@@ -15,12 +15,10 @@ import java.util.List;
 public class StockScraper {
     protected List<String> stockSymbols = new ArrayList();
     public StockSummary ss = new StockSummary();
-    public StockHistorical sh = new StockHistorical();
     
     StockDao dao = StockDao.getInstance();
     
     public void scrapeAllSummaryData(){}
-    public void scrapeAllHistoricalData(){}
     
     /*  Keeping the old code here until it is decided what to do with it, move/delete/etc... - Jason
     protected StockDao db;
