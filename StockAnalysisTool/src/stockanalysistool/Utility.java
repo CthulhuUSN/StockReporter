@@ -5,6 +5,7 @@
  */
 package stockanalysistool;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
  * @author Herve Tchoufong
  */
 public class Utility {
-    public static String convertStringCurrency(String stringCurrency){
+    public static BigDecimal convertStringCurrency(String stringCurrency){
             double doubleCurrency = 0;
             if (Character.isLetter(stringCurrency.charAt(stringCurrency.length()-1))){
                 char letter = stringCurrency.charAt(stringCurrency.length()-1);
@@ -27,8 +28,7 @@ public class Utility {
             }else{
                 doubleCurrency  = getDoubleCurrency(stringCurrency);
             }
-            DecimalFormat format = new DecimalFormat("0.#");
-            return format.format(doubleCurrency);
+            return BigDecimal.valueOf(doubleCurrency);
     }
     
     public static double getThousands(char letter){
