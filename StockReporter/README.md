@@ -14,8 +14,10 @@ Step 3: You need to add project dependencies.
 
 Databases
 ---------
-The application has two databases, "stockreporter.dev" for dev and testing and "stockreporter.prod" for production.
+The application has two databases, "stockreporter.dev" for dev and testing and "stockreporter.prod" for production with pre-loaded table structure, indexes and views.
 
+New Database
+------------
 Use "create_tbl_vw_master_summary.sql" to create master, summary tables, indexes, and summary view.
 
 Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
