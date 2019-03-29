@@ -25,12 +25,12 @@ public class InvestopediaScraper extends StockScraper {
     }
     
     public void scrape(){
-        scrapeAllSymbols();
+        getStickersSymnols();
         scapeAllHistoricalTables();
     }
     
-    private void scrapeAllSymbols(){
-        /*
+    private void getStickersSymnols(){
+        
         for(int i=0; i<47; i++){
             try {
                 Connection jsoupConn = Jsoup.connect("https://www.investopedia.com/markets/stocks/?page="+i);
@@ -47,20 +47,17 @@ public class InvestopediaScraper extends StockScraper {
                 Logger.getLogger(InvestopediaScraper.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        */
     }
     
-    private void scapeAllHistoricalTables(){
-        /*
+    private void scapeAllSummaryData(){
         for(String symbolString: stockSymbols)
-            scapeSingleHistoricalTables(symbolString);
-        */
+            scapeSingleSummaryData(symbolString);
     }
     
-    public void scapeSingleHistoricalTables(String symbolString){
-        /*
+    public void scapeSingleSummaryData(String symbolString){
+        
         System.out.println(symbolString);
-        String url = "https://www.investopedia.com/markets/stocks/"+symbolString.toLowerCase()+"#Historical";
+        String url = "https://www.investopedia.com/markets/stocks/"+symbolString.toLowerCase()+"#Summary";
         try {
             Connection jsoupConn = Jsoup.connect(url);
             Document document = jsoupConn.referrer("http://www.google.com") 
@@ -71,24 +68,24 @@ public class InvestopediaScraper extends StockScraper {
             Elements rows = table.select("tr"); 
             for(int i=1; i<rows.size()-1; i++){
                 Element row = rows.get(i);
-                StockHistorical historicalData = new StockHistorical();
+                StockSummary summaryData = new StockSummary();
                 Elements columns = row.select("td");
                 if(columns.size() == 6){
-                    historicalData.setSymbol(symbolString);
-                    historicalData.setSource(Constants.INVESTOPEDIA);
-                    historicalData.setDate(columns.get(0).text());
-                    historicalData.setOpen(columns.get(1).text());
-                    historicalData.setHigh(columns.get(2).text());
-                    historicalData.setLow(columns.get(3).text());
-                    historicalData.setClose(columns.get(4).text());
-                    historicalData.setAdjusted_close(columns.get(4).text());
-                    historicalData.setVolume(columns.get(5).text());
-                    dao.insertStockHistoricalData(historicalData);
+                    summaryData.setSymbol(symbolString);
+                    summaryData.setSource(Constants.INVESTOPEDIA);
+                    summaryData.setDate(columns.get(0).text());
+                    summaryData.setOpen(columns.get(1).text());
+                    summaryData.setHigh(columns.get(2).text());
+                    summaryData.setLow(columns.get(3).text());
+                    summaryData.setClose(columns.get(4).text());
+                    summaryData.setAdjusted_close(columns.get(4).text());
+                    summaryData.setVolume(columns.get(5).text());
+                    dao.insertStockSummaryData(summaryData);
                 }
             }
         } catch (IOException ex) {
             Logger.getLogger(StockAnalysisTool.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }
 }
