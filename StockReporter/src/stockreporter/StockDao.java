@@ -231,10 +231,11 @@ public final class StockDao {
              ResultSet results    = statement.executeQuery(sql)){
             System.out.println(results);
             while (results.next()) {
-                //Still working on this, need an example of what the data looks liek and is displayed to finish.
-                System.out.println(results.getInt("id") +  "\t" + 
-                                   results.getString("name") + "\t" +
-                                   results.getDouble("capacity"));
+                System.out.println(results.getInt("SDP.TICKER_ID") +  "\t" + 
+                                   results.getString("SDP.SOURCE_ID") + "\t" +
+                                   results.getBigDecimal("PRICE_MAX") +  "\t" + 
+                                   results.getBigDecimal("PRICE_MIN") + "\t" +
+                                   results.getBigDecimal("PRICE_AVERAGE"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
