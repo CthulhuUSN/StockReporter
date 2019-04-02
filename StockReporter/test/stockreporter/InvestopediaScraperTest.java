@@ -33,12 +33,12 @@ public class InvestopediaScraperTest {
     /**
      * Test of scapeSingleHistoricalTables method, of class InvestopediaScraper.
      */
-    @Test
+    /*@Test
     public void testScapeSingleHistoricalTables() {
         System.out.println("scapeSingleHistoricalTables");
         String symbolString = "";
         InvestopediaScraper instance = new InvestopediaScraper();
         instance.scapeSingleHistoricalTables(symbolString);
     }
-    
+    */
 }

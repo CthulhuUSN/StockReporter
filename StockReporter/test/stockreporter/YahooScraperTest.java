@@ -33,11 +33,11 @@ public class YahooScraperTest {
     /**
      * Test of scrapeAllHistoricalData method, of class YahooScraper.
      */
-    @Test
+    /*@Test
     public void testScrapeAllHistoricalData() {
         System.out.println("scrapeAllHistoricalData");
         YahooScraper instance = new YahooScraper();
         instance.scrapeAllHistoricalData();
-    }
+    }*/
     
 }
