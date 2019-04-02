@@ -5,6 +5,7 @@
  */
 package stockreporter;
 
+import stockreporter.daomodels.StockSummary;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +15,7 @@ import java.util.List;
  */
 public class StockScraper {
     protected List<String> stockSymbols = new ArrayList();
-    public StockSummary ss = new StockSummary();
-    
-    StockDao dao = StockDao.getInstance();
-    
-    public void scrapeAllSummaryData(){}
-    
-    /*  Keeping the old code here until it is decided what to do with it, move/delete/etc... - Jason
-    protected StockDao db;
+    protected StockSummary ss = new StockSummary();
+    protected StockDao dao = StockDao.getInstance();
     protected List<String> symbols = new ArrayList();
-    
-    public StockScraper(){
-        db = StockDao.getInstance();
-        db.deleteAll();
-    }
-    */
 }

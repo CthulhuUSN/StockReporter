@@ -5,8 +5,8 @@
  */
 package stockreporter;
 
-import stockreporter.StockHistorical;
-import stockreporter.StockSummary;
+import stockreporter.daomodels.StockHistorical;
+import stockreporter.daomodels.StockSummary;
 import stockreporter.StockDao;
 import java.util.Date;
 import static junit.framework.Assert.assertEquals;

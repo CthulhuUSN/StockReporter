@@ -46,4 +46,11 @@ public class Utility {
         }
         return 1;
     }
+    
+    public static String[] getRangeMinAndMax(String range){
+        return range.split("-");
+    }
+    public static String[] getNumeratorAndDenominator(String fraction){
+        return fraction.trim().equals("-")?new String[]{"0","0"}:fraction.split("/");
+    }
 }
