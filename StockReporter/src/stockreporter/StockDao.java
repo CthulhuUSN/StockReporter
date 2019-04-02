@@ -345,9 +345,9 @@ public final class StockDao {
             pstmt.setBigDecimal(12,stockSummary.getBetaCoefficient());
             pstmt.setBigDecimal(13,stockSummary.getPeRatio());
             pstmt.setBigDecimal(14,stockSummary.getEps());
-            pstmt.setDate(15,stockSummary.getEarningDate());
+            pstmt.setString(15,stockSummary.getEarningDate());
             pstmt.setBigDecimal(16,stockSummary.getDividentYield());
-            pstmt.setDate(17,stockSummary.getExDividentDate());
+            pstmt.setString(17,stockSummary.getExDividentDate());
             pstmt.setBigDecimal(18,stockSummary.getOneYearTargetEst());
             pstmt.setLong(19,stockSummary.getStockDtMapId());
             pstmt.executeUpdate();
