@@ -100,7 +100,7 @@ public final class StockDao {
         sqlStrings.add(index);
         
         //Creating the View strings
-        String stockSummaryView = "CREATE OR REPLACE VIEW STOCK_SUMMARY_VIEW AS\n"
+        String stockSummaryView = "CREATE VIEW STOCK_SUMMARY_VIEW AS\n"
                 + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
                 + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
                 + "	FROM STOCK_SUMMARY SS\n"
