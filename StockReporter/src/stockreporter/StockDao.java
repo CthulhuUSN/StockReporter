@@ -251,6 +251,7 @@ public final class StockDao {
         }
     }
     
+    //used to get the stockdatemap id key from the DB to add into the stock summary/historical objects.
     public int getStockDateMapID(String date, String symbol, String stockSource){
         int stockDateMapID = -1;
         int tickerID = -1;
