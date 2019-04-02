@@ -44,11 +44,11 @@ public class StockSummary implements Serializable {
 	
 	private BigDecimal eps;
 	
-	private Date earningDate;
+	private String earningDate;
 	
 	private BigDecimal dividentYield;
 	
-	private Date exDividentDate;
+	private String exDividentDate;
 	
 	private BigDecimal oneYearTargetEst;
 	
@@ -174,11 +174,11 @@ public class StockSummary implements Serializable {
 		this.eps = eps;
 	}
 
-	public Date getEarningDate() {
+	public String getEarningDate() {
 		return earningDate;
 	}
 
-	public void setEarningDate(Date earningDate) {
+	public void setEarningDate(String earningDate) {
 		this.earningDate = earningDate;
 	}
 
@@ -190,11 +190,11 @@ public class StockSummary implements Serializable {
 		this.dividentYield = dividentYield;
 	}
 
-	public Date getExDividentDate() {
+	public String getExDividentDate() {
 		return exDividentDate;
 	}
 
-	public void setExDividentDate(Date exDividentDate) {
+	public void setExDividentDate(String exDividentDate) {
 		this.exDividentDate = exDividentDate;
 	}
 

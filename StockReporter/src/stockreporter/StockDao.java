@@ -44,7 +44,7 @@ public final class StockDao {
         
         //Create the tables
         String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"
-                + "	TICKER_ID INTEGER PRIMARY KEY,\n"
+                + "	TICKER_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "	SYMBOL TEXT NOT NULL UNIQUE,\n"
                 + "	NAME TEXT NOT NULL UNIQUE\n"
                 + ");";
@@ -52,15 +52,15 @@ public final class StockDao {
         sqlStrings.add(stockTicker);
         
         String stockSource = "CREATE TABLE IF NOT EXISTS STOCK_SOURCE (\n"
-                + "	SOURCE_ID INTEGER PRIMARY KEY,\n"
+                + "	SOURCE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "	NAME TEXT NOT NULL UNIQUE\n"
                 + ");";
         
         sqlStrings.add(stockSource);
         
         String stockDateMap = "CREATE TABLE IF NOT EXISTS STOCK_DATE_MAP (\n"
-                + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY,\n"
-                + "	STOCK_DATE INTEGER,\n"
+                + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + "	STOCK_DATE TEXT,\n"
                 + "	TICKER_ID INTEGER REFERENCES STOCK_TICKET(TICKET_ID),\n"
                 + "	SOURCE_ID INTEGER REFERENCES STOCK_SOURCE(SOURCE_ID)\n"
                 + ");";
@@ -68,7 +68,7 @@ public final class StockDao {
         sqlStrings.add(stockDateMap);
         
         String stockSummary = "CREATE TABLE IF NOT EXISTS STOCK_SUMMARY (\n"
-                + "	SUMMARY_ID INTEGER PRIMARY KEY,\n"
+                + "	SUMMARY_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + "	PREV_CLOSE_PRICE REAL,\n"
                 + "	OPEN_PRICE REAL,\n"
                 + "	BID_PRICE REAL,\n"
@@ -83,9 +83,9 @@ public final class StockDao {
                 + "	BETA_COEFFICIENT REAL,\n"
                 + "	PE_RATIO REAL,\n"
                 + "	EPS REAL,\n"
-                + "	EARNING_DATE INTEGER,\n"
+                + "	EARNING_DATE TEXT,\n"
                 + "	DIVIDEND_YIELD REAL,\n"
-                + "	EX_DIVIDEND_DATE INTEGER,\n"
+                + "	EX_DIVIDEND_DATE TEXT,\n"
                 + "	ONE_YEAR_TARGET_EST REAL,\n"
                 + "	STOCK_DT_MAP_ID INTEGER REFERENCES STOCK_DATE_MAP(STOCK_DT_MAP_ID)\n"
                 + ");";
@@ -100,7 +100,7 @@ public final class StockDao {
         sqlStrings.add(index);
         
         //Creating the View strings
-        String stockSummaryView = "CREATE OR REPLACE VIEW STOCK_SUMMARY_VIEW AS\n"
+        String stockSummaryView = "CREATE VIEW STOCK_SUMMARY_VIEW AS\n"
                 + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
                 + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
                 + "	FROM STOCK_SUMMARY SS\n"
@@ -113,15 +113,20 @@ public final class StockDao {
         //Placeholder for stockhistorical view
         
         //Execute the SQL strings in the DB.
-        for(String str:sqlStrings){
-            try (Statement stmt = conn.createStatement()) {
+        try{
+            Statement stmt = conn.createStatement();
+            for(String str:sqlStrings){
                 stmt.execute(str);
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
             }
+        } catch (SQLException e) {
+                System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
-        
-        //this.disconnect();
       }
     }
     
@@ -139,6 +144,7 @@ public final class StockDao {
             System.out.println(e.getMessage());
         }
     }
+   
     private void disconnect(){//Disconnects from the database
         try {
             if (conn != null) {
@@ -159,6 +165,12 @@ public final class StockDao {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
     }
     
@@ -172,47 +184,134 @@ public final class StockDao {
             conn.commit();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
     }
     
-    public void insertStockHistoricalData(StockHistorical stockHistorical){
-        //Commenting this out until we get to the historical data part of the project. -Jason
-        /*
-        String sql = "INSERT INTO "+Constants.TABLE_STOCKS+" ("
-                + Constants.FIELD_SYMBOL + ","
-                + Constants.FIELD_SOURCE + ","
-                + Constants.FIELD_DATE + ","
-                + Constants.FIELD_OPEN + ","
-                + Constants.FIELD_HIGH + ","
-                + Constants.FIELD_LOW + ","
-                + Constants.FIELD_CLOSE + ","
-                + Constants.FIELD_ADJUSTED_CLOSE + ","
-                + Constants.FIELD_VOLUME + ")"
-                + " values (?,?,?,?,?,?,?,?,?)";
+    public void insertStockDateMap(String date, String symbol, String stockSource) {
+        int tickerID = -1;
+        String symbolQuery = "SELECT TICKER_ID FROM STOCK_TICKER WHERE SYMBOL = ?";
         try{
-            connect(); //<--CONNECTS TO DATABASE BEFORE STARTING AN OPERATION
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, stockHistorical.getSymbol());
-            pstmt.setString(2, stockHistorical.getSource());
-            pstmt.setDate(3, stockHistorical.getDate());
-            pstmt.setInt(4, stockHistorical.getOpen());
-            pstmt.setInt(5, stockHistorical.getHigh());
-            pstmt.setInt(6, stockHistorical.getLow());
-            pstmt.setInt(7, stockHistorical.getClose());
-            pstmt.setInt(8, stockHistorical.getAdjClose());
-            pstmt.setInt(9, stockHistorical.getVolume());
-            pstmt.executeUpdate();
+            PreparedStatement pstmt = conn.prepareStatement(symbolQuery);
+            pstmt.setString(1, symbol);
+            ResultSet rs = pstmt.executeQuery();
+            tickerID = rs.getInt("ticker_id");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            disconnect(); //<--DISCONNECTS FROM DATABASE AFTER COMPLETING THE OPERATION
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
-        */
+        
+        int sourceID = -1;
+        String sourceIdQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sourceIdQuery);
+            pstmt.setString(1, stockSource);
+            ResultSet rs = pstmt.executeQuery();
+            sourceID = rs.getInt("source_id");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        
+        String sql = "INSERT INTO STOCK_DATE_MAP (STOCK_DATE,"
+                + " TICKER_ID,"
+                + " SOURCE_ID) VALUES (?, ?, ?);";
+        if (tickerID != -1 && sourceID != -1){
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, date);
+            pstmt.setInt(2, tickerID);
+            pstmt.setInt(3, sourceID);
+            pstmt.executeUpdate();
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        }
+    }
+    
+    //used to get the stockdatemap id key from the DB to add into the stock summary/historical objects.
+    public int getStockDateMapID(String date, String symbol, String stockSource){
+        int stockDateMapID = -1;
+        int tickerID = -1;
+        String symbolQuery = "SELECT TICKER_ID FROM STOCK_TICKER WHERE SYMBOL = ?";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(symbolQuery);
+            pstmt.setString(1, symbol);
+            ResultSet rs = pstmt.executeQuery();
+            tickerID = rs.getInt("ticker_id");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        
+        int sourceID = -1;
+        String sourceIdQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(sourceIdQuery);
+            pstmt.setString(1, stockSource);
+            ResultSet rs = pstmt.executeQuery();
+            sourceID = rs.getInt("source_id");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        if (tickerID != -1 && sourceID != -1){
+        String stockDtMapId = "SELECT STOCK_DT_MAP_ID FROM STOCK_DATE_MAP WHERE STOCK_DATE = ? AND TICKER_ID = ? AND SOURCE_ID = ?";
+        try{
+            PreparedStatement pstmt = conn.prepareStatement(stockDtMapId);
+            pstmt.setString(1, date);
+            pstmt.setInt(2, tickerID);
+            pstmt.setInt(3, sourceID);
+            ResultSet rs = pstmt.executeQuery();
+            stockDateMapID = rs.getInt("stock_dt_map_id");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+        }
+        
+        }
+        return stockDateMapID;
     }
     
     public void insertStockSummaryData(StockSummary stockSummary){
-        String sql = "INSERT INTO STOCK_TICKER (SUMMARY_ID,"
-                + " PREV_CLOSE_PRICE,"
+        String sql = "INSERT INTO STOCK_TICKER (PREV_CLOSE_PRICE,"
                 + " OPEN_PRICE,"
                 + " BID_PRICE,"
                 + " ASK_PRICE,"
@@ -229,39 +328,42 @@ public final class StockDao {
                 + " EARNING_DATE,"
                 + " DIVIDEND_YIELD,"
                 + " EX_DIVIDEND_DATE,"
-                + " ONE_YEAR_TARGET) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + " ONE_YEAR_TARGET,"
+                + " STOCK_DT_MAP_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try{
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, stockSummary.getSummaryId());
-            pstmt.setBigDecimal(2, stockSummary.getPrevClosePrice());
-            pstmt.setBigDecimal(3, stockSummary.getOpenPrice());
-            pstmt.setBigDecimal(4, stockSummary.getBidPrice());
-            pstmt.setBigDecimal(5, stockSummary.getAskPrice());
-            pstmt.setBigDecimal(6, stockSummary.getDaysRangeMax());
-            pstmt.setBigDecimal(7, stockSummary.getDaysRangeMin());
-            pstmt.setBigDecimal(8, stockSummary.getFiftyTwoWeeksMax());
-            pstmt.setBigDecimal(9, stockSummary.getFiftyTwoWeeksMin());
-            pstmt.setLong(10,stockSummary.getVolume());
-            pstmt.setLong(11,stockSummary.getAvgVolume());
-            pstmt.setBigDecimal(12,stockSummary.getMarketCap());
-            pstmt.setBigDecimal(13,stockSummary.getBetaCoefficient());
-            pstmt.setBigDecimal(14,stockSummary.getPeRatio());
-            pstmt.setBigDecimal(15,stockSummary.getEps());
-            pstmt.setDate(16,stockSummary.getEarningDate());
-            pstmt.setBigDecimal(17,stockSummary.getDividentYield());
-            pstmt.setDate(18,stockSummary.getExDividentDate());
-            pstmt.setBigDecimal(19,stockSummary.getOneYearTargetEst());
+            pstmt.setBigDecimal(1, stockSummary.getPrevClosePrice());
+            pstmt.setBigDecimal(2, stockSummary.getOpenPrice());
+            pstmt.setBigDecimal(3, stockSummary.getBidPrice());
+            pstmt.setBigDecimal(4, stockSummary.getAskPrice());
+            pstmt.setBigDecimal(5, stockSummary.getDaysRangeMax());
+            pstmt.setBigDecimal(6, stockSummary.getDaysRangeMin());
+            pstmt.setBigDecimal(7, stockSummary.getFiftyTwoWeeksMax());
+            pstmt.setBigDecimal(8, stockSummary.getFiftyTwoWeeksMin());
+            pstmt.setLong(9,stockSummary.getVolume());
+            pstmt.setLong(10,stockSummary.getAvgVolume());
+            pstmt.setBigDecimal(11,stockSummary.getMarketCap());
+            pstmt.setBigDecimal(12,stockSummary.getBetaCoefficient());
+            pstmt.setBigDecimal(13,stockSummary.getPeRatio());
+            pstmt.setBigDecimal(14,stockSummary.getEps());
+            pstmt.setString(15,stockSummary.getEarningDate());
+            pstmt.setBigDecimal(16,stockSummary.getDividentYield());
+            pstmt.setString(17,stockSummary.getExDividentDate());
+            pstmt.setBigDecimal(18,stockSummary.getOneYearTargetEst());
+            pstmt.setLong(19,stockSummary.getStockDtMapId());
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
     }
-    
-    public void updateStockHistoricalData(StockHistorical stockHistorical){}
-    
-    public void updateStockSummaryData(StockSummary stockSummary){}
-    
+     
     public void getAvgStockSummaryView(){
         String sql = "SELECT * FROM STOCK_SUMMARY_VIEW;";
         
@@ -270,53 +372,21 @@ public final class StockDao {
              ResultSet results    = statement.executeQuery(sql)){
             System.out.println(results);
             while (results.next()) {
-                //Still working on this, need an example of what the data looks liek and is displayed to finish.
-                System.out.println(results.getInt("id") +  "\t" + 
-                                   results.getString("name") + "\t" +
-                                   results.getDouble("capacity"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public void getAvgStockHistoricalView(){
-    //Moved this here from selectAll() to keep the class organized and to keep the code - Jason
-    //Commenting this out until we get to the historical data part of the project -Jason
-    /*
-        String sql = "SELECT "+Constants.FIELD_ID+", "
-                +Constants.FIELD_SYMBOL+", "
-                +Constants.FIELD_SOURCE+", "
-                +Constants.FIELD_DATE+", "
-                +Constants.FIELD_OPEN+", "
-                +Constants.FIELD_HIGH+", "
-                +Constants.FIELD_LOW+", "
-                +Constants.FIELD_CLOSE+", "
-                +Constants.FIELD_ADJUSTED_CLOSE+", "
-                +Constants.FIELD_VOLUME
-                +" FROM "+Constants.TABLE_STOCKS;
-        try{
-            connect();
-            Statement stmt  = conn.createStatement();
-            ResultSet rs    = stmt.executeQuery(sql);
-            while (rs.next()) {
-                System.out.println(rs.getInt(Constants.FIELD_ID) + "\t" 
-                        +  rs.getString(Constants.FIELD_SYMBOL)  + "\t" 
-                        +  rs.getString(Constants.FIELD_DATE)  + "\t" 
-                        +  rs.getString(Constants.FIELD_OPEN)  + "\t" 
-                        +  rs.getString(Constants.FIELD_HIGH)  + "\t" 
-                        +  rs.getString(Constants.FIELD_LOW)  + "\t" 
-                        +  rs.getString(Constants.FIELD_CLOSE)  + "\t" 
-                        +  rs.getString(Constants.FIELD_ADJUSTED_CLOSE)  + "\t" 
-                        +  rs.getString(Constants.FIELD_VOLUME)
-                );
+                System.out.println(results.getInt("SDP.TICKER_ID") +  "\t" + 
+                                   results.getString("SDP.SOURCE_ID") + "\t" +
+                                   results.getBigDecimal("PRICE_MAX") +  "\t" + 
+                                   results.getBigDecimal("PRICE_MIN") + "\t" +
+                                   results.getBigDecimal("PRICE_AVERAGE"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
-            disconnect();
+                try {
+                    conn.close();
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
         }
-    */
     }
     
     public void deleteAll(){
