@@ -4,9 +4,11 @@ Setup project
 -------------
 Step 1: On local, git clone https://github.com/kennylg2/swen_sa_tool.git.
 
-Step 2: Open "StockReporter" project.
+Step 2: Switch to "master" branch.
 
-Step 3: You need to add project dependencies. 
+Step 3: Open "StockReporter" project.
+
+Step 4: You need to add project dependencies. 
 
   (Netbeans): Right click the project -> properties -> libraries -> Add Jar/Folder and select "jarfiles" folder. 
 
