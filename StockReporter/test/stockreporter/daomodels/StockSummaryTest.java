@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import stockreporter.daomodels.StockSummary;
 
 public class StockSummaryTest {
     
