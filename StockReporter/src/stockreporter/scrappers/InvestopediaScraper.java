@@ -46,7 +46,7 @@ public class InvestopediaScraper extends StockScraper {
             StockDateMap stockDateMap = new StockDateMap();
             stockDateMap.setSourceId(2);
             stockDateMap.setTickerId(stockTicker.getId());
-            stockDateMap.setDate(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
+            stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
             int last_inserted_id = dao.insertStockDateMap(stockDateMap);
         
             Element table2 = document.select("table").get(2);
