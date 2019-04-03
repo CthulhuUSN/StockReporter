@@ -5,12 +5,9 @@
  */
 package stockreporter.daomodels;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Date;
-
 /**
- * Model class to hold stock StockDateMap data
+ *
+ * @author Herve Tchoufong
  */
 public class StockDateMap{
     private long id;

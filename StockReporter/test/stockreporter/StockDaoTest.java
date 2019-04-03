@@ -125,5 +125,25 @@ public class StockDaoTest {
         StockDao instance = StockDao.getInstance();
         instance.deleteAll();
     }
+
+    @Test
+    public void testDatabaseAlreadyInitialized() {
+    }
+
+    @Test
+    public void testGetAllstockTickers() {
+    }
+
+    @Test
+    public void testSetStockSource() {
+    }
+
+    @Test
+    public void testInsertStockDateMap() {
+    }
+
+    @Test
+    public void testGetStockDateMapID() {
+    }
     
 }

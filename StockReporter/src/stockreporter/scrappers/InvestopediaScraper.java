@@ -21,7 +21,6 @@ import stockreporter.StockReporter;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
 
-
 /**
  *
  * @author Herve Tchoufong

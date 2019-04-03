@@ -5,12 +5,9 @@
  */
 package stockreporter.daomodels;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Date;
-
 /**
- * Model class to hold stock ticker data
+ *
+ * @author Herve Tchoufong
  */
 public class StockTicker{ 
     private long id;

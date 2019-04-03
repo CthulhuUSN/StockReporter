@@ -11,10 +11,6 @@ import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.*;
 
-/**
- *
- * @author ArvidsJE
- */
 public class InvestopediaScraperTest {
     
     public InvestopediaScraperTest() {
@@ -24,10 +20,11 @@ public class InvestopediaScraperTest {
      * Test of scrape method, of class InvestopediaScraper.
      */
     @Test
-    public void testScrape() {
-        System.out.println("scrape");
-        InvestopediaScraper instance = new InvestopediaScraper();
-        instance.scrape();
+    public void testScrapeAllSummaryData() {
+    }
+
+    @Test
+    public void testScapeSingleSummaryTables() {
     }
 
     /**
