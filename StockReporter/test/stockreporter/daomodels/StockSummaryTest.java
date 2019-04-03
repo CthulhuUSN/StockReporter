@@ -1,4 +1,4 @@
-package stockreporter;
+package stockreporter.daomodels;
 
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
