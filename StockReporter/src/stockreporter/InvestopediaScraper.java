@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockreporter;
 
 import java.io.IOException;
@@ -22,10 +17,6 @@ import org.jsoup.select.Elements;
 import stockreporter.daomodels.StockDateMap;
 
 
-/**
- *
- * @author Herve Tchoufong
- */
 public class InvestopediaScraper extends StockScraper {
     
     public InvestopediaScraper(){

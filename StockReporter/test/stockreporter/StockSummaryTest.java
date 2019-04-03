@@ -7,6 +7,7 @@ package stockreporter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import static junit.framework.Assert.assertEquals;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -244,6 +245,7 @@ public class StockSummaryTest {
            assertEquals(expResult, result, 0.1);
         }
 
+        /* This was causing errors in the IDE as already existing so commenting out for now. -Jason
 	@Test
         public void testgetMarketCap () {
            StockSummary instance = new StockSummary();
@@ -253,6 +255,7 @@ public class StockSummaryTest {
            long result = instance.getAvgVolume();
            assertEquals(expResult, result, 0.1);
         }
+        */
 
         @Test
         public void testgetMarketCap () {
@@ -338,20 +341,20 @@ public class StockSummaryTest {
 	@Test
         public void testgetEarningDate () {
           StockSummary instance = new StockSummary();
-          Date earningDate = new Date(03/25/2019);
+          String earningDate = "2019-03-25";
           instance.setEarningDate(earningDate);
-          Date expResult = earningDate;
-          Date result = instance.getEarningDate();
+          String expResult = earningDate;
+          String result = instance.getEarningDate();
           assertEquals(expResult, result);  
         }
 
 	@Test
         public void testsetEarningDate () {
           StockSummary instance = new StockSummary();
-          Date earningDate = new Date(03/21/2019);
+          String earningDate = "2019-03-21";
           instance.setEarningDate(earningDate);
-          Date expResult = earningDate;
-          Date result = instance.getEarningDate();
+          String expResult = earningDate;
+          String result = instance.getEarningDate();
           assertEquals(expResult, result);  
         }
 
@@ -381,20 +384,20 @@ public class StockSummaryTest {
         @Test
         public void testgetExDividentDate() {
           StockSummary instance = new StockSummary();
-          Date exDividentDate = new Date(03/11/2019);
+          String exDividentDate = "2019-03-11";
           instance.setExDividentDate(exDividentDate);
-          Date expResult = exDividentDate;
-          Date result = instance.getExDividentDate();
+          String expResult = exDividentDate;
+          String result = instance.getExDividentDate();
           assertEquals(expResult, result);  
         }
 	
         @Test
         public void testsetExDividentDate() {
           StockSummary instance = new StockSummary();
-          Date exDividentDate = new Date(03/27/2019);
+          String exDividentDate = "2019-03-27";
           instance.setExDividentDate(exDividentDate);
-          Date expResult = exDividentDate;
-          Date result = instance.getExDividentDate();
+          String expResult = exDividentDate;
+          String result = instance.getExDividentDate();
           assertEquals(expResult, result);  
         }
         
@@ -456,9 +459,9 @@ public class StockSummaryTest {
 	BigDecimal betaCoefficient = new BigDecimal("4.45");
 	BigDecimal peRatio = new BigDecimal("3.55");
 	BigDecimal eps = new BigDecimal("1.11");
-	Date earningDate = new Date(4/03/2019);
+	String earningDate = "2019-04-03";
 	BigDecimal dividentYield = new BigDecimal("0.75");
-	Date exDividentDate = new Date(4/07/2019);
+	String exDividentDate = "2019-04-07";
         BigDecimal oneYearTargetEst = new BigDecimal("0.15");
         long stockDtMapId = 8;
         String expResult = toString();
