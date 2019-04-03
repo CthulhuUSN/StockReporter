@@ -5,7 +5,7 @@
  */
 package stockreporter;
 
-import stockreporter.InvestopediaScraper;
+import stockreporter.scrappers.InvestopediaScraper;
 import java.util.Date;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;

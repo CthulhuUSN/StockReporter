@@ -5,6 +5,9 @@
  */
 package stockreporter;
 
+import stockreporter.scrappers.YahooScraper;
+import stockreporter.scrappers.InvestopediaScraper;
+
 public class StockReporter {
     
     public static void main(String[] args) {    
