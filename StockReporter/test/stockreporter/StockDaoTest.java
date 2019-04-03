@@ -7,11 +7,13 @@ package stockreporter;
 
 import stockreporter.daomodels.StockHistorical;
 import stockreporter.daomodels.StockSummary;
+import stockreporter.daomodels.StockDateMap;
+import stockreporter.daomodels.StockTicker;
 import stockreporter.StockDao;
-import java.util.Date;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.*;
+import static org.junit.Assert.assertNotNull;
 
 public class StockDaoTest {
     
@@ -24,10 +26,8 @@ public class StockDaoTest {
      */
     @Test
     public void testGetInstance() {
-        System.out.println("getInstance");
-        StockDao expResult = dao;
         StockDao result = StockDao.getInstance();
-        assertEquals(expResult, result);
+        assertNotNull(result);
     }
 
     /**
@@ -35,7 +35,6 @@ public class StockDaoTest {
      */
     @Test
     public void testConnect() {
-        System.out.println("connect");
         StockDao instance = StockDao.getInstance();
         instance.connect();
     }
@@ -45,55 +44,21 @@ public class StockDaoTest {
      */
     @Test
     public void testSetStockTickerData() {
-        System.out.println("setStockTickerData");
         String stockName = "";
         String stockSymbol = "";
         StockDao instance = StockDao.getInstance();
         instance.setStockTickerData(stockName, stockSymbol);
     }
 
-    /**
-     * Test of insertStockHistoricalData method, of class StockDao.
-     */
-    @Test
-    public void testInsertStockHistoricalData() {
-        System.out.println("insertStockHistoricalData");
-        StockHistorical stockHistorical = null;
-        StockDao instance = StockDao.getInstance();
-        instance.insertStockHistoricalData(stockHistorical);
-    }
 
     /**
      * Test of insertStockSummaryData method, of class StockDao.
      */
     @Test
     public void testInsertStockSummaryData() {
-        System.out.println("insertStockSummaryData");
         StockSummary stockSummary = null;
         StockDao instance = StockDao.getInstance();
         instance.insertStockSummaryData(stockSummary);
-    }
-
-    /**
-     * Test of updateStockHistoricalData method, of class StockDao.
-     */
-    @Test
-    public void testUpdateStockHistoricalData() {
-        System.out.println("updateStockHistoricalData");
-        StockHistorical stockHistorical = null;
-        StockDao instance = StockDao.getInstance();
-        instance.updateStockHistoricalData(stockHistorical);
-    }
-
-    /**
-     * Test of updateStockSummaryData method, of class StockDao.
-     */
-    @Test
-    public void testUpdateStockSummaryData() {
-        System.out.println("updateStockSummaryData");
-        StockSummary stockSummary = null;
-        StockDao instance = StockDao.getInstance();
-        instance.updateStockSummaryData(stockSummary);
     }
 
     /**
@@ -101,19 +66,8 @@ public class StockDaoTest {
      */
     @Test
     public void testGetAvgStockSummaryView() {
-        System.out.println("getAvgStockSummaryView");
         StockDao instance = StockDao.getInstance();
         instance.getAvgStockSummaryView();
-    }
-
-    /**
-     * Test of getAvgStockHistoricalView method, of class StockDao.
-     */
-    @Test
-    public void testGetAvgStockHistoricalView() {
-        System.out.println("getAvgStockHistoricalView");
-        StockDao instance = StockDao.getInstance();
-        instance.getAvgStockHistoricalView();
     }
 
     /**
@@ -121,7 +75,6 @@ public class StockDaoTest {
      */
     @Test
     public void testDeleteAll() {
-        System.out.println("deleteAll");
         StockDao instance = StockDao.getInstance();
         instance.deleteAll();
     }
