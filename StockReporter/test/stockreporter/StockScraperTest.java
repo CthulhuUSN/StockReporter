@@ -33,11 +33,5 @@ public class StockScraperTest {
     /**
      * Test of scrapeAllHistoricalData method, of class StockScraper.
      */
-    @Test
-    public void testScrapeAllHistoricalData() {
-        System.out.println("scrapeAllHistoricalData");
-        StockScraper instance = new StockScraper();
-        instance.scrapeAllHistoricalData();
-    }
     
 }

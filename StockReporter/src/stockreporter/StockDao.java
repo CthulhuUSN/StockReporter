@@ -31,7 +31,6 @@ public final class StockDao {
     public StockDao() {
             if(!databaseAlreadyInitialized()){
             ArrayList<String> sqlStrings = new ArrayList<>();
-
             //Create the tables
             String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"
                     + "	TICKER_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
