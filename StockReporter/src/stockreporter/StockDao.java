@@ -2,18 +2,15 @@ package stockreporter;
 
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockTicker;
-import java.io.File;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import stockreporter.daomodels.StockDateMap;
 
 public final class StockDao {
@@ -141,21 +138,20 @@ public final class StockDao {
     }
     
     public boolean databaseAlreadyInitialized() {
-        String query = "SELECT COUNT(*) AS total FROM STOCK_TICKER";
-        int total = 0;
+        String tableName=null;
         try {
             connect();
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                total = rs.getInt("total");
-            }
+            DatabaseMetaData meta = conn.getMetaData();
+            ResultSet res = meta.getTables(null, null, "STOCK_TICKER", new String[] {"TABLE"});
+            while (res.next()) 
+                tableName = res.getString("TABLE_NAME");
+            res.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             disconnect();
         }
-        return total>0;
+        return tableName!=null;
     }
 
 
@@ -173,6 +169,7 @@ public final class StockDao {
             pstmt.setString(2, stockName);
             pstmt.executeUpdate();
             conn.commit();
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -196,6 +193,8 @@ public final class StockDao {
                 stockticker.setSymbol(rs.getString("symbol"));
                 stockTickers.add(stockticker);
             }
+            rs.close();
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -206,13 +205,13 @@ public final class StockDao {
 
     public void setStockSource(String stockSource) {
         String sql = "INSERT INTO STOCK_SOURCE (NAME) VALUES (?);";
-
         try {
             connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, stockSource);
             pstmt.executeUpdate();
             conn.commit();
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -238,6 +237,8 @@ public final class StockDao {
                 if(rs.next())
                     last_inserted_id = rs.getInt(1);
                 conn.commit();
+                pstmt.close();
+                rs.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -258,6 +259,8 @@ public final class StockDao {
             pstmt.setString(1, symbol);
             ResultSet rs = pstmt.executeQuery();
             tickerID = rs.getInt("ticker_id");
+            pstmt.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -272,6 +275,8 @@ public final class StockDao {
             pstmt.setString(1, stockSource);
             ResultSet rs = pstmt.executeQuery();
             sourceID = rs.getInt("source_id");
+            pstmt.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -287,6 +292,8 @@ public final class StockDao {
                 pstmt.setInt(3, sourceID);
                 ResultSet rs = pstmt.executeQuery();
                 stockDateMapID = rs.getInt("stock_dt_map_id");
+                pstmt.close();
+                rs.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -324,10 +331,10 @@ public final class StockDao {
             pstmt.setBigDecimal(2, stockSummary.getOpenPrice());
             pstmt.setBigDecimal(3, stockSummary.getBidPrice());
             pstmt.setBigDecimal(4, stockSummary.getAskPrice());
-            pstmt.setBigDecimal(5, stockSummary.getDaysRangeMax());
-            pstmt.setBigDecimal(6, stockSummary.getDaysRangeMin());
-            pstmt.setBigDecimal(7, stockSummary.getFiftyTwoWeeksMax());
-            pstmt.setBigDecimal(8, stockSummary.getFiftyTwoWeeksMin());
+            pstmt.setBigDecimal(5, stockSummary.getDaysRangeMin());
+            pstmt.setBigDecimal(6, stockSummary.getDaysRangeMax());
+            pstmt.setBigDecimal(7, stockSummary.getFiftyTwoWeeksMin());
+            pstmt.setBigDecimal(8, stockSummary.getFiftyTwoWeeksMax());
             pstmt.setLong(9, stockSummary.getVolume());
             pstmt.setLong(10, stockSummary.getAvgVolume());
             pstmt.setBigDecimal(11, stockSummary.getMarketCap());
@@ -341,6 +348,7 @@ public final class StockDao {
             pstmt.setLong(19, stockSummary.getStockDtMapId());
             pstmt.executeUpdate();
             conn.commit();
+            pstmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -362,6 +370,7 @@ public final class StockDao {
                         + results.getBigDecimal("PRICE_MIN") + "\t"
                         + results.getBigDecimal("PRICE_AVERAGE"));
             }
+            results.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -375,6 +384,7 @@ public final class StockDao {
             connect();
             Statement stmt = conn.createStatement();
             stmt.executeQuery(sql);
+            stmt.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

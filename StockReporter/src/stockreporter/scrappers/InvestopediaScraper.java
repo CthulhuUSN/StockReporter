@@ -53,6 +53,8 @@ public class InvestopediaScraper extends StockScraper {
             Elements rows = table2.select("tr");    
             StockSummary summaryData = new StockSummary();
             
+            summaryData.setStockDtMapId(last_inserted_id);
+            
             int rowNum=0;
             String prevClosePrice = rows.get(rowNum).select("td").get(1).text();
             summaryData.setPrevClosePrice(Utility.convertStringCurrency(Utility.isBlank(prevClosePrice)?"0":prevClosePrice));

@@ -66,17 +66,17 @@ public class YahooScraper extends StockScraper {
             rowNum++;
             
             String bidPrice = rows.get(rowNum).select("td").get(1).text();
-            summaryData.setBidPrice(Utility.convertStringCurrency(Utility.isBlank(openPrice)?"0":bidPrice));
+            summaryData.setBidPrice(Utility.convertStringCurrency(Utility.isBlank(bidPrice)?"0":bidPrice));
             rowNum++;
             
             String askPrice = rows.get(rowNum).select("td").get(1).text();
-            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(openPrice)?"0":Utility.computeStringValues(askPrice)));
+            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(askPrice)?"0":Utility.computeStringValues(askPrice)));
             rowNum++;
-            
-            String daysRangeMax = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[0].trim();
-            summaryData.setDaysRangeMin(Utility.convertStringCurrency(Utility.isBlank(daysRangeMax)?"0":daysRangeMax));            
-            String daysRangeMin = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[1].trim();
-            summaryData.setDaysRangeMax(Utility.convertStringCurrency(Utility.isBlank(daysRangeMin)?"0":daysRangeMin));
+                       
+            String daysRangeMin = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[0].trim();
+            summaryData.setDaysRangeMin(Utility.convertStringCurrency(Utility.isBlank(daysRangeMin)?"0":daysRangeMin));
+            String daysRangeMax = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[1].trim();
+            summaryData.setDaysRangeMax(Utility.convertStringCurrency(Utility.isBlank(daysRangeMax)?"0":daysRangeMax)); 
             rowNum++;
                     
             String fiftyTwoWeeksMin = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[0].trim();
@@ -86,9 +86,13 @@ public class YahooScraper extends StockScraper {
             rowNum++;
             
             String volume = rows.get(rowNum).select("td").get(1).text();
-            summaryData.setAvgVolume(Utility.convertStringCurrency(Utility.isBlank(volume)?"0":volume).longValue());
+            summaryData.setVolume(Utility.convertStringCurrency(Utility.isBlank(volume)?"0":volume).longValue());
             rowNum++;
-           
+            
+            String avgVolume = rows.get(rowNum).select("td").get(1).text();
+            summaryData.setAvgVolume(Utility.convertStringCurrency(Utility.isBlank(avgVolume)?"0":avgVolume).longValue());
+
+            
             rowNum=0;
             Element table2 = document.select("table").get(1);
             rows = table2.select("tr");    
