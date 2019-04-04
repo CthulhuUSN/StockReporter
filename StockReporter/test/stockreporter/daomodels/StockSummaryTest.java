@@ -1,27 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package stockreporter;
+package stockreporter.daomodels;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import static junit.framework.Assert.assertEquals;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import stockreporter.daomodels.StockSummary;
-import java.util.ArrayList;
 
-/**
- *
- * @author Jared Smith
- */
 public class StockSummaryTest {
     
     public StockSummaryTest() {
@@ -91,7 +74,7 @@ public class StockSummaryTest {
             BigDecimal bidPrice = new BigDecimal("3.2");
             instance.setBidPrice(bidPrice);
             int expResult = bidPrice.intValue();
-            int result = instance.getOpenPrice().intValue();
+            int result = instance.getBidPrice().intValue();
             assertEquals(expResult, result, 0.1);
         }
 
@@ -101,7 +84,7 @@ public class StockSummaryTest {
             BigDecimal bidPrice = new BigDecimal("3.2");
             instance.setBidPrice(bidPrice);
             int expResult = bidPrice.intValue();
-            int result = instance.getOpenPrice().intValue();
+            int result = instance.getBidPrice().intValue();
             assertEquals(expResult, result, 0.1);
         }
 
@@ -468,10 +451,4 @@ public class StockSummaryTest {
         String result = toString();
         assertTrue(expResult.equals(result));
         }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

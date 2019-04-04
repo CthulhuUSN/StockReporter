@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * UtilityTest.java
+ * JUnit Class to test the Utility.java class
+ * 
  */
 package stockreporter;
 
@@ -20,6 +20,9 @@ public class UtilityTest {
         util = new Utility();
     }
 
+    /*
+    * Test of convertStringCurrency utilizing 'M'
+    */
     @Test
     public void testConvertStringCurrencyUsingM() {
         System.out.println("convertStringCurrencyUsingM");
@@ -29,6 +32,9 @@ public class UtilityTest {
         assertEquals(expResult, result);  
     }
     
+    /*
+    * Test of convertStringCurrency utilizing 'B'
+    */
     @Test
     public void testConvertStringCurrencyUsingB() {
         System.out.println("convertStringCurrencyUsingB");
@@ -38,6 +44,9 @@ public class UtilityTest {
         assertEquals(expResult, result);  
     }
     
+    /*
+    * Test of convertStringCurrency utilizing numerical value
+    */    
     @Test
     public void testConvertStringCurrencyUsingOther() {
         System.out.println("convertStringCurrencyUsingOther");
@@ -47,6 +56,9 @@ public class UtilityTest {
         assertEquals(expResult, result);  
     }
     
+    /*
+    * Test of getThousands utilizing M
+    */ 
     @Test
     public void testGetThousandsUsingM() {
         System.out.println("getThousandsUsingM");
@@ -56,6 +68,9 @@ public class UtilityTest {
         assertEquals(expResult, result, 0.0);      
     }
     
+     /*
+    * Test of getThousands utilizing B
+    */     
     @Test
     public void testGetThousandsUsingB() {
         System.out.println("getThousandsUsingB");
@@ -65,6 +80,9 @@ public class UtilityTest {
         assertEquals(expResult, result, 0.0);      
     }
     
+     /*
+    * Test of getThousands utilizing X
+    */ 
      @Test
     public void testGetThousandsUsingOther() {
         System.out.println("getThousandsUsingOther");
@@ -73,7 +91,10 @@ public class UtilityTest {
         double result = Utility.getThousands(letter);
         assertEquals(expResult, result, 0.0);      
     }
-
+    
+     /*
+    * Test of getDoubleCurrency utilizing 1
+    */ 
     @Test
     public void testGetDoubleCurrency() {
         System.out.println("getDoubleCurrency");
