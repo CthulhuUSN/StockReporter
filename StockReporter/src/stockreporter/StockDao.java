@@ -313,6 +313,8 @@ public final class StockDao {
     public int getStockDateMapID(String date, String symbol, String stockSource) {
         int stockDateMapID = -1;
         int tickerID = -1;
+        int sourceID = -1;
+        
         String symbolQuery = "SELECT TICKER_ID FROM STOCK_TICKER WHERE SYMBOL = ?";
         try {
             connect();
@@ -328,21 +330,8 @@ public final class StockDao {
             disconnect();
         }
 
-        int sourceID = -1;
-        String sourceIdQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
-        try {
-            connect();
-            PreparedStatement pstmt = conn.prepareStatement(sourceIdQuery);
-            pstmt.setString(1, stockSource);
-            ResultSet rs = pstmt.executeQuery();
-            sourceID = rs.getInt("source_id");
-            pstmt.close();
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            disconnect();
-        }
+        sourceID = getStockSourceIdByName(stockSource);
+        
         if (tickerID != -1 && sourceID != -1) {
             String stockDtMapId = "SELECT STOCK_DT_MAP_ID FROM STOCK_DATE_MAP WHERE STOCK_DATE = ? AND TICKER_ID = ? AND SOURCE_ID = ?";
             try {
