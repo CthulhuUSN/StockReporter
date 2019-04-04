@@ -438,9 +438,17 @@ public final class StockDao {
     }
 
     /**
-     * Delete data from STOCK_SOURCE table
+     * Delete data
      */
     public void deleteAll() {
+        deleteFromStockSource();
+        deleteFromStockTicker();
+    }
+    
+    /**
+     * Delete data from stock_source
+     */
+    void deleteFromStockSource() {
         String sql = "DELETE FROM " + Constants.TABLE_STOCK_SOURCE;
         try {
             connect();
@@ -453,5 +461,21 @@ public final class StockDao {
             disconnect();
         }
     }
-
+    
+    /**
+     * Delete data from stock_ticker
+     */
+    void deleteFromStockTicker() {
+        String sql = "DELETE FROM " + Constants.TABLE_STOCK_TICKER;
+        try {
+            connect();
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            disconnect();
+        }
+    }
 }
