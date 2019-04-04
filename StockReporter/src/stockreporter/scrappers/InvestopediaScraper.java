@@ -22,20 +22,29 @@ import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
 
 /**
- *
- * @author Herve Tchoufong
+ * Scrap stock financial data from investopedia
  */
 public class InvestopediaScraper extends StockScraper {
     
+    /**
+     * default constructor
+     */
     public InvestopediaScraper(){
         super();
     }
     
+    /**
+     * scrap summary data
+     */
     public void scrapeAllSummaryData(){
         for(StockTicker stockTicker: stockTickers)
             scapeSingleSummaryData(stockTicker);
     }
     
+    /**
+     * Scrap summary data by stock ticker
+     * @param stockTicker 
+     */
     public void scapeSingleSummaryData(StockTicker stockTicker){        
         System.out.println(stockTicker.getSymbol());
         String url = "https://www.investopedia.com/markets/stocks/"+stockTicker.getSymbol().toLowerCase();
