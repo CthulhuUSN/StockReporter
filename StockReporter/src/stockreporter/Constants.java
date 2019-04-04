@@ -1,5 +1,9 @@
 package stockreporter;
 
+/**
+ * This will keep the initial stocks for scraping
+ * The program will insert these stocks if the table is empty
+ */
 public class Constants {
     public static final String TABLE_STOCKS = "stocks";
     public static final String[] stockSymbols = {"MSFT", "AAPL", "GOOG", "BA", "NFLX", "AMZN", "FB", "CSCO", "TSLA", "TIF"};
