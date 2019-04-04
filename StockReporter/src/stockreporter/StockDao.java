@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import stockreporter.daomodels.StockDateMap;
 
 /**
@@ -19,6 +21,7 @@ import stockreporter.daomodels.StockDateMap;
  */
 public final class StockDao {
 
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
     private static StockDao instance = null;
     private Connection conn = null;
     
@@ -102,6 +105,7 @@ public final class StockDao {
 
                 //Placeholder for stockhistorical view
                 //Execute the SQL strings in the DB.
+                logger.log(Level.INFO, "Creating database and DDL statements...");
                 try {
                     connect();
                     Statement stmt = conn.createStatement();
@@ -109,12 +113,12 @@ public final class StockDao {
                         stmt.execute(str);
                     }
                 } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                    logger.log(Level.SEVERE, e.getMessage());
                 } finally {
                     try {
                         conn.close();
                     } catch (SQLException e) {
-                        System.out.println(e.getMessage());
+                        logger.log(Level.SEVERE, e.getMessage());
                     }
                 }
                 insertAllStockSources();
@@ -138,10 +142,11 @@ public final class StockDao {
      * Make database connection
      */
     public void connect() {
+        logger.log(Level.INFO, "Connect to database...");
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -149,12 +154,13 @@ public final class StockDao {
      * Disconnect from database
      */
     private void disconnect() {
+        logger.log(Level.INFO, "Disconnect from database...");
         try {
             if (conn != null) {
                 conn.close();
             }
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            logger.log(Level.SEVERE, ex.getMessage());
         }
     }
     
@@ -163,6 +169,7 @@ public final class StockDao {
      * @return boolean
      */
     public boolean databaseAlreadyInitialized() {
+        logger.log(Level.INFO, "Check database already initialized...");
         String tableName=null;
         try {
             connect();
@@ -172,7 +179,7 @@ public final class StockDao {
                 tableName = res.getString("TABLE_NAME");
             res.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -202,6 +209,8 @@ public final class StockDao {
      * @param stockName 
      */
     public void setStockTickerData(String stockSymbol, String stockName) {
+        logger.log(Level.INFO, "Insert STOCK_TICKER data...");
+        
         String sql = "INSERT INTO STOCK_TICKER (SYMBOL, NAME) VALUES (?, ?);";
         try {
             connect();
@@ -212,7 +221,7 @@ public final class StockDao {
             conn.commit();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -223,6 +232,7 @@ public final class StockDao {
      * @return 
      */
     public List<StockTicker> getAllstockTickers() {
+        logger.log(Level.INFO, "Get all STOCK_TICKER data...");
         List<StockTicker> stockTickers = new ArrayList<>();
         String query = "SELECT SYMBOL, NAME FROM STOCK_TICKER";
         try {
@@ -241,7 +251,7 @@ public final class StockDao {
             rs.close();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -253,6 +263,7 @@ public final class StockDao {
      * @param stockSource 
      */
     public void setStockSource(String stockSource) {
+        logger.log(Level.INFO, "Insert STOCK_SOURCE data...");
         String sql = "INSERT INTO STOCK_SOURCE (NAME) VALUES (?);";
         try {
             connect();
@@ -262,7 +273,7 @@ public final class StockDao {
             conn.commit();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -274,6 +285,7 @@ public final class StockDao {
      * @return 
      */
     public int insertStockDateMap(StockDateMap stockDateMap) {
+        logger.log(Level.INFO, "Insert data into STOCK_DATE_MAP...");
         int last_inserted_id = -1;
         String sql = "INSERT INTO STOCK_DATE_MAP (STOCK_DATE,"
                 + " TICKER_ID,"
@@ -294,7 +306,7 @@ public final class StockDao {
                 pstmt.close();
                 rs.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                logger.log(Level.SEVERE, e.getMessage());
             } finally {
                 disconnect();
             }
@@ -311,6 +323,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockDateMapID(String date, String symbol, String stockSource) {
+        logger.log(Level.INFO, "Calling getStockDateMapID...");
+        
         int stockDateMapID = -1;
         int tickerID = -1;
         int sourceID = -1;
@@ -325,7 +339,7 @@ public final class StockDao {
             pstmt.close();
             rs.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -345,7 +359,7 @@ public final class StockDao {
                 pstmt.close();
                 rs.close();
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                logger.log(Level.SEVERE, e.getMessage());
             } finally {
                 disconnect();
             }
@@ -358,6 +372,7 @@ public final class StockDao {
      * @param stockSummary 
      */
     public void insertStockSummaryData(StockSummary stockSummary) {
+        logger.log(Level.INFO, "Insert data into STOCK_SUMMARY...");
         String sql = "INSERT INTO STOCK_SUMMARY (PREV_CLOSE_PRICE,"
                 + " OPEN_PRICE,"
                 + " BID_PRICE,"
@@ -404,7 +419,7 @@ public final class StockDao {
             conn.commit();
             pstmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
@@ -414,14 +429,16 @@ public final class StockDao {
      * Get Stock summary data from view
      */
     public void getAvgStockSummaryView() {
+        logger.log(Level.INFO, "Get STOCK_SUMMARY_VIEW data...");
+        
         String sql = "SELECT * FROM STOCK_SUMMARY_VIEW;";
         connect();
         try (
             Statement statement = conn.createStatement();
             ResultSet results = statement.executeQuery(sql)) {
-            System.out.println(results);
+            logger.log(Level.INFO, "getAvgStockSummaryView results...");
             while (results.next()) {
-                System.out.println(results.getInt("SDP.TICKER_ID") + "\t"
+                logger.log(Level.INFO, results.getInt("SDP.TICKER_ID") + "\t"
                         + results.getString("SDP.SOURCE_ID") + "\t"
                         + results.getBigDecimal("PRICE_MAX") + "\t"
                         + results.getBigDecimal("PRICE_MIN") + "\t"
@@ -429,43 +446,20 @@ public final class StockDao {
             }
             results.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
     }
 
     /**
-     * Delete data
-     */
-    public void deleteAll() {
-        deleteFromStockSource();
-        deleteFromStockTicker();
-    }
-    
-    /**
-     * Delete data from stock_source
-     */
-    void deleteFromStockSource() {
-        String sql = "DELETE FROM " + Constants.TABLE_STOCK_SOURCE;
-        try {
-            connect();
-            Statement stmt = conn.createStatement();
-            stmt.executeQuery(sql);
-            stmt.close();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            disconnect();
-        }
-    }
-    
-    /**
      * Get stock source id by name
      * @param name
      * @return source id
      */
     public int getStockSourceIdByName(String name) {
+        
+        
         int tickerID = -1;
         String symbolQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
         try {
@@ -477,17 +471,46 @@ public final class StockDao {
             pstmt.close();
             rs.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
         return tickerID;
     }
         
+        /**
+     * Delete data
+     */
+    public void deleteAll() {
+        deleteFromStockSource();
+        deleteFromStockTicker();
+    }
+    
+    /**
+     * Delete data from stock_source
+     */
+    void deleteFromStockSource() {
+        logger.log(Level.INFO, "Delete data from STOCK_SOURCE...");
+        
+        String sql = "DELETE FROM " + Constants.TABLE_STOCK_SOURCE;
+        try {
+            connect();
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            disconnect();
+        }
+    }
+    
     /**
      * Delete data from stock_ticker
      */
     void deleteFromStockTicker() {
+        logger.log(Level.INFO, "Delete data from STOCK_TICKER...");
+        
         String sql = "DELETE FROM " + Constants.TABLE_STOCK_TICKER;
         try {
             connect();
@@ -495,7 +518,7 @@ public final class StockDao {
             stmt.executeQuery(sql);
             stmt.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage());
         } finally {
             disconnect();
         }
