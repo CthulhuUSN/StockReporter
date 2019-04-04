@@ -7,10 +7,9 @@ package stockreporter.daomodels;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
 
 /**
- * Domain class to hold stock summary data
+ * Entity object for stock summary with setter/getters
  */
 public class StockSummary implements Serializable {
         
