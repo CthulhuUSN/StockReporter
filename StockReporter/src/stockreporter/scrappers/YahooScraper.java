@@ -23,20 +23,29 @@ import stockreporter.daomodels.StockDateMap;
 
 
 /**
- *
- * @author Herve Tchoufong
+ * Scrap Yahoo stock financial data
  */
 public class YahooScraper extends StockScraper {
     
+    /**
+     * default constructor
+     */
     public YahooScraper(){
         super();
     }
     
+    /**
+     * Scrap summary data
+     */
     public void scrapeAllSummaryData(){
         for(StockTicker stockTicker: stockTickers)
             scapeSingleSummaryData(stockTicker);
     }
     
+    /**
+     * Scrap summary data by stock ticker
+     * @param stockTicker 
+     */
     public void scapeSingleSummaryData(StockTicker stockTicker){        
         System.out.println(stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
