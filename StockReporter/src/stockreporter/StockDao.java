@@ -94,12 +94,10 @@ public final class StockDao {
 
                 //Creating the View strings
                 String stockSummaryView = "CREATE VIEW STOCK_SUMMARY_VIEW AS\n"
-                        + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
-                        + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
-                        + "	FROM STOCK_SUMMARY SS\n"
-                        + "	INNER JOIN STOCK_DATE_MAP SDP ON SS.STOCK_DT_MAP_ID =\n"
-                        + "	SDP.STOCK_DT_MAP_ID\n"
-                        + "	GROUP BY STOCK_DATE, SDP.SOURCE_ID;";
+                        + "	SELECT SDM.STOCK_DATE STK_DATE, ST.SYMBOL STOCK, AVG(SS.PREV_CLOSE_PRICE) AVG_PRICE FROM STOCK_SUMMARY SS,\n"
+                        + "	INNER JOIN STOCK_DATE_MAP SDM ON SS.STOCK_DT_MAP_ID = SDM.STOCK_DT_MAP_ID\n"
+                        + "	INNER JOIN STOCK_TICKER ST ON ST.TICKER_ID = SDM.TICKER_ID\n"
+                        + "	GROUP BY SDM.STOCK_DATE, ST.SYMBOL;";
 
                 sqlStrings.add(stockSummaryView);
 
@@ -430,7 +428,7 @@ public final class StockDao {
      */
     public void getAvgStockSummaryView() {
         logger.log(Level.INFO, "Get STOCK_SUMMARY_VIEW data...");
-        
+
         String sql = "SELECT * FROM STOCK_SUMMARY_VIEW;";
         connect();
         try (
@@ -438,11 +436,9 @@ public final class StockDao {
             ResultSet results = statement.executeQuery(sql)) {
             logger.log(Level.INFO, "getAvgStockSummaryView results...");
             while (results.next()) {
-                logger.log(Level.INFO, results.getInt("SDP.TICKER_ID") + "\t"
-                        + results.getString("SDP.SOURCE_ID") + "\t"
-                        + results.getBigDecimal("PRICE_MAX") + "\t"
-                        + results.getBigDecimal("PRICE_MIN") + "\t"
-                        + results.getBigDecimal("PRICE_AVERAGE"));
+                logger.log(Level.INFO, results.getString("STK_DATE") + "\t"
+                        + results.getString("ST.SYMBOL STOCK") + "\t"
+                        + results.getBigDecimal("AVG_PRICE"));
             }
             results.close();
         } catch (SQLException e) {
