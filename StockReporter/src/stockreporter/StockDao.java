@@ -117,6 +117,7 @@ public final class StockDao {
                         System.out.println(e.getMessage());
                     }
                 }
+                insertAllStockSources();
                 insertAllTickers();
           }
     }
@@ -187,6 +188,14 @@ public final class StockDao {
             setStockTickerData(Constants.stockSymbols[i], Constants.stockNames[i]);
     }
     
+    /**
+     * Insert stock_source data if the table is empty
+     */
+    private void insertAllStockSources() {
+        for(int cnt=0; cnt <= Constants.stockSourceNames.length-1; cnt++) {
+            setStockSource(Constants.stockSourceNames[cnt]);
+        }
+    }
     /**
      * Insert STOCK_TICKER data
      * @param stockSymbol
@@ -462,6 +471,30 @@ public final class StockDao {
         }
     }
     
+    /**
+     * Get stock source id by name
+     * @param name
+     * @return source id
+     */
+    public int getStockSourceIdByName(String name) {
+        int tickerID = -1;
+        String symbolQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
+        try {
+            connect();
+            PreparedStatement pstmt = conn.prepareStatement(symbolQuery);
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            tickerID = rs.getInt("SOURCE_ID");
+            pstmt.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            disconnect();
+        }
+        return tickerID;
+    }
+        
     /**
      * Delete data from stock_ticker
      */
