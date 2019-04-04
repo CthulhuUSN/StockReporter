@@ -54,7 +54,7 @@ public class YahooScraper extends StockScraper {
             Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*5).get();
 
             StockDateMap stockDateMap = new StockDateMap();
-            stockDateMap.setSourceId(1);
+            stockDateMap.setSourceId(dao.getStockSourceIdByName("Yahoo"));
             stockDateMap.setTickerId(stockTicker.getId());
             stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
             int last_inserted_id = dao.insertStockDateMap(stockDateMap);
