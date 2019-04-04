@@ -13,105 +13,119 @@ import java.util.ArrayList;
 import java.util.List;
 import stockreporter.daomodels.StockDateMap;
 
+/**
+ * This is the Data Access Layer (DAO) between database and business logic
+ * It contains all CRUD and DDL statements to database operation
+ */
 public final class StockDao {
 
     private static StockDao instance = null;
     private Connection conn = null;
+    
+    //database
     private String dbName = "stockreporter.prod";
     private String url = "jdbc:sqlite:stockreporter.prod";
     
+    /**
+     * Default constructor to check if database exist otherwise
+     * create new database with tables, views and indexes
+     */
     public StockDao() {
             if(!databaseAlreadyInitialized()){
-            ArrayList<String> sqlStrings = new ArrayList<>();
-            //Create the tables
-            String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"
-                    + "	TICKER_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                    + "	SYMBOL TEXT NOT NULL UNIQUE,\n"
-                    + "	NAME TEXT NOT NULL UNIQUE\n"
-                    + ");";
+                ArrayList<String> sqlStrings = new ArrayList<>();
+                //Create the tables
+                String stockTicker = "CREATE TABLE IF NOT EXISTS STOCK_TICKER (\n"
+                        + "	TICKER_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                        + "	SYMBOL TEXT NOT NULL UNIQUE,\n"
+                        + "	NAME TEXT NOT NULL UNIQUE\n"
+                        + ");";
 
-            sqlStrings.add(stockTicker);
+                sqlStrings.add(stockTicker);
 
-            String stockSource = "CREATE TABLE IF NOT EXISTS STOCK_SOURCE (\n"
-                    + "	SOURCE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                    + "	NAME TEXT NOT NULL UNIQUE\n"
-                    + ");";
+                String stockSource = "CREATE TABLE IF NOT EXISTS STOCK_SOURCE (\n"
+                        + "	SOURCE_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                        + "	NAME TEXT NOT NULL UNIQUE\n"
+                        + ");";
 
-            sqlStrings.add(stockSource);
+                sqlStrings.add(stockSource);
 
-            String stockDateMap = "CREATE TABLE IF NOT EXISTS STOCK_DATE_MAP (\n"
-                    + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                    + "	STOCK_DATE TEXT,\n"
-                    + "	TICKER_ID INTEGER REFERENCES STOCK_TICKET(TICKET_ID),\n"
-                    + "	SOURCE_ID INTEGER REFERENCES STOCK_SOURCE(SOURCE_ID)\n"
-                    + ");";
+                String stockDateMap = "CREATE TABLE IF NOT EXISTS STOCK_DATE_MAP (\n"
+                        + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                        + "	STOCK_DATE TEXT,\n"
+                        + "	TICKER_ID INTEGER REFERENCES STOCK_TICKET(TICKET_ID),\n"
+                        + "	SOURCE_ID INTEGER REFERENCES STOCK_SOURCE(SOURCE_ID)\n"
+                        + ");";
 
-            sqlStrings.add(stockDateMap);
+                sqlStrings.add(stockDateMap);
 
-            String stockSummary = "CREATE TABLE IF NOT EXISTS STOCK_SUMMARY (\n"
-                    + "	SUMMARY_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                    + "	PREV_CLOSE_PRICE REAL,\n"
-                    + "	OPEN_PRICE REAL,\n"
-                    + "	BID_PRICE REAL,\n"
-                    + "	ASK_PRICE REAL,\n"
-                    + "	DAYS_RANGE_MIN REAL,\n"
-                    + "	DAYS_RANGE_MAX REAL,\n"
-                    + "	FIFTY_TWO_WEEKS_MIN REAL,\n"
-                    + "	FIFTY_TWO_WEEKS_MAX REAL,\n"
-                    + "	VOLUME INTEGER,\n"
-                    + "	AVG_VOLUME INTEGER,\n"
-                    + "	MARKET_CAP REAL,\n"
-                    + "	BETA_COEFFICIENT REAL,\n"
-                    + "	PE_RATIO REAL,\n"
-                    + "	EPS REAL,\n"
-                    + "	EARNING_DATE TEXT,\n"
-                    + "	DIVIDEND_YIELD REAL,\n"
-                    + "	EX_DIVIDEND_DATE TEXT,\n"
-                    + "	ONE_YEAR_TARGET_EST REAL,\n"
-                    + "	STOCK_DT_MAP_ID INTEGER REFERENCES STOCK_DATE_MAP(STOCK_DT_MAP_ID)\n"
-                    + ");";
+                String stockSummary = "CREATE TABLE IF NOT EXISTS STOCK_SUMMARY (\n"
+                        + "	SUMMARY_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                        + "	PREV_CLOSE_PRICE REAL,\n"
+                        + "	OPEN_PRICE REAL,\n"
+                        + "	BID_PRICE REAL,\n"
+                        + "	ASK_PRICE REAL,\n"
+                        + "	DAYS_RANGE_MIN REAL,\n"
+                        + "	DAYS_RANGE_MAX REAL,\n"
+                        + "	FIFTY_TWO_WEEKS_MIN REAL,\n"
+                        + "	FIFTY_TWO_WEEKS_MAX REAL,\n"
+                        + "	VOLUME INTEGER,\n"
+                        + "	AVG_VOLUME INTEGER,\n"
+                        + "	MARKET_CAP REAL,\n"
+                        + "	BETA_COEFFICIENT REAL,\n"
+                        + "	PE_RATIO REAL,\n"
+                        + "	EPS REAL,\n"
+                        + "	EARNING_DATE TEXT,\n"
+                        + "	DIVIDEND_YIELD REAL,\n"
+                        + "	EX_DIVIDEND_DATE TEXT,\n"
+                        + "	ONE_YEAR_TARGET_EST REAL,\n"
+                        + "	STOCK_DT_MAP_ID INTEGER REFERENCES STOCK_DATE_MAP(STOCK_DT_MAP_ID)\n"
+                        + ");";
 
-            sqlStrings.add(stockSummary);
+                sqlStrings.add(stockSummary);
 
-            //Placeholder for the StockHistorical string.
-            //Creating the index
-            String index = "CREATE INDEX STOCK_DATE_IDX ON STOCK_DATE_MAP(STOCK_DATE);";
+                //Placeholder for the StockHistorical string.
+                //Creating the index
+                String index = "CREATE INDEX STOCK_DATE_IDX ON STOCK_DATE_MAP(STOCK_DATE);";
 
-            sqlStrings.add(index);
+                sqlStrings.add(index);
 
-            //Creating the View strings
-            String stockSummaryView = "CREATE VIEW STOCK_SUMMARY_VIEW AS\n"
-                    + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
-                    + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
-                    + "	FROM STOCK_SUMMARY SS\n"
-                    + "	INNER JOIN STOCK_DATE_MAP SDP ON SS.STOCK_DT_MAP_ID =\n"
-                    + "	SDP.STOCK_DT_MAP_ID\n"
-                    + "	GROUP BY STOCK_DATE, SDP.SOURCE_ID;";
+                //Creating the View strings
+                String stockSummaryView = "CREATE VIEW STOCK_SUMMARY_VIEW AS\n"
+                        + "	SELECT SDP.TICKER_ID, SDP.SOURCE_ID, MAX(SS.OPEN_PRICE) AS PRICE_MAX,\n"
+                        + "	MIN(SS.OPEN_PRICE) AS PRICE_MIN, AVG(SS.OPEN_PRICE) AS PRICE_AVERAGE\n"
+                        + "	FROM STOCK_SUMMARY SS\n"
+                        + "	INNER JOIN STOCK_DATE_MAP SDP ON SS.STOCK_DT_MAP_ID =\n"
+                        + "	SDP.STOCK_DT_MAP_ID\n"
+                        + "	GROUP BY STOCK_DATE, SDP.SOURCE_ID;";
 
-            sqlStrings.add(stockSummaryView);
+                sqlStrings.add(stockSummaryView);
 
-            //Placeholder for stockhistorical view
-            //Execute the SQL strings in the DB.
-            try {
-                connect();
-                Statement stmt = conn.createStatement();
-                for (String str : sqlStrings) {
-                    stmt.execute(str);
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            } finally {
+                //Placeholder for stockhistorical view
+                //Execute the SQL strings in the DB.
                 try {
-                    conn.close();
-                } catch (Exception e) {
+                    connect();
+                    Statement stmt = conn.createStatement();
+                    for (String str : sqlStrings) {
+                        stmt.execute(str);
+                    }
+                } catch (SQLException e) {
                     System.out.println(e.getMessage());
+                } finally {
+                    try {
+                        conn.close();
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
-            }
-            insertAllStickers();
+                insertAllTickers();
           }
- //       }
     }
 
+    
+    /**
+     * Get database instance
+     * @return 
+     */
     public static StockDao getInstance() {
         if (instance == null) {
             instance = new StockDao();
@@ -119,7 +133,10 @@ public final class StockDao {
         return instance;
     }
 
-    public void connect() {   //Connects to the database
+    /**
+     * Make database connection
+     */
+    public void connect() {
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
@@ -127,7 +144,10 @@ public final class StockDao {
         }
     }
 
-    private void disconnect() {//Disconnects from the database
+    /**
+     * Disconnect from database
+     */
+    private void disconnect() {
         try {
             if (conn != null) {
                 conn.close();
@@ -137,6 +157,10 @@ public final class StockDao {
         }
     }
     
+    /**
+     * Method to check if the database already exist
+     * @return boolean
+     */
     public boolean databaseAlreadyInitialized() {
         String tableName=null;
         try {
@@ -155,11 +179,19 @@ public final class StockDao {
     }
 
 
-    private void insertAllStickers() {
+    /**
+     * Insert stock_ticker data if the table is empty
+     */
+    private void insertAllTickers() {
         for (int i = 0; i <= Constants.stockSymbols.length-1; i++) 
             setStockTickerData(Constants.stockSymbols[i], Constants.stockNames[i]);
     }
     
+    /**
+     * Insert STOCK_TICKER data
+     * @param stockSymbol
+     * @param stockName 
+     */
     public void setStockTickerData(String stockSymbol, String stockName) {
         String sql = "INSERT INTO STOCK_TICKER (SYMBOL, NAME) VALUES (?, ?);";
         try {
@@ -177,6 +209,10 @@ public final class StockDao {
         }
     }
 
+    /**
+     * Load STOCK_TICKER data
+     * @return 
+     */
     public List<StockTicker> getAllstockTickers() {
         List<StockTicker> stockTickers = new ArrayList<>();
         String query = "SELECT SYMBOL, NAME FROM STOCK_TICKER";
@@ -203,6 +239,10 @@ public final class StockDao {
         return stockTickers;
     }
 
+    /**
+     * Insert data into STOCK_SOURCE table
+     * @param stockSource 
+     */
     public void setStockSource(String stockSource) {
         String sql = "INSERT INTO STOCK_SOURCE (NAME) VALUES (?);";
         try {
@@ -219,6 +259,11 @@ public final class StockDao {
         }
     }
 
+    /**
+     * Insert data into STOCK_DATE_MAP table
+     * @param stockDateMap
+     * @return 
+     */
     public int insertStockDateMap(StockDateMap stockDateMap) {
         int last_inserted_id = -1;
         String sql = "INSERT INTO STOCK_DATE_MAP (STOCK_DATE,"
@@ -248,7 +293,14 @@ public final class StockDao {
         return last_inserted_id;
     }
 
-    //used to get the stockdatemap id key from the DB to add into the stock summary/historical objects.
+    /**
+     * Used to get the stockdatemap id key from the DB to add into 
+     * the stock summary/historical objects.
+     * @param date
+     * @param symbol
+     * @param stockSource
+     * @return 
+     */
     public int getStockDateMapID(String date, String symbol, String stockSource) {
         int stockDateMapID = -1;
         int tickerID = -1;
@@ -303,6 +355,10 @@ public final class StockDao {
         return stockDateMapID;
     }
 
+    /**
+     * insert data into STOCK_SUMMARY table
+     * @param stockSummary 
+     */
     public void insertStockSummaryData(StockSummary stockSummary) {
         String sql = "INSERT INTO STOCK_SUMMARY (PREV_CLOSE_PRICE,"
                 + " OPEN_PRICE,"
@@ -356,6 +412,9 @@ public final class StockDao {
         }
     }
 
+    /**
+     * Get Stock summary data from view
+     */
     public void getAvgStockSummaryView() {
         String sql = "SELECT * FROM STOCK_SUMMARY_VIEW;";
         connect();
@@ -378,8 +437,11 @@ public final class StockDao {
         }
     }
 
+    /**
+     * Delete data from STOCK_SOURCE table
+     */
     public void deleteAll() {
-        String sql = "DELETE FROM " + Constants.TABLE_STOCKS;
+        String sql = "DELETE FROM " + Constants.TABLE_STOCK_SOURCE;
         try {
             connect();
             Statement stmt = conn.createStatement();
