@@ -26,8 +26,8 @@ public final class StockDao {
     private Connection conn = null;
     
     //database
-    private String dbName = "stockreporter.prod";
-    private String url = "jdbc:sqlite:stockreporter.prod";
+    private String dbName = "stockreporter.dev";
+    private String url = "jdbc:sqlite:stockreporter.dev";
     
     /**
      * Default constructor to check if database exist otherwise
