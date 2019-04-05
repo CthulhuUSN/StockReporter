@@ -12,4 +12,7 @@ public class Constants {
     public static final String[] stockNames = {"Microsoft Corporation.", "Apple Inc.", "Alphabet Inc.", "The Boeing Company", "Netflix Inc.", "Amazon.com Inc.", "Facebook Inc.", "Cisco Systems Inc.", "Tesla Inc.", "Tiffany & Co."};
     
     public static final String[] stockSourceNames = {"Yahoo", "Investopedia"};
+    
+    public static final String SCRAP_DATA_FROM_YAHOO = stockSourceNames[0];
+    public static final String SCRAP_DATA_FROM_INVESTOPEDIA = stockSourceNames[1];
 }

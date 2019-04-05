@@ -17,6 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import stockreporter.Constants;
 import stockreporter.StockReporter;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
@@ -46,15 +47,15 @@ public class YahooScraper extends StockScraper {
      * Scrap summary data by stock ticker
      * @param stockTicker 
      */
-    public void scapeSingleSummaryData(StockTicker stockTicker){        
-        System.out.println(stockTicker.getSymbol());
+    public void scapeSingleSummaryData(StockTicker stockTicker){     
+        System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
             Connection jsoupConn = Jsoup.connect(url);
-            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*5).get();
+            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
 
             StockDateMap stockDateMap = new StockDateMap();
-            stockDateMap.setSourceId(dao.getStockSourceIdByName("Yahoo"));
+            stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_YAHOO));
             stockDateMap.setTickerId(stockTicker.getId());
             stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
             int last_inserted_id = dao.insertStockDateMap(stockDateMap);
@@ -79,7 +80,7 @@ public class YahooScraper extends StockScraper {
             rowNum++;
             
             String askPrice = rows.get(rowNum).select("td").get(1).text();
-            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(askPrice)?"0":Utility.computeStringValues(askPrice)));
+            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(askPrice)?"0":askPrice));
             rowNum++;
                        
             String daysRangeMin = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[0].trim();

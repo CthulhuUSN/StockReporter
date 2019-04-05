@@ -1,6 +1,7 @@
 package stockreporter;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,9 +40,9 @@ public class Utility {
      */
     public static double getThousands(char letter){
         if (letter == 'M')
-            return 1000000;
+            return 1000;
         else if (letter == 'B')
-            return 1000000000;
+            return 1000000;
         return 1;
     }
     
@@ -57,6 +58,9 @@ public class Utility {
             Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
+    }
+    public static String removeTrailingZero(double value){
+        return new DecimalFormat("0.#").format(value);
     }
     
     /**

@@ -17,6 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import stockreporter.Constants;
 import stockreporter.StockReporter;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
@@ -46,14 +47,14 @@ public class InvestopediaScraper extends StockScraper {
      * @param stockTicker 
      */
     public void scapeSingleSummaryData(StockTicker stockTicker){        
-        System.out.println(stockTicker.getSymbol());
+        System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://www.investopedia.com/markets/stocks/"+stockTicker.getSymbol().toLowerCase();
         try {
             Connection jsoupConn = Jsoup.connect(url);
-            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*5).get();
+            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*10).get();
 
             StockDateMap stockDateMap = new StockDateMap();
-            stockDateMap.setSourceId(dao.getStockSourceIdByName("Investopedia"));
+            stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_INVESTOPEDIA));
             stockDateMap.setTickerId(stockTicker.getId());
             stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
             int last_inserted_id = dao.insertStockDateMap(stockDateMap);
