@@ -40,9 +40,9 @@ public class Utility {
      */
     public static double getThousands(char letter){
         if (letter == 'M')
-            return 1000000;
+            return 1000;
         else if (letter == 'B')
-            return 1000000000;
+            return 1000000;
         return 1;
     }
     
