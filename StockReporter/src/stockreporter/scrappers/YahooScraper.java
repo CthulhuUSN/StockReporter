@@ -47,12 +47,12 @@ public class YahooScraper extends StockScraper {
      * Scrap summary data by stock ticker
      * @param stockTicker 
      */
-    public void scapeSingleSummaryData(StockTicker stockTicker){        
-        System.out.println(stockTicker.getSymbol());
+    public void scapeSingleSummaryData(StockTicker stockTicker){     
+        System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
             Connection jsoupConn = Jsoup.connect(url);
-            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*5).get();
+            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
 
             StockDateMap stockDateMap = new StockDateMap();
             stockDateMap.setSourceId(dao.getStockSourceIdByName("Yahoo"));
