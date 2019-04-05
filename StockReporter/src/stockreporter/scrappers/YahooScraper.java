@@ -24,20 +24,29 @@ import stockreporter.daomodels.StockDateMap;
 
 
 /**
- *
- * @author Herve Tchoufong
+ * Scrap Yahoo stock financial data
  */
 public class YahooScraper extends StockScraper {
     
+    /**
+     * default constructor
+     */
     public YahooScraper(){
         super();
     }
     
+    /**
+     * Scrap summary data
+     */
     public void scrapeAllSummaryData(){
         for(StockTicker stockTicker: stockTickers)
             scapeSingleSummaryData(stockTicker);
     }
     
+    /**
+     * Scrap summary data by stock ticker
+     * @param stockTicker 
+     */
     public void scapeSingleSummaryData(StockTicker stockTicker){        
         System.out.println(stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
@@ -46,7 +55,7 @@ public class YahooScraper extends StockScraper {
             Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*5).get();
 
             StockDateMap stockDateMap = new StockDateMap();
-            stockDateMap.setSourceId(1);
+            stockDateMap.setSourceId(dao.getStockSourceIdByName("Yahoo"));
             stockDateMap.setTickerId(stockTicker.getId());
             stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
             int last_inserted_id = dao.insertStockDateMap(stockDateMap);

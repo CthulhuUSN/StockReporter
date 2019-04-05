@@ -27,7 +27,7 @@ public class UtilityTest {
     public void testConvertStringCurrencyUsingM() {
         System.out.println("convertStringCurrencyUsingM");
         String stringCurrency = "1M";
-        BigDecimal expResult = new BigDecimal("1000000.0");
+        BigDecimal expResult = BigDecimal.valueOf(1000000.0);
         BigDecimal result = util.convertStringCurrency(stringCurrency);
         assertEquals(expResult, result);  
     }
@@ -39,9 +39,9 @@ public class UtilityTest {
     public void testConvertStringCurrencyUsingB() {
         System.out.println("convertStringCurrencyUsingB");
         String stringCurrency = "1B";
-        BigDecimal expResult = new BigDecimal("1000000000.0");
+        BigDecimal expResult = BigDecimal.valueOf(1000000000.0);
         BigDecimal result = util.convertStringCurrency(stringCurrency);
-        assertEquals(expResult, result);  
+        assertEquals(expResult, result); 
     }
     
     /*
@@ -51,7 +51,7 @@ public class UtilityTest {
     public void testConvertStringCurrencyUsingOther() {
         System.out.println("convertStringCurrencyUsingOther");
         String stringCurrency = "100";
-        BigDecimal expResult = new BigDecimal("100.0");
+        BigDecimal expResult = BigDecimal.valueOf(100.0);
         BigDecimal result = util.convertStringCurrency(stringCurrency);
         assertEquals(expResult, result);  
     }

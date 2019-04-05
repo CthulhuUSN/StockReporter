@@ -6,10 +6,10 @@
 package stockreporter.daomodels;
 
 /**
- *
- * @author Herve Tchoufong
+ * Entity object for stock ticker with setter/getters
  */
 public class StockTicker{ 
+    
     private long id;
     private String symbol;
     private String name;

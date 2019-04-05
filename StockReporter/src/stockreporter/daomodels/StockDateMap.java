@@ -6,10 +6,10 @@
 package stockreporter.daomodels;
 
 /**
- *
- * @author Herve Tchoufong
+ * Entity object for stock date mapper with setter/getters
  */
 public class StockDateMap{
+    
     private long id;
     private String date;
     private long tickerId;

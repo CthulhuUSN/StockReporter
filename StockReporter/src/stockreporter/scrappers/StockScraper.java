@@ -9,8 +9,7 @@ import stockreporter.StockDao;
 import stockreporter.daomodels.StockTicker;
 
 /**
- *
- * @author Herve Tchoufong
+ * Initialize stock scrapper with dao and stock tickers
  */
 public class StockScraper {
     protected StockDao dao;
