@@ -14,15 +14,15 @@ import stockreporter.daomodels.StockTicker;
  * @author klacayo
  */
 public class YahooScraperTest {
-    
+    YahooScraper instance;
     public YahooScraperTest() {
+    instance = new YahooScraper();    
     }
     /**
      * Test of scrapeAllSummaryData method, of class YahooScraper.
      */
     @Test
     public void testScrapeAllSummaryData() {
-        YahooScraper instance = new YahooScraper();
         instance.scrapeAllSummaryData();
         
     }
