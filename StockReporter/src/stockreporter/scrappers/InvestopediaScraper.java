@@ -30,6 +30,10 @@ public class InvestopediaScraper extends StockScraper {
     /**
      * default constructor
      */
+    private boolean test = false;
+    private Document document;
+    private StockSummary summaryData;
+    
     public InvestopediaScraper(){
         super();
     }
@@ -39,20 +43,21 @@ public class InvestopediaScraper extends StockScraper {
      */
     public void scrapeAllSummaryData(){
         for(StockTicker stockTicker: stockTickers)
-            scapeSingleSummaryData(stockTicker);
+            scrapeSingleSummaryData(stockTicker);
     }
     
     /**
      * Scrap summary data by stock ticker
      * @param stockTicker 
      */
-    public void scapeSingleSummaryData(StockTicker stockTicker){        
+    public void scrapeSingleSummaryData(StockTicker stockTicker){        
         System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://www.investopedia.com/markets/stocks/"+stockTicker.getSymbol().toLowerCase();
         try {
+            if (!test){
             Connection jsoupConn = Jsoup.connect(url);
-            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*10).get();
-
+            document = jsoupConn.referrer("http://www.google.com") .timeout(1000*10).get();
+            }
             StockDateMap stockDateMap = new StockDateMap();
             stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_INVESTOPEDIA));
             stockDateMap.setTickerId(stockTicker.getId());
@@ -61,7 +66,7 @@ public class InvestopediaScraper extends StockScraper {
         
             Element table2 = document.select("table").get(2);
             Elements rows = table2.select("tr");    
-            StockSummary summaryData = new StockSummary();
+            summaryData = new StockSummary();
             
             summaryData.setStockDtMapId(last_inserted_id);
             
