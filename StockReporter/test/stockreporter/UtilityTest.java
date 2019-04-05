@@ -69,7 +69,6 @@ public class UtilityTest {
     */     
     @Test
     public void testGetThousandsUsingB() {
-        System.out.println("getThousandsUsingB");
         char letter = 'B';
         double expResult = 1000000000.0;
         double result = Utility.getThousands(letter);
@@ -81,7 +80,6 @@ public class UtilityTest {
     */ 
      @Test
     public void testGetThousandsUsingOther() {
-        System.out.println("getThousandsUsingOther");
         char letter = 'X';
         double expResult = 1.0;
         double result = Utility.getThousands(letter);
@@ -93,7 +91,6 @@ public class UtilityTest {
     */ 
     @Test
     public void testGetDoubleCurrency() {
-        System.out.println("getDoubleCurrency");
         String stringCurrency = "1";
         double expResult = 1.0;
         double result = Utility.getDoubleCurrency(stringCurrency);
