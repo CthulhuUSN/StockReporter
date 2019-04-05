@@ -1,6 +1,7 @@
 package stockreporter;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,6 +43,9 @@ public class Utility {
             Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 1;
+    }
+    public static String removeTrailingZero(double value){
+        return new DecimalFormat("0.#").format(value);
     }
     
     public static String[] getRangeMinAndMax(String range){

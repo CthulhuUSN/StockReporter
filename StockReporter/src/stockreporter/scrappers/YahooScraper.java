@@ -6,6 +6,7 @@
 package stockreporter.scrappers;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockTicker;
 import java.text.SimpleDateFormat;
@@ -70,7 +71,7 @@ public class YahooScraper extends StockScraper {
             rowNum++;
             
             String askPrice = rows.get(rowNum).select("td").get(1).text();
-            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(askPrice)?"0":Utility.computeStringValues(askPrice)));
+            summaryData.setAskPrice(Utility.convertStringCurrency(Utility.isBlank(askPrice)?"0":askPrice));
             rowNum++;
                        
             String daysRangeMin = Utility.getRangeMinAndMax(rows.get(rowNum).select("td").get(1).text())[0].trim();
