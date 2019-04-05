@@ -8,13 +8,13 @@ import static org.junit.Assert.*;
 
 public class InvestopediaScraperTest {
     
-    public InvestopediaScraperTest() {
-        File input = new File("Apr_4_2019_AAPL_Investopedia.html");
-        Document doc = Jsoup.parse(input, "UTF-8", "");
-    }
+    public InvestopediaScraperTest() {}
 
     @Test
     public void testScapeSingleSummaryData() {
+        InvestopediaScraper instance = new InvestopediaScraper();
+        File input = new File("Apr_4_2019_AAPL_Investopedia.html");
+        //Document doc = Jsoup.parse(input, "UTF-8", "");
     }
     
 }
