@@ -50,7 +50,7 @@ public class StockTickerTest {
     @Test
     public void testSetName() {
         StockTicker instance = new StockTicker();
-        instance.setSymbol("Testing Corp");
+        instance.setName("Testing Corp");
         assertEquals(master.getName(), instance.getName());
     }
     
