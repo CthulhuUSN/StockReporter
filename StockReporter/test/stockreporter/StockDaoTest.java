@@ -5,6 +5,7 @@
  */
 package stockreporter;
 
+import java.math.BigDecimal;
 import org.junit.Test;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockDateMap;
@@ -50,7 +51,8 @@ public class StockDaoTest {
      */
     @Test
     public void testInsertStockSummaryData() {
-        StockSummary stockSummary = null;
+        StockSummary stockSummary = new StockSummary();
+        stockSummary.setAskPrice(new BigDecimal(12.5));
         StockDao instance = StockDao.getInstance();
         instance.insertStockSummaryData(stockSummary);
     }
@@ -89,15 +91,15 @@ public class StockDaoTest {
     @Test
     public void testSetStockSource() {
         StockDao instance = StockDao.getInstance();
-        String stocksource = "yahoo";
+        String stocksource = "Yahoo";
         instance.setStockSource(stocksource);
     }
 
     @Test
     public void testInsertStockDateMap() {
         StockDao instance = StockDao.getInstance();
-        StockDateMap StockDateMap = null;
-        instance.insertStockDateMap(StockDateMap);
+        StockDateMap stockDateMap = new StockDateMap();
+        instance.insertStockDateMap(stockDateMap);
     }
 
     @Test
@@ -105,7 +107,7 @@ public class StockDaoTest {
         StockDao instance = StockDao.getInstance();
         String Date = "02/19/2019";
         String Symbol = "x";
-        String StockSource = "yahoo";
+        String StockSource = "Yahoo";
         instance.getStockDateMapID(Date, Symbol, StockSource);
     }
     @Test
