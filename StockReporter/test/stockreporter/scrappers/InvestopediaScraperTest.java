@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import stockreporter.StockDao;
+import stockreporter.scrappers.InvestopediaScraper;
 import java.lang.reflect.*;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockSummary;
