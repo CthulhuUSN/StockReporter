@@ -16,7 +16,7 @@ Step 4: You need to add project dependencies.
 
 Databases
 ---------
-The application has two databases, "stockreporter.dev" for dev and testing and "stockreporter.prod" for production with pre-loaded table structure, indexes and views. The system will auto create "stockreporter.prod" database during application startup if not available.
+The application will generate "stockreporter.prod" database with tables, indexes, and views when the application is executed for the first time.
 
 New Database
 ------------
