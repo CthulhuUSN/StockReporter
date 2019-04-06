@@ -40,14 +40,14 @@ public class YahooScraper extends StockScraper {
      */
     public void scrapeAllSummaryData(){
         for(StockTicker stockTicker: stockTickers)
-            scapeSingleSummaryData(stockTicker);
+            scrapeSingleSummaryData(stockTicker);
     }
     
     /**
      * Scrap summary data by stock ticker
      * @param stockTicker 
      */
-    public void scapeSingleSummaryData(StockTicker stockTicker){     
+    public void scrapeSingleSummaryData(StockTicker stockTicker){     
         System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
