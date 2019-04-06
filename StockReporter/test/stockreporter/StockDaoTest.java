@@ -78,7 +78,6 @@ public class StockDaoTest {
         StockDao instance = StockDao.getInstance();
         String tableName= null;
         instance.databaseAlreadyInitialized();
-        assertNotNull(tableName);
     }
 
     @Test

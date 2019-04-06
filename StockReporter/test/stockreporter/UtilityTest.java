@@ -27,8 +27,8 @@ public class UtilityTest {
     public void testConvertStringCurrencyUsingM() {
         System.out.println("convertStringCurrencyUsingM");
         String stringCurrency = "1M";
-        BigDecimal expResult = BigDecimal.valueOf(1000000.0);
-        BigDecimal result = util.convertStringCurrency(stringCurrency);
+        Double expResult = 1000.0;
+        Double result = Utility.convertStringCurrency(stringCurrency).doubleValue();
         assertEquals(expResult, result);  
     }
     
@@ -39,8 +39,8 @@ public class UtilityTest {
     public void testConvertStringCurrencyUsingB() {
         System.out.println("convertStringCurrencyUsingB");
         String stringCurrency = "1B";
-        BigDecimal expResult = BigDecimal.valueOf(1000000000.0);
-        BigDecimal result = util.convertStringCurrency(stringCurrency);
+        Double expResult = 1000000.0;
+        Double result = util.convertStringCurrency(stringCurrency).doubleValue();
         assertEquals(expResult, result); 
     }
     
@@ -63,7 +63,7 @@ public class UtilityTest {
     public void testGetThousandsUsingM() {
         System.out.println("getThousandsUsingM");
         char letter = 'M';
-        double expResult = 1000000.0;
+        double expResult = 1000.0;
         double result = Utility.getThousands(letter);
         assertEquals(expResult, result, 0.0);      
     }
@@ -75,7 +75,7 @@ public class UtilityTest {
     public void testGetThousandsUsingB() {
         System.out.println("getThousandsUsingB");
         char letter = 'B';
-        double expResult = 1000000000.0;
+        double expResult = 1000000.0;
         double result = Utility.getThousands(letter);
         assertEquals(expResult, result, 0.0);      
     }
