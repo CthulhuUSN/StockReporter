@@ -14,12 +14,12 @@ Step 4: You need to add project dependencies.
 
   (Eclipse): Right click the project -> properties -> Java Build Path -> Add JARs and select the project name and "jarfiles"                folder.
 
-Databases
----------
+Databases (Auto)
+----------------
 The application will generate "stockreporter.prod" database with tables, indexes, and views when the application is executed for the first time.
 
-New Database
-------------
+Database (Manual)
+-----------------
 Use "create_tbl_vw_master_summary.sql" to create master, summary tables, indexes, and summary view.
 
 Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
