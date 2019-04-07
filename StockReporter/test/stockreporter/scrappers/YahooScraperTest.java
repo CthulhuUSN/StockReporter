@@ -112,6 +112,9 @@ public class YahooScraperTest {
             
             assertEquals(expected, actual);
             
+            //truncate the data after test
+            dao.getInstance();
+            dao.deleteAll();
             
         } catch (Exception e) {
             e.printStackTrace();
