@@ -2,7 +2,7 @@ StockReporter will be able to scrape financial data from websites, store that da
 
 Setup project
 -------------
-Step 1: On local, git clone https://github.com/kennylg2/swen_sa_tool.git.
+Step 1: On local, run "git init" and followed by git clone https://github.com/kennylg2/swen_sa_tool.git.
 
 Step 2: Switch to "master" branch.
 
@@ -23,3 +23,15 @@ Database (Manual)
 Use "create_tbl_vw_master_summary.sql" to create master, summary tables, indexes, and summary view.
 
 Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
+
+Running application
+-------------------
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time and it scraps the financial data based on STOCK_SOURCE and STOCK_TICKER data.
+
+Note:
+----
+As of Apr 07, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
+
+Running Test
+------------
+The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database for StockReporterTestSuite and ScrappersTestSuite (auto-creates if the database does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is advisable to drop the database before running main application as it trunctates STOCK_SOURCE and STOCK_TICKER data as well.
