@@ -28,7 +28,9 @@ Running application
 -------------------
 src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time and it scraps the financial data based on STOCK_SOURCE and STOCK_TICKER data.
 
-Note: As of Apr 07, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
+Note:
+----
+As of Apr 07, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
 
 Running Test
 ------------
