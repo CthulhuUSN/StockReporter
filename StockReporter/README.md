@@ -26,6 +26,6 @@ Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE 
 
 Running application
 -------------------
-src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER), indexes, and views) when the application is executed for the first time and it scraps the financial data for Yahoo and Investopedia.
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time and it scraps the financial data based on STOCK_SOURCE and STOCK_TICKER data.
 
 
