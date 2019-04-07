@@ -2,7 +2,7 @@ StockReporter will be able to scrape financial data from websites, store that da
 
 Setup project
 -------------
-Step 1: On local, git clone https://github.com/kennylg2/swen_sa_tool.git.
+Step 1: On local, run "git init" and followed by git clone https://github.com/kennylg2/swen_sa_tool.git.
 
 Step 2: Switch to "master" branch.
 
