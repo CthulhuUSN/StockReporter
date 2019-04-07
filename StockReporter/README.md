@@ -26,7 +26,7 @@ Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE 
 
 Running application
 -------------------
-src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time and it scraps the financial data based on STOCK_SOURCE and STOCK_TICKER data.
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time. The application scraps the stock data based on STOCK_SOURCE and STOCK_TICKER data. When you run test cases, please drop the database to have clean data.
 
 Note:
 ----
@@ -34,4 +34,4 @@ As of Apr 07, 2019 the application scraps the data based on STOCK_SOURCE. The ap
 
 Running Test
 ------------
-The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database for StockReporterTestSuite and ScrappersTestSuite (auto-creates if the database does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is advisable to drop the database before running main application as it trunctates STOCK_SOURCE and STOCK_TICKER data as well.
+The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database for StockReporterTestSuite and ScrappersTestSuite (auto-creates if the database does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is advisable to drop the database before running main application as it trunctates data including STOCK_SOURCE and STOCK_TICKER for some test cases.
