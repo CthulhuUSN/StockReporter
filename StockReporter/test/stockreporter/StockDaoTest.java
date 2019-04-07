@@ -111,7 +111,8 @@ public class StockDaoTest {
         
         //Only if the summary has data otherwise view will return 0 rows
         if(cntStockDataMap > 0) {
-            Assert.assertTrue("Summary view failed to return any data", totalRecords > 0);
+            String message = "Summary view failed to return any data";
+            Assert.assertTrue(message, totalRecords > 0);
         }
     }
     
