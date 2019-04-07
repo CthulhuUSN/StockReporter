@@ -31,6 +31,10 @@ public class YahooScraper extends StockScraper {
     /**
      * default constructor
      */
+    private boolean test = false;
+    private Document document;
+    private StockSummary summaryData;
+    
     public YahooScraper(){
         super();
     }
@@ -51,8 +55,10 @@ public class YahooScraper extends StockScraper {
         System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
+        if(!test){
             Connection jsoupConn = Jsoup.connect(url);
             Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
+         }
 
             StockDateMap stockDateMap = new StockDateMap();
             stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_YAHOO));
