@@ -58,18 +58,24 @@ public class YahooScraperTest {
             stockTicker.setSymbol("AAPL");
             
             master.setPrevClosePrice(Utility.convertStringCurrency("195.35"));
-            master.setBetaCoefficient(Utility.convertStringCurrency("1.247"));
-            master.setDaysRangeMax(Utility.convertStringCurrency("196.37"));
-            master.setDaysRangeMin(Utility.convertStringCurrency("193.14"));
+            master.setBetaCoefficient(Utility.convertStringCurrency("0.99"));
+            master.setDaysRangeMax(Utility.convertStringCurrency("196.36"));
+            master.setDaysRangeMin(Utility.convertStringCurrency("194.71"));
             master.setDividentYield(Utility.convertStringCurrency("2.92/1.49%"));
-            master.setEps(Utility.convertStringCurrency("12.16"));
+            master.setEps(Utility.convertStringCurrency("12.12"));
             master.setFiftyTwoWeeksMax(Utility.convertStringCurrency("233.47"));
             master.setFiftyTwoWeeksMin(Utility.convertStringCurrency("142.00"));
-            master.setMarketCap(Utility.convertStringCurrency("934.08B"));
+            master.setMarketCap(Utility.convertStringCurrency("922.733B"));
             master.setOpenPrice(Utility.convertStringCurrency("194.79"));
-            master.setPeRatio(Utility.convertStringCurrency("16.09"));
+            master.setPeRatio(Utility.convertStringCurrency("16.14"));
             master.setSummaryId(0);
-            master.setVolume(Utility.convertStringCurrency("19,105,393.00").longValue());
+            master.setVolume(Utility.convertStringCurrency("18,747,318.00").longValue());
+            master.setBidPrice(Utility.convertStringCurrency("195.43"));
+            master.setAskPrice(Utility.convertStringCurrency("195.56"));
+            master.setAvgVolume(30598950);
+            master.setEarningDate("Apr 30, 2019");
+            master.setExDividentDate("2019-02-08");
+            master.setOneYearTargetEst(Utility.convertStringCurrency("190.94"));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,7 +114,7 @@ public class YahooScraperTest {
             String expected = master.toString();
             String actual = results.toString();
             System.out.println("Expected:" + expected);
-            System.out.println("Actual:" + actual);
+            System.out.println("Actual:  " + actual);
             
             assertEquals(expected, actual);
             

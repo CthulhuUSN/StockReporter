@@ -55,10 +55,10 @@ public class YahooScraper extends StockScraper {
         System.out.println("Scrapping: "+stockTicker.getSymbol());
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
-        if(!test){
+            if(!test){
             Connection jsoupConn = Jsoup.connect(url);
-            Document document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
-         }
+            document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
+            }
 
             StockDateMap stockDateMap = new StockDateMap();
             stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_YAHOO));
@@ -68,7 +68,7 @@ public class YahooScraper extends StockScraper {
         
             Element table1 = document.select("table").get(0);
             Elements rows = table1.select("tr");    
-            StockSummary summaryData = new StockSummary();
+            summaryData = new StockSummary();
             
             summaryData.setStockDtMapId(last_inserted_id);
             
