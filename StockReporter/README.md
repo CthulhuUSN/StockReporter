@@ -28,4 +28,6 @@ Running application
 -------------------
 src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time and it scraps the financial data based on STOCK_SOURCE and STOCK_TICKER data.
 
-
+Running Test
+------------
+The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database (auto-creates the database if it does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is advisable to drop the database before running main application as it trunctates STOCK_SORUCE and STOCK_TICKER data as well.
