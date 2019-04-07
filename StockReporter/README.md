@@ -23,3 +23,9 @@ Database (Manual)
 Use "create_tbl_vw_master_summary.sql" to create master, summary tables, indexes, and summary view.
 
 Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
+
+Running application
+-------------------
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER), indexes, and views) when the application is executed for the first time and it scraps the financial data for Yahoo and Investopedia.
+
+
