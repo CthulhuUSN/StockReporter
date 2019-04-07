@@ -14,6 +14,9 @@ public class StockReporter {
     
     public static void main(String[] args) {    
         
+        logger.log(Level.INFO, "Get database instance");
+        StockDao dao = StockDao.getInstance();
+        
         logger.log(Level.INFO, "Create scraper instances");
         InvestopediaScraper investopediaScraper = new InvestopediaScraper();
         YahooScraper yahooScraper = new YahooScraper();
