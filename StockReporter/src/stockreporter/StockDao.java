@@ -90,7 +90,19 @@ public final class StockDao {
 
                 sqlStrings.add(stockSummary);
 
-                //Placeholder for the StockHistorical string.
+                //StockHistorical string.
+                String stockHistorical = "CREATE TABLE STOCK_HISTORICAL (\n"
+                        + "      HISTORICAL_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                        + "      OPEN REAL,\n"
+                        + "      HIGH REAL,\n"
+                        + "      LOW REAL,\n"
+                        + "      CLOSE REAL,\n"
+                        + "      ADJ_CLOSE REAL,\n"
+                        + "      VOLUME INTEGER,\n"
+                        + "      STOCK_DT_MAP_ID INTEGER REFERENCES STOCK_DATE_MAP(STOCK_DT_MAP_ID));";
+                
+                sqlStrings.add(stockHistorical);
+                
                 //Creating the index
                 String index = "CREATE INDEX STOCK_DATE_IDX ON STOCK_DATE_MAP(STOCK_DATE);";
 
@@ -101,11 +113,19 @@ public final class StockDao {
                         + " SELECT SDM.STOCK_DATE STK_DATE, ST.SYMBOL STOCK, AVG(SS.PREV_CLOSE_PRICE) AVG_PRICE FROM STOCK_SUMMARY SS\n"
                         + " INNER JOIN STOCK_DATE_MAP SDM ON SS.STOCK_DT_MAP_ID = SDM.STOCK_DT_MAP_ID\n"
                         + " INNER JOIN STOCK_TICKER ST ON ST.TICKER_ID = SDM.TICKER_ID\n"
-                        + " GROUP BY SDM.STOCK_DATE, ST.SYMBOL";
+                        + " GROUP BY SDM.STOCK_DATE, ST.SYMBOL;";
 
                 sqlStrings.add(stockSummaryView);
 
-                //Placeholder for stockhistorical view
+                //stockhistorical view
+                String stockHistoricalView = "CREATE VIEW STOCK_HISTORICAL_VIEW AS\n"
+                        + " SELECT SDM.STOCK_DATE STK_DATE, ST.SYMBOL STOCK, AVG(SH.CLOSE) AVG_PRICE FROM STOCK_HISTORICAL SH\n"
+                        + " INNER JOIN STOCK_DATE_MAP SDM ON SH.STOCK_DT_MAP_ID = SDM.STOCK_DT_MAP_ID\n"
+                        + " INNER JOIN STOCK_TICKER ST ON ST.TICKER_ID = SDM.TICKER_ID\n"
+                        + " GROUP BY SDM.STOCK_DATE, ST.SYMBOL;";
+
+                sqlStrings.add(stockHistoricalView);
+                
                 //Execute the SQL strings in the DB.
                 logger.log(Level.INFO, "Creating database and DDL statements...");
                 try {
