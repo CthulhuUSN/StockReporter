@@ -18,6 +18,16 @@ public class StockHistorical implements Serializable {
     private BigDecimal adjClose;
     
     private long volume;
+    
+    private long stockDtMapId;
+
+    public long getStockDtMapId() {
+        return stockDtMapId;
+    }
+
+    public void setStockDtMapId(long stockDtMapId) {
+        this.stockDtMapId = stockDtMapId;
+    }
 
     public long getHistoricalId() {
         return historicalId;

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import stockreporter.daomodels.StockDateMap;
+import stockreporter.daomodels.StockHistorical;
 
 /**
  * This is the Data Access Layer (DAO) between database and business logic
@@ -456,6 +457,34 @@ public final class StockDao {
     }
     
     /**
+     * Count number of records from historical
+     * @return 
+     */
+    public int getStockHistoricalCount() {
+        String SQL = "SELECT COUNT(*) as CNT FROM STOCK_HISTORICAL";
+        int recCount = 0;
+        try {
+            connect();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+            recCount = rs.getInt("CNT");
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            if(pstmt != null)
+                try {
+                    pstmt.close();
+                    if(rs != null)
+                        rs.close();
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, ex.getLocalizedMessage());
+            }
+            disconnect();
+        }
+        return recCount;
+    }
+    
+    /**
      * Count number of records from stock source
      * @return 
      */
@@ -627,6 +656,41 @@ public final class StockDao {
         }
     }
 
+    
+    /**
+     * insert data into STOCK_HISTORICAL table
+     * @param stockHistorical 
+     */
+    public void insertStockHistoricalData(StockHistorical stockHistorical) {
+        logger.log(Level.INFO, "Insert data into STOCK_HISTORICAL...");
+        String sql = "INSERT INTO STOCK_HISTORICAL (OPEN,"
+                + " HIGH,"
+                + " LOW,"
+                + " CLOSE,"
+                + " ADJ_CLOSE,"
+                + " VOLUME,"
+                + " STOCK_DT_MAP_ID) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        try {
+            connect();
+            conn.setAutoCommit(false);
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBigDecimal(1, stockHistorical.getOpen());
+            pstmt.setBigDecimal(2, stockHistorical.getHigh());
+            pstmt.setBigDecimal(3, stockHistorical.getLow());
+            pstmt.setBigDecimal(4, stockHistorical.getClose());
+            pstmt.setBigDecimal(5, stockHistorical.getAdjClose());
+            pstmt.setLong(6, stockHistorical.getVolume());
+            pstmt.setLong(7, stockHistorical.getStockDtMapId());
+            pstmt.executeUpdate();
+            conn.commit();
+            pstmt.close();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            disconnect();
+        }
+    }
+    
     /**
      * Get Stock summary data from view
      */
@@ -640,6 +704,34 @@ public final class StockDao {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
             logger.log(Level.INFO, "getAvgStockSummaryView results...");
+            while (rs.next()) {
+                logger.log(Level.INFO, rs.getString("STK_DATE") + "\t"
+                        + rs.getString("STOCK") + "\t"
+                        + rs.getBigDecimal("AVG_PRICE"));
+                ++totalRecords;
+            }
+            rs.close();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            disconnect();
+        }
+        return totalRecords;
+    }
+    
+    /**
+     * Get Stock historical data from view
+     */
+    public int getStockHistoricalView() {
+        logger.log(Level.INFO, "Get STOCK_HISTORICAL_VIEW data...");
+        int totalRecords = 0;
+        
+        String sql = "SELECT * FROM STOCK_HISTORICAL_VIEW;";
+        connect();
+        try (
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+            logger.log(Level.INFO, "getStockHistoricalView results...");
             while (rs.next()) {
                 logger.log(Level.INFO, rs.getString("STK_DATE") + "\t"
                         + rs.getString("STOCK") + "\t"
@@ -723,12 +815,31 @@ public final class StockDao {
     }
     
     /**
-     * Delete data from stock_ticker
+     * Delete data from stock_summary
      */
     void deleteFromStockSummary() {
         logger.log(Level.INFO, "Delete data from STOCK_SUMMARY...");
         
         String sql = "DELETE FROM " + Constants.TABLE_STOCK_SUMMARY;
+        try {
+            connect();
+            stmt = conn.createStatement();
+            stmt.executeQuery(sql);
+            stmt.close();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } finally {
+            disconnect();
+        }
+    }
+    
+    /**
+     * Delete data from stock_historical
+     */
+    void deleteFromStockHiastorical() {
+        logger.log(Level.INFO, "Delete data from STOCK_HISTORICAL...");
+        
+        String sql = "DELETE FROM " + Constants.TABLE_STOCK_HISTORICAL;
         try {
             connect();
             stmt = conn.createStatement();
