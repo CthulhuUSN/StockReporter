@@ -59,7 +59,7 @@ public final class StockDao {
                 String stockDateMap = "CREATE TABLE IF NOT EXISTS STOCK_DATE_MAP (\n"
                         + "	STOCK_DT_MAP_ID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                         + "	STOCK_DATE TEXT,\n"
-                        + "	TICKER_ID INTEGER REFERENCES STOCK_TICKET(TICKET_ID),\n"
+                        + "	TICKER_ID INTEGER REFERENCES STOCK_TICKER(TICKER_ID),\n"
                         + "	SOURCE_ID INTEGER REFERENCES STOCK_SOURCE(SOURCE_ID)\n"
                         + ");";
 
