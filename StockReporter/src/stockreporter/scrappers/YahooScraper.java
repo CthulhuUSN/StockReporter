@@ -21,6 +21,7 @@ import stockreporter.Constants;
 import stockreporter.StockReporter;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
+import stockreporter.daomodels.StockHistorical;
 
 
 /**
@@ -34,6 +35,7 @@ public class YahooScraper extends StockScraper {
     private boolean test = false;
     private Document document;
     private StockSummary summaryData;
+    private StockHistorical stockHistorical;
     
     public YahooScraper(){
         super();
@@ -46,7 +48,13 @@ public class YahooScraper extends StockScraper {
         for(StockTicker stockTicker: stockTickers)
             scrapeSingleSummaryData(stockTicker);
     }
-    
+    /**
+     * Scrap historical data
+     */
+    public void scrapeAllHistoricalData(){
+        for(StockTicker stockTicker: stockTickers)
+            scrapeSingleHistoricalData(stockTicker);
+    }
     /**
      * Scrap summary data by stock ticker
      * @param stockTicker 
@@ -150,4 +158,48 @@ public class YahooScraper extends StockScraper {
             Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void scrapeSingleHistoricalData(StockTicker stockTicker){     
+        System.out.println("Scrapping: "+stockTicker.getSymbol());
+        String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase()+"/history?p="+stockTicker.getSymbol().toLowerCase();
+        try {
+            if(!test){
+            Connection jsoupConn = Jsoup.connect(url);
+            document = jsoupConn.referrer("http://www.google.com") .timeout(1000*20).get();
+            }
+            Element table1 = document.select("table").get(0);
+            Elements rows = table1.select("tr");    
+            
+            for(int i=1; i<rows.size()-1; i++){
+                stockHistorical = new StockHistorical();
+                Element row = rows.get(i);
+                Elements columns = row.select("td");
+                if(columns.size() == 7){
+                    String date = columns.get(0).text();
+                    StockDateMap stockDateMap = new StockDateMap();
+                    stockDateMap.setSourceId(dao.getStockSourceIdByName(Constants.SCRAP_DATA_FROM_YAHOO));
+                    stockDateMap.setTickerId(stockTicker.getId());
+                    stockDateMap.setDate(new SimpleDateFormat("MM-dd-yyyy").format(new Date(date)));
+                    int last_inserted_id = dao.insertStockDateMap(stockDateMap);
+                    stockHistorical.setStockDtMapId(last_inserted_id);
+                
+                    String openPrice = columns.get(1).text();
+                    stockHistorical.setOpen(Utility.convertStringCurrency(Utility.isBlank(openPrice)?"0":openPrice));
+                    String high = columns.get(2).text();
+                    stockHistorical.setHigh(Utility.convertStringCurrency(Utility.isBlank(high)?"0":high));
+                    String low = columns.get(3).text();
+                    stockHistorical.setLow(Utility.convertStringCurrency(Utility.isBlank(low)?"0":low));
+                    String close = columns.get(4).text();
+                    stockHistorical.setClose(Utility.convertStringCurrency(Utility.isBlank(close)?"0":close));
+                    String adjClose = columns.get(5).text();
+                    stockHistorical.setAdjClose(Utility.convertStringCurrency(Utility.isBlank(adjClose)?"0":adjClose));
+                    String volume = columns.get(6).text();
+                    stockHistorical.setVolume(Utility.convertStringCurrency(Utility.isBlank(volume)?"0":volume).longValue());
+                    dao.insertStockHistoricalData(stockHistorical);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
 }

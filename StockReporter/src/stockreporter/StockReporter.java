@@ -27,5 +27,8 @@ public class StockReporter {
         logger.log(Level.INFO, "Scrap summary data for Investopedia...");
         investopediaScraper.scrapeAllSummaryData();
         
+        logger.log(Level.INFO, "Scrap historical data for Yahoo...");
+        yahooScraper.scrapeAllHistoricalData();
+        
     }
 }
