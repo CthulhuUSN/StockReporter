@@ -30,5 +30,7 @@ public class StockReporter {
         logger.log(Level.INFO, "Scrap historical data for Yahoo...");
         yahooScraper.scrapeAllHistoricalData();
         
+        //TODO: Future
+        //Scrap historical data for Investopedia when the data is available
     }
 }
