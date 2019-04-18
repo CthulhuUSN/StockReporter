@@ -16,7 +16,7 @@ import stockreporter.StockDao;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockTicker;
 import stockreporter.daomodels.StockSummary;
-
+import stockreporter.daomodels.StockHistorical;
 /**
  *
  * @author klacayo
@@ -26,7 +26,7 @@ public class YahooScraperTest {
     
     StockTicker stockTicker = new StockTicker();
     StockSummary master = new StockSummary();
-    
+    StockHistorical sh = new StockHistorical();
     
     public YahooScraperTest() {
     
@@ -127,7 +127,23 @@ public class YahooScraperTest {
         }
         
     }
-    
+    @Test
+    public void testscrapeSingleHisotricalData() {
+        try {
+            YahooScraper ys = new YahooScraper();
+            Class isClass = ys.getClass();
+            ys.scrapeSingleHistoricalData(stockTicker);
+            Field f3 = isClass.getDeclaredField("historicalData");
+            StockHistorical results = (StockHistorical)f3.get(ys);
+            String expected = sh.toString();
+            String actual = results.toString();
+            assertEquals(expected, actual);
+            StockDao instance = StockDao.getInstance();
+            dao.deleteAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
     
 }

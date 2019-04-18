@@ -115,6 +115,16 @@ public class StockDaoTest {
             Assert.assertTrue(message, totalRecords > 0);
         }
     }
+
+    /**
+    *Test get stock historical data from view
+     */
+
+    public void testGetStockHIstoricalView() {
+        StockDao instance = StockDao.getInstance();
+        int totalRecords = instance.getStockHistoricalView();
+        Assert.assertTrue(totalRecords > 0);
+    }
     
     /**
      * Delete records from stock source
@@ -166,5 +176,15 @@ public class StockDaoTest {
         int recordsCnt = instance.getStockSummaryCount();
         
         Assert.assertTrue("Delete failed for stock summary", recordsCnt <1);
+    }
+    /**
+    * Delete records from stock historical
+     */
+    @Test
+    public void testDeleteFromStockHiastorical() {
+        StockDao instance = StockDao.getInstance();
+        instance.deleteFromStockHiastorical();
+        int recordsCnt = instance.getStockHistoricalCount();
+        Assert.assertTrue("Delete failed from stock history", recordsCnt <1);
     }
 }
