@@ -3,6 +3,9 @@ package stockreporter.daomodels;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * Entity object for historical data
+ */
 public class StockHistorical implements Serializable {
     
     private long historicalId;
