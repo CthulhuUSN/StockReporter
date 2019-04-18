@@ -53,6 +53,7 @@ public class InvestopediaScraper extends StockScraper {
      */
     public void scrapeSingleSummaryData(StockTicker stockTicker){        
         System.out.println("Scrapping: "+stockTicker.getSymbol());
+        
         String url = "https://www.investopedia.com/markets/stocks/"+stockTicker.getSymbol().toLowerCase();
         try {
             if (!test){

@@ -13,6 +13,7 @@ import stockreporter.daomodels.StockTicker;
  * Initialize stock scrapper with dao and stock tickers
  */
 public class StockScraper {
+    
     protected StockDao dao;
     protected List<StockTicker> stockTickers;
     protected Date latestScrappedDate;

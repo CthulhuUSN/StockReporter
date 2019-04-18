@@ -164,7 +164,6 @@ public final class StockDao {
      * Make database connection
      */
     public void connect() {
-        logger.log(Level.INFO, "Connect to database...");
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
@@ -176,7 +175,6 @@ public final class StockDao {
      * Disconnect from database
      */
     private void disconnect() {
-        logger.log(Level.INFO, "Disconnect from database...");
         try {
             if (conn != null) {
                 conn.close();
@@ -342,6 +340,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockTickerBySymbol(String symbol) {
+        logger.log(Level.INFO, "Get stock ticker id by symbol...");
+        
         String symbolQuery = "SELECT TICKER_ID FROM STOCK_TICKER WHERE SYMBOL = ?";
         int tickerID = 0;
         try {
@@ -374,6 +374,7 @@ public final class StockDao {
      * @return source id
      */
     public int getStockSourceIdByName(String name) {
+        logger.log(Level.INFO, "Get stock sourceid by name...");
         int tickerID = -1;
         String symbolQuery = "SELECT SOURCE_ID FROM STOCK_SOURCE WHERE NAME = ?";
         
@@ -408,6 +409,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockDateMapCount() {
+        logger.log(Level.INFO, "Get stock date map count...");
+        
         String SQL = "SELECT COUNT(*) as CNT FROM STOCK_DATE_MAP";
         int recCount = 0;
         try {
@@ -436,6 +439,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockSummaryCount() {
+        logger.log(Level.INFO, "Get stock summary count...");
+        
         String SQL = "SELECT COUNT(*) as CNT FROM STOCK_SUMMARY";
         int recCount = 0;
         try {
@@ -464,6 +469,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockHistoricalCount() {
+        logger.log(Level.INFO, "Get stock historical count...");
+        
         String SQL = "SELECT COUNT(*) as CNT FROM STOCK_HISTORICAL";
         int recCount = 0;
         try {
@@ -492,6 +499,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockSourceCount() {
+        logger.log(Level.INFO, "Get stock source count...");
+        
         String SQL = "SELECT COUNT(*) as CNT FROM STOCK_SOURCE";
         int recCount = 0;
         try {
@@ -520,6 +529,8 @@ public final class StockDao {
      * @return 
      */
     public int getStockTickerCount() {
+        logger.log(Level.INFO, "Get stock ticker count...");
+        
         String SQL = "SELECT COUNT(*) as CNT FROM STOCK_TICKER";
         int recCount = 0;
         try {
@@ -551,6 +562,8 @@ public final class StockDao {
      * @return 
      */
     private int getStockDateMapId(String date, int tickerID, int sourceID) {
+       logger.log(Level.INFO, "Get stock datemap id...");
+       
         String stockDtMapId = "SELECT STOCK_DT_MAP_ID FROM STOCK_DATE_MAP WHERE STOCK_DATE = ? AND TICKER_ID = ? AND SOURCE_ID = ?";
         int stockDateMapID = 0;
 
@@ -860,6 +873,8 @@ public final class StockDao {
      * @return latestDate
      */
     public Date getLatestScrappedDate() {
+       logger.log(Level.INFO, "Get latest scrapped date...");
+       
         Date latestDate = null;
         String query = "SELECT STOCK_DATE FROM STOCK_DATE_MAP ORDER BY DATE(STOCK_DATE) DESC LIMIT 1";
         try {

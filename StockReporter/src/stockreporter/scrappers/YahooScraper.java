@@ -19,7 +19,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import stockreporter.Constants;
-import stockreporter.StockReporter;
 import stockreporter.Utility;
 import stockreporter.daomodels.StockDateMap;
 import stockreporter.daomodels.StockHistorical;
@@ -29,6 +28,8 @@ import stockreporter.daomodels.StockHistorical;
  * Scrap Yahoo stock financial data
  */
 public class YahooScraper extends StockScraper {
+    
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
     
     /**
      * default constructor
@@ -61,7 +62,8 @@ public class YahooScraper extends StockScraper {
      * @param stockTicker 
      */
     public void scrapeSingleSummaryData(StockTicker stockTicker){     
-        System.out.println("Scrapping: "+stockTicker.getSymbol());
+        logger.log(Level.INFO,"Scrapping: "+stockTicker.getSymbol());
+        
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase();
         try {
             if(!test){
@@ -159,9 +161,9 @@ public class YahooScraper extends StockScraper {
             }
             
         } catch (IOException ex) {
-            Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getLocalizedMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(YahooScraper.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getLocalizedMessage());
         }
     }
     
@@ -170,7 +172,8 @@ public class YahooScraper extends StockScraper {
      * @param stockTicker 
      */
     public void scrapeSingleHistoricalData(StockTicker stockTicker){ 
-        System.out.println("Scrapping: "+stockTicker.getSymbol());
+        logger.log(Level.INFO,"Scrapping: "+stockTicker.getSymbol());
+        
         String url = "https://finance.yahoo.com/quote/"+stockTicker.getSymbol().toLowerCase()+"/history?p="+stockTicker.getSymbol().toLowerCase();
         try {
             if(!test){
@@ -214,9 +217,9 @@ public class YahooScraper extends StockScraper {
                 }
             }
         } catch (IOException ex) {
-            Logger.getLogger(StockReporter.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getLocalizedMessage());
         } catch (ParseException ex) {
-            Logger.getLogger(YahooScraper.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getLocalizedMessage());
         }
     }    
 }

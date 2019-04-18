@@ -31,6 +31,6 @@ public class StockReporter {
         yahooScraper.scrapeAllHistoricalData();
         
         //TODO: Future
-        //Scrap historical data for Investopedia when the data is available
+        //Scrap historical data for Investopedia when available
     }
 }
