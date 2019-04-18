@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package stockreporter.scrappers;
+import java.util.Date;
 import java.util.List;
 import stockreporter.StockDao;
 import stockreporter.daomodels.StockTicker;
@@ -14,9 +15,11 @@ import stockreporter.daomodels.StockTicker;
 public class StockScraper {
     protected StockDao dao;
     protected List<StockTicker> stockTickers;
+    protected Date latestScrappedDate;
     
     public StockScraper(){
         dao = StockDao.getInstance();
         stockTickers = dao.getAllstockTickers();
+        latestScrappedDate = dao.getLatestScrappedDate();
     }
 }

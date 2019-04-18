@@ -9,7 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -850,5 +854,29 @@ public final class StockDao {
         } finally {
             disconnect();
         }
+    }
+    
+    /**
+     * Get latest stock date
+     * @return latestDate
+     */
+    public Date getLatestScrappedDate() {
+        Date latestDate = null;
+        String query = "SELECT STOCK_DATE FROM STOCK_DATE_MAP ORDER BY DATE(STOCK_DATE) DESC LIMIT 1";
+        try {
+            connect();
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            String stockDate = rs.getString("STOCK_DATE");
+            //Date inputDate = new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-17");
+            latestDate = stockDate!=null?new SimpleDateFormat("yyyy-MM-dd").parse(stockDate):null;
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(StockDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {  
+            disconnect();
+        }
+        return latestDate;
     }
 }
