@@ -56,7 +56,8 @@ public class InvestopediaScraper extends StockScraper {
         String url = "https://www.investopedia.com/markets/stocks/"+stockTicker.getSymbol().toLowerCase();
         try {
             if (!test){
-            Connection jsoupConn = Jsoup.connect(url);
+            Connection jsoupConn = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:25.0) Gecko/20100101 Firefox/25.0");
             document = jsoupConn.referrer("http://www.google.com") .timeout(1000*10).get();
             }
             Date stockDate = new SimpleDateFormat("yyyy-MM-dd").parse(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
