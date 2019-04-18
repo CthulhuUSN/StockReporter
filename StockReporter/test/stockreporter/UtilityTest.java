@@ -98,10 +98,39 @@ public class UtilityTest {
     @Test
     public void testGetDoubleCurrency() {
         System.out.println("getDoubleCurrency");
-        String stringCurrency = "1";
+        String stringCurrency = "1.00";
         double expResult = 1.0;
         double result = Utility.getDoubleCurrency(stringCurrency);
         assertEquals(expResult, result, 0.0); 
+    }
+    /*
+    *Test remove trailing zero
+     */
+     public void testRemoveTrailingZero() {
+         double convertValue = 1.00;
+         String resultValue = Utility.removeTrailingZero(convertValue);
+         double expResult = 1.0;
+         double result = Double.valueOf(resultValue);
+         assertEquals(expResult, result, 0.0);
+     }
+    /*
+    * Test compute string values
+    */
+    public void testComputeStringValues() {
+        String convertValue = "3x";
+        String resultValue = Utility.computeStringValues(convertValue);
+        double expResult = 3;
+        double result = Double.valueOf(resultValue);
+        assertEquals(expResult, result, 0.01);
+    }
+    /*
+    * test date formatter
+    */
+    public void testFormatDateString(){
+        String randomDate = "2019/09/12";
+        String expResult = "2019-09-12";
+        String result = Utility.formatDateString(randomDate);
+        assertTrue(expResult.equals(result));
     }
     
 }
