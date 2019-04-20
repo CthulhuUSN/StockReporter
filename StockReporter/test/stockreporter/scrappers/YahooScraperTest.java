@@ -132,6 +132,9 @@ public class YahooScraperTest {
         }
         
     }
+    /*
+    * Test scraping of historical data
+    */
 
     @Test
     public void testscrapeSingleHisotricalData() {

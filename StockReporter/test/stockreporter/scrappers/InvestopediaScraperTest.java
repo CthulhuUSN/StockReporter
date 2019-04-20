@@ -62,6 +62,9 @@ public class InvestopediaScraperTest {
         }
     }
 
+    /*
+    * Test signle scrape of summary data
+    */
     @Test
     public void testScrapeSingleSummaryData() {
         try{

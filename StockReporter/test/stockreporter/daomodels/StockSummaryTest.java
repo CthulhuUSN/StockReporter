@@ -9,6 +9,9 @@ public class StockSummaryTest {
     
     public StockSummaryTest() {
     }
+    /* Test of getSummaryId
+    * 
+    */
         @Test
         public void testgetSummaryId () {
             StockSummary instance = new StockSummary();
@@ -17,6 +20,10 @@ public class StockSummaryTest {
             long result = instance.getSummaryId();
             assertEquals(expResult, result, 0.01);
         }
+        
+        /* Test of setSummaryId
+    * 
+    */
    	@Test
         public void testsetSummaryId () {
             StockSummary instance = new StockSummary();
@@ -27,6 +34,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
 
+        /* Test of getPrevClosePrice
+    * 
+    */
 	@Test
         public void testgetPrevClosePrice () {
             StockSummary instance = new StockSummary();
@@ -37,6 +47,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.01);
         }
 
+        /* Test of setPrevClosePrice
+    * 
+    */
 	@Test
         public void testsetPrevClosePrice () {
             StockSummary instance = new StockSummary();
@@ -46,7 +59,9 @@ public class StockSummaryTest {
             int result = instance.getPrevClosePrice().intValue();
             assertEquals(expResult, result, 0.1);
         }
-	
+	/* Test of getOpenPrice
+    * 
+    */
         @Test
         public void testgetOpenPrice () {
             StockSummary instance = new StockSummary();
@@ -58,6 +73,9 @@ public class StockSummaryTest {
             
         }
 	
+        /* Test of setOpenPrice
+    * 
+    */
         @Test
         public void testsetOpenPrice () {
             StockSummary instance = new StockSummary();
@@ -68,6 +86,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
 
+        /* Test of getBidPrice
+    * 
+    */
 	@Test
         public void testgetBidPrice () {
             StockSummary instance = new StockSummary();
@@ -78,6 +99,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
 
+        /* Test of setBidPrice
+    * 
+    */
 	@Test
         public void testsetBidPrice () {
             StockSummary instance = new StockSummary();
@@ -88,6 +112,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
 
+        /* Test of getAskPrice
+    * 
+    */
 	@Test
         public void testgetAskPrice () {
             StockSummary instance = new StockSummary();
@@ -98,6 +125,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
 	
+        /* Test of setAskPrice
+    * 
+    */
         @Test
         public void testsetAskPrice () {
           StockSummary instance = new StockSummary();
@@ -108,6 +138,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.1);  
         }
 	
+        /* Test of getDaysRangeMin
+    * 
+    */
         @Test
         public void testgetDaysRangeMin () {
           StockSummary instance = new StockSummary();
@@ -118,6 +151,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.1); 
         }
 
+        /* Test of setDaysRangeMin
+    * 
+    */
 	@Test
         public void testsetDaysRangeMin () {
            StockSummary instance = new StockSummary();
@@ -128,6 +164,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.1);  
         }
 
+        /* Test of getDaysRangeMax
+    * 
+    */
         @Test
         public void testgetDaysRangeMax () {
            StockSummary instance = new StockSummary();
@@ -138,6 +177,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.1);  
         }
 	
+        /* Test of setDaysRangeMax
+    * 
+    */
 	@Test
         public void testsetDaysRangeMax () {
            StockSummary instance = new StockSummary();
@@ -148,6 +190,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of getFiftyTwoWeeksMin
+    * 
+    */
 	@Test
         public void testgetFiftyTwoWeeksMin () {
            StockSummary instance = new StockSummary();
@@ -158,6 +203,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of setFiftyTwoWeeksMin
+    * 
+    */
         @Test
         public void testsetFiftyTwoWeeksMin () {
           StockSummary instance = new StockSummary();
@@ -168,6 +216,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
         
+        /* Test of getFiftyTwoWeeksMax
+    * 
+    */
         @Test
         public void testgetFiftyTwoWeeksMax () {
           StockSummary instance = new StockSummary();
@@ -178,6 +229,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of setFiftyTwoWeeksMax
+    * 
+    */
         @Test
         public void testsetFiftyTwoWeeksMax () {
           StockSummary instance = new StockSummary();
@@ -188,6 +242,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 	
+        /* Test of getVolume
+    * 
+    */
         @Test
         public void testgetVolume () {
            StockSummary instance = new StockSummary();
@@ -198,6 +255,9 @@ public class StockSummaryTest {
            assertEquals(expResult, result, 0.1);
         }
         
+        /* Test of setVolume
+    * 
+    */
         @Test
         public void testsetVolume () {
            StockSummary instance = new StockSummary();
@@ -208,6 +268,9 @@ public class StockSummaryTest {
            assertEquals(expResult, result, 0.1);
         }
 	
+        /* Test of getavgVolume
+    * 
+    */
         @Test
         public void testgetavgVolume () {
            StockSummary instance = new StockSummary();
@@ -218,6 +281,9 @@ public class StockSummaryTest {
            assertEquals(expResult, result, 0.1);
         }
 	
+        /* Test of setavgVolume
+    * 
+    */
         @Test
         public void testsetavgVolume () {
            StockSummary instance = new StockSummary();
@@ -240,6 +306,9 @@ public class StockSummaryTest {
         }
         */
 
+        /* Test of getMarketCap
+    * 
+    */
         @Test
         public void testgetMarketCap () {
           StockSummary instance = new StockSummary();
@@ -250,6 +319,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
         
+        /* Test of setMarketCap
+    * 
+    */
         @Test
         public void testsetMarketCap () {
           StockSummary instance = new StockSummary();
@@ -260,6 +332,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 	
+        /* Test of getBetaCoefficient
+    * 
+    */
         @Test
         public void testgetBetaCoefficient () {
           StockSummary instance = new StockSummary();
@@ -271,6 +346,9 @@ public class StockSummaryTest {
         }
 	
 
+        /* Test of setBetaCoeficcient
+    * 
+    */
 	@Test
         public void testsetBetaCoefficient () {
           StockSummary instance = new StockSummary();
@@ -281,6 +359,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of getPetRatio
+    * 
+    */
 	@Test
         public void testgetPeRatio () {
           StockSummary instance = new StockSummary();
@@ -291,6 +372,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
         
+        /* Test of setPetRatio
+    * 
+    */
         @Test
         public void testsetPeRatio () {
           StockSummary instance = new StockSummary();
@@ -301,6 +385,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of getEps
+    * 
+    */
         @Test
         public void testgetEps () {
           StockSummary instance = new StockSummary();
@@ -311,6 +398,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 	
+        /* Test of setEps
+    * 
+    */
         @Test
         public void testsetEps () {
           StockSummary instance = new StockSummary();
@@ -321,6 +411,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of getEarningDate
+    * 
+    */
 	@Test
         public void testgetEarningDate () {
           StockSummary instance = new StockSummary();
@@ -331,6 +424,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result);  
         }
 
+        /* Test of setEarningDate
+    * 
+    */
 	@Test
         public void testsetEarningDate () {
           StockSummary instance = new StockSummary();
@@ -341,6 +437,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result);  
         }
 
+        /* Test of getDividentYield
+    * 
+    */
         @Test
         public void testgetDividentYield() {
           StockSummary instance = new StockSummary();
@@ -351,6 +450,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 	
+        /* Test of setDividentYield
+    * 
+    */
 	//Left Off here 
         @Test
         public void testsetDividentYield() {
@@ -362,7 +464,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 	
-
+/* Test of getexDividentDate
+    * 
+    */
 	
         @Test
         public void testgetExDividentDate() {
@@ -374,6 +478,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result);  
         }
 	
+        /* Test of setExDividentDate
+    * 
+    */
         @Test
         public void testsetExDividentDate() {
           StockSummary instance = new StockSummary();
@@ -384,6 +491,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result);  
         }
         
+        /* Test of getOneYearTargetEst
+    * 
+    */
         @Test
         public void testgetOneYearTargetEst() {
           StockSummary instance = new StockSummary();
@@ -394,6 +504,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
         
+        /* Test of setOneYearTargetEst
+    * 
+    */
         @Test
         public void testsetOneYearTargetEst() {
           StockSummary instance = new StockSummary();
@@ -404,6 +517,9 @@ public class StockSummaryTest {
           assertEquals(expResult, result, 0.01);  
         }
 
+        /* Test of getStockDtMapId
+    * 
+    */
         @Test
         public void testgetStockDtMapId () {
             StockSummary instance = new StockSummary();
@@ -414,6 +530,9 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
         
+        /* Test of setStockDtMapId
+    * 
+    */
         @Test
         public void testsetStockDtMapId () {
             StockSummary instance = new StockSummary();
@@ -424,31 +543,5 @@ public class StockSummaryTest {
             assertEquals(expResult, result, 0.1);
         }
         
-        @Test
-        public void testtoString () {
-        StockSummary instance = new StockSummary();
-        long summaryId = 3;
-	BigDecimal prevClosePrice = new BigDecimal("0.35");
-	BigDecimal openPrice = new BigDecimal("0.57");
-	BigDecimal bidPrice = new BigDecimal("0.15");
-	BigDecimal askPrice = new BigDecimal("0.59");
-	BigDecimal daysRangeMin = new BigDecimal("1.35");
-	BigDecimal daysRangeMax = new BigDecimal("5.35");
-	BigDecimal fiftyTwoWeeksMin = new BigDecimal("0.35");
-	BigDecimal fiftyTwoWeeksMax = new BigDecimal("3.35");
-	long volume = 2;
-	long avgVolume = 4;
-	BigDecimal marketCap = new BigDecimal("2.35");
-	BigDecimal betaCoefficient = new BigDecimal("4.45");
-	BigDecimal peRatio = new BigDecimal("3.55");
-	BigDecimal eps = new BigDecimal("1.11");
-	String earningDate = "2019-04-03";
-	BigDecimal dividentYield = new BigDecimal("0.75");
-	String exDividentDate = "2019-04-07";
-        BigDecimal oneYearTargetEst = new BigDecimal("0.15");
-        long stockDtMapId = 8;
-        String expResult = toString();
-        String result = toString();
-        assertTrue(expResult.equals(result));
-        }
+       
 }

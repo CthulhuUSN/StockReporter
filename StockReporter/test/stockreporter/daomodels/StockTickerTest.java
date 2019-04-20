@@ -15,12 +15,18 @@ public class StockTickerTest {
 
     }
 
+    /* Test of getId
+    * 
+    */
     @Test
     public void testGetId() {
         long test = 100;
         assertEquals(test, master.getId());
     }
 
+    /* Test of setId
+    * 
+    */
     @Test
     public void testSetId() {
         StockTicker instance = new StockTicker();
@@ -28,12 +34,18 @@ public class StockTickerTest {
         assertEquals(master.getId(), instance.getId());
     }
 
+    /* Test of getsymbol
+    * 
+    */
     @Test
     public void testGetSymbol() {
         String test = "TC";
         assertEquals(test, master.getSymbol());
     }
 
+    /* Test of setsymbol
+    * 
+    */
     @Test
     public void testSetSymbol() {
         StockTicker instance = new StockTicker();
@@ -41,12 +53,18 @@ public class StockTickerTest {
         assertEquals(master.getSymbol(), instance.getSymbol());
     }
 
+    /* Test of getName
+    * 
+    */
     @Test
     public void testGetName() {
         String test = "Testing Corp";
         assertEquals(test, master.getName());
     }
 
+    /* Test of setName
+    * 
+    */
     @Test
     public void testSetName() {
         StockTicker instance = new StockTicker();
