@@ -37,4 +37,9 @@ public class StockTicker{
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "StockTicker{" + "id=" + id + ", symbol=" + symbol + ", name=" + name + '}';
+    }
 }

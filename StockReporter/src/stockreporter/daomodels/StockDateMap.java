@@ -46,4 +46,9 @@ public class StockDateMap{
     public void setSourceId(long sourceId) {
         this.sourceId = sourceId;
     }
+
+    @Override
+    public String toString() {
+        return "StockDateMap{" + "id=" + id + ", date=" + date + ", tickerId=" + tickerId + ", sourceId=" + sourceId + '}';
+    }
 }

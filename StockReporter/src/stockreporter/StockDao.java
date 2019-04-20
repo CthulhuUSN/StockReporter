@@ -727,6 +727,7 @@ public final class StockDao {
                 ++totalRecords;
             }
             rs.close();
+            stmt.close();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         } finally {
@@ -755,6 +756,7 @@ public final class StockDao {
                 ++totalRecords;
             }
             rs.close();
+            stmt.close();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         } finally {
@@ -884,6 +886,8 @@ public final class StockDao {
             String stockDate = rs.getString("STOCK_DATE");
             //Date inputDate = new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-17");
             latestDate = stockDate!=null?new SimpleDateFormat("yyyy-MM-dd").parse(stockDate):null;
+            rs.close();
+            stmt.close();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         } catch (ParseException ex) {
