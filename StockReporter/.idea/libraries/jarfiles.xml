@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jarfiles">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jarfiles/sqlite-jdbc-3.27.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jarfiles/jsoup-1.11.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jarfiles/apiguardian-api-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

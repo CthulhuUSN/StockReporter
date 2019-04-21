@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockreporter.daomodels;
 
 /**
@@ -45,10 +40,5 @@ public class StockDateMap{
 
     public void setSourceId(long sourceId) {
         this.sourceId = sourceId;
-    }
-
-    @Override
-    public String toString() {
-        return "StockDateMap{" + "id=" + id + ", date=" + date + ", tickerId=" + tickerId + ", sourceId=" + sourceId + '}';
     }
 }

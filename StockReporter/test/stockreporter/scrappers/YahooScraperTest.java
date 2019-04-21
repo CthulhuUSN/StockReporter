@@ -1,9 +1,3 @@
-    
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockreporter.scrappers;
 
 import java.io.File;
@@ -18,9 +12,6 @@ import stockreporter.daomodels.StockTicker;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockHistorical;
 
-/**
- * Test class for Yahoo scraper
- */
 public class YahooScraperTest {
     StockDao dao;
     
@@ -29,13 +20,17 @@ public class YahooScraperTest {
     StockHistorical sh = new StockHistorical();
     
     public YahooScraperTest() {
-        try {
+    
+    
+    
+    try {
             File tempFile = File.createTempFile("dbTest", "sqlite");
             tempFile.deleteOnExit();
             String tempUrl = "jdbc:sqlite:" + tempFile.getAbsolutePath();
             
             dao = new StockDao();
             Class daoClass = dao.getClass();
+            dao.deleteAll();
 
             Field f1 = daoClass.getDeclaredField("dbName");
             f1.setAccessible(true);
@@ -48,7 +43,6 @@ public class YahooScraperTest {
             f3.set(dao, null);
             
             dao.getInstance();
-            dao.deleteAll();
             
             stockTicker.setId(1);
             stockTicker.setName("Apple Inc.");
@@ -123,18 +117,13 @@ public class YahooScraperTest {
 
             assertEquals(expected, actual);
 
-            //truncate the data after test
-            dao.getInstance();
-            dao.deleteAll();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }
-    /*
-    * Test scraping of historical data
-    */
+    //Apr_19_2019_AAPL_Historical_Yahoo.html
 
     @Test
     public void testscrapeSingleHisotricalData() {
@@ -158,7 +147,7 @@ public class YahooScraperTest {
             Field f3 = isClass.getDeclaredField("stockHistorical");
             f3.setAccessible(true);
             StockHistorical results = (StockHistorical)f3.get(ys);
-            //This isn't scraped so don't care about the vaule since it is a DB thing.
+            //This isn't scraped so don't care about the value since it is a DB thing.
             sh.setStockDtMapId(results.getStockDtMapId());
             sh.setHistoricalId(results.getHistoricalId());
 
@@ -169,32 +158,10 @@ public class YahooScraperTest {
 
             assertEquals(expected, actual);
 
-            //truncate the data after test
-            dao.getInstance();
-            dao.deleteAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    /*
-    @Test
-    public void testscrapeSingleHisotricalData() {
-        try {
-            YahooScraper ys = new YahooScraper();
-            Class isClass = ys.getClass();
-            ys.scrapeSingleHistoricalData(stockTicker);
-            Field f3 = isClass.getDeclaredField("historicalData");
-            StockHistorical results = (StockHistorical)f3.get(ys);
-            String expected = sh.toString();
-            String actual = results.toString();
-            assertEquals(expected, actual);
-            StockDao instance = StockDao.getInstance();
-            dao.deleteAll();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-     */
     
 }

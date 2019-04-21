@@ -1,17 +1,9 @@
-/*
- * UtilityTest.java
- * JUnit Class to test the Utility.java class
- * 
- */
 package stockreporter;
 
 import java.math.BigDecimal;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- * Test generic methods such as string to currency, billion to thousands etc.
- */
 public class UtilityTest {
     Utility util;
     

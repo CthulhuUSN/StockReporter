@@ -1,25 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stockreporter.daomodels;
 
 import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- * Test cases for stock historical
- */
 public class StockHistoricalTest {
     
     public StockHistoricalTest() {
     }
     
-    /* Test of getStockDtMapId
-    * 
-    */
     @Test
     public void testgetStockDtMapId () {
         StockHistorical instance = new StockHistorical();
@@ -29,9 +23,6 @@ public class StockHistoricalTest {
         assertEquals(expResult, result, 0.01);
     }
 
-    /* Test of setStockDtMapid
-    * 
-    */
     @Test
     public void testsetStockDtMapId () {
         StockHistorical instance = new StockHistorical();
@@ -42,10 +33,7 @@ public class StockHistoricalTest {
         assertEquals(expResult, result, 0.1);
     }
 
-  
-    /* Test of getHistoricalId
-    * 
-    */
+    
     @Test
     public void testgetHistoricalId () {
         StockHistorical instance = new StockHistorical();
@@ -55,9 +43,6 @@ public class StockHistoricalTest {
         assertEquals(expResult, result, 0.01);
     }
 
-    /* Test of setHistoricalId
-    * 
-    */
     @Test
     public void testsetHistoricalId () {
         StockHistorical instance = new StockHistorical();
@@ -68,9 +53,6 @@ public class StockHistoricalTest {
         assertEquals(expResult, result, 0.1);
     }
 
-    /* Test of getOpen
-    * 
-    */
     @Test
     public void testgetOpen () {
         StockHistorical instance = new StockHistorical();
@@ -83,10 +65,7 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
     
- 
-    /* Test of setOpen
-    * 
-    */
+    
     @Test
     public void testsetOpen () {
         StockHistorical instance = new StockHistorical();
@@ -98,10 +77,7 @@ public class StockHistoricalTest {
         i2 = expResult.intValue();
         assertEquals(i1, i2, 0.1);
     }
-
-    /* Test of getHigh
-    * 
-    */
+    
     @Test
     public void testgetHigh () {
         StockHistorical instance = new StockHistorical();
@@ -114,9 +90,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
 
-    /* Test of setHigh
-    * 
-    */
     @Test
     public void testsetHigh () {
         StockHistorical instance = new StockHistorical();
@@ -129,9 +102,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
     
-    /* Test of getLow
-    * 
-    */
     @Test
     public void testgetLow () {
         StockHistorical instance = new StockHistorical();
@@ -144,9 +114,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
 
-    /* Test of setLow
-    * 
-    */
     @Test
     public void testsetLow () {
         StockHistorical instance = new StockHistorical();
@@ -159,9 +126,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
 
-    /* Test of getClose
-    * 
-    */
     @Test
     public void testgetClose () {
         StockHistorical instance = new StockHistorical();
@@ -174,9 +138,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
     
-    /* Test of setClose
-    * 
-    */
     @Test
     public void testsetClose () {
         StockHistorical instance = new StockHistorical();
@@ -189,9 +150,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
 
-    /* Test of getAdjClose
-    * 
-    */
     @Test
     public void testgetAdjClose () {
         StockHistorical instance = new StockHistorical();
@@ -204,9 +162,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
     
-    /* Test of setAdjClose
-    * 
-    */
     @Test
     public void testsetAdjClose () {
         StockHistorical instance = new StockHistorical();
@@ -219,9 +174,6 @@ public class StockHistoricalTest {
         assertEquals(i1, i2, 0.1);
     }
 
-    /* Test of getVolume
-    * 
-    */
     @Test
     public void testgetVolume () {
         StockHistorical instance = new StockHistorical();
@@ -231,10 +183,7 @@ public class StockHistoricalTest {
         long result = instance.getVolume();
         assertEquals(expResult, result, 0.1);
     }
-   
-    /* Test of setVolume
-    * 
-    */
+    
     @Test
     public void testsetVolume () {
         StockHistorical instance = new StockHistorical();
@@ -245,5 +194,19 @@ public class StockHistoricalTest {
         assertEquals(expResult, result, 0.1);
     }
 
-   
+    @Test
+        public void testtoString () {
+        StockHistorical instance = new StockHistorical();
+        long historicalId = 9;
+        BigDecimal open = new BigDecimal("0.35");
+        BigDecimal high = new BigDecimal("0.57");
+        BigDecimal low = new BigDecimal("0.15");
+        BigDecimal close = new BigDecimal("5.35");
+        BigDecimal adjClose = new BigDecimal("0.35");
+        long volume = 2;
+        long stockDtMapId = 7;
+        String expResult = toString();
+        String result = toString();
+        assertTrue(expResult.equals(result));
+        }
 }

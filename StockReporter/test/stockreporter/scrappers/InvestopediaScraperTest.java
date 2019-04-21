@@ -11,18 +11,12 @@ import stockreporter.Utility;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockTicker;
 
-/**
- * Test class for investopedia scraper
- */
 public class InvestopediaScraperTest {
 
     StockDao dao;
     StockTicker test = new StockTicker();
     StockSummary master = new StockSummary();
     
-    /**
-     * Investopedia scraper
-     */
     public InvestopediaScraperTest() {
         try {
             File tempFile = File.createTempFile("dbTest", "sqlite");
@@ -31,6 +25,7 @@ public class InvestopediaScraperTest {
             
             dao = new StockDao();
             Class daoClass = dao.getClass();
+            dao.deleteAll();
 
             Field f1 = daoClass.getDeclaredField("dbName");
             f1.setAccessible(true);
@@ -43,7 +38,6 @@ public class InvestopediaScraperTest {
             f3.set(dao, null);
             
             dao.getInstance();
-            dao.deleteAll();
             
             test.setId(1);
             test.setName("Apple Inc.");
@@ -68,9 +62,6 @@ public class InvestopediaScraperTest {
         }
     }
 
-    /*
-    * Test signle scrape of summary data
-    */
     @Test
     public void testScrapeSingleSummaryData() {
         try{
@@ -102,10 +93,7 @@ public class InvestopediaScraperTest {
             System.out.println("Actual:" + actual);
             
             assertEquals(expected, actual);
-            
-            //truncate the data after test
-            dao.getInstance();
-            dao.deleteAll();
+
             
         } catch (Exception e) {
             e.printStackTrace();
