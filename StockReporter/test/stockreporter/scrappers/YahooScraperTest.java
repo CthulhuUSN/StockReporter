@@ -18,6 +18,9 @@ import stockreporter.daomodels.StockTicker;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockHistorical;
 
+/**
+ * Test class for Yahoo scraper
+ */
 public class YahooScraperTest {
     StockDao dao;
     
@@ -26,10 +29,7 @@ public class YahooScraperTest {
     StockHistorical sh = new StockHistorical();
     
     public YahooScraperTest() {
-    
-    
-    
-    try {
+        try {
             File tempFile = File.createTempFile("dbTest", "sqlite");
             tempFile.deleteOnExit();
             String tempUrl = "jdbc:sqlite:" + tempFile.getAbsolutePath();

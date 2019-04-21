@@ -4,6 +4,9 @@ package stockreporter.daomodels;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Test class for stock ticker
+ */
 public class StockTickerTest {
     
     StockTicker master = new StockTicker();

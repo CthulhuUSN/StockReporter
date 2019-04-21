@@ -10,8 +10,7 @@ import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
 /**
- *
- * @author Jared Smith
+ * Test cases for stock historical
  */
 public class StockHistoricalTest {
     

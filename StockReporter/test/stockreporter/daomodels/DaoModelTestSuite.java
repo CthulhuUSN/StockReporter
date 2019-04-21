@@ -13,8 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- *
- * @author Jared Smith
+ * Test suite for model classes
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({stockreporter.daomodels.StockDateMapTest.class, stockreporter.daomodels.StockTickerTest.class, stockreporter.daomodels.StockSummaryTest.class})

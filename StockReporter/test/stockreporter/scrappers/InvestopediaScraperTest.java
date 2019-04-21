@@ -11,12 +11,18 @@ import stockreporter.Utility;
 import stockreporter.daomodels.StockSummary;
 import stockreporter.daomodels.StockTicker;
 
+/**
+ * Test class for investopedia scraper
+ */
 public class InvestopediaScraperTest {
 
     StockDao dao;
     StockTicker test = new StockTicker();
     StockSummary master = new StockSummary();
     
+    /**
+     * Investopedia scraper
+     */
     public InvestopediaScraperTest() {
         try {
             File tempFile = File.createTempFile("dbTest", "sqlite");

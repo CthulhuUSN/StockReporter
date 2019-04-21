@@ -3,6 +3,9 @@ package stockreporter.daomodels;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * Stock date map test class
+ */
 public class StockDateMapTest {
     
     StockDateMap master = new StockDateMap();

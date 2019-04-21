@@ -13,8 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- *
- * @author Jared Smith
+ * Test suite for scrapers
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({stockreporter.scrappers.InvestopediaScraperTest.class, stockreporter.scrappers.YahooScraperTest.class})

@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
+/**
+ * Test class for summary 
+ */
 public class StockSummaryTest {
     
     public StockSummaryTest() {

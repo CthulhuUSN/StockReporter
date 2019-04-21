@@ -10,8 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author klacayo
+ * Test generic methods such as string to currency, billion to thousands etc.
  */
 public class UtilityTest {
     Utility util;

@@ -13,8 +13,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 /**
- *
- * @author Jared Smith
+ * Test suite for utility and stock dao classes
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({stockreporter.UtilityTest.class, stockreporter.StockDaoTest.class})
