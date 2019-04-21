@@ -20,17 +20,19 @@ The application will generate "stockreporter.prod" database with tables, indexes
 
 Database (Manual)
 -----------------
+Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
+
 Use "create_tbl_vw_master_summary.sql" to create master, summary tables, indexes, and summary view.
 
-Use "master_data.sql" to insert initial data into STOCK_TICKER and STOCK_SOURCE tables.
+Use "create tbl_vw_historical.sql" to create stock historical and summary table/view.
 
 Running application
 -------------------
-src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time. The application scraps the stock data based on STOCK_SOURCE and STOCK_TICKER data. When you run test cases, please drop the database to have clean data.
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time. The application scraps the stock summary and historical data based on STOCK_SOURCE and STOCK_TICKER data. When you run test cases, please drop the database to have clean data.
 
 Note:
 ----
-As of Apr 07, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
+As of Apr 21, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
 
 Running Test
 ------------
