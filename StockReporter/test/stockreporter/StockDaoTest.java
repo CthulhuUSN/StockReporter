@@ -117,10 +117,17 @@ public class StockDaoTest {
     }
 
     /**
+     * TODO
+     * Test of insertStockHistoricalData insert/get, of class StockDao.
+     */
+    public void testGInsertStockhistoricalData() {
+        
+    }
+    
+    /**
     *Test get stock historical data from view
      */
-
-    public void testGetStockHIstoricalView() {
+    public void testHGetStockHIstoricalView() {
         StockDao instance = StockDao.getInstance();
         int totalRecords = instance.getStockHistoricalView();
         Assert.assertTrue(totalRecords > 0);
@@ -130,7 +137,7 @@ public class StockDaoTest {
      * Delete records from stock source
      */
     @Test
-    public void testGdeleteAllFromStockSource(){
+    public void testIdeleteAllFromStockSource(){
         StockDao instance = StockDao.getInstance();
         
         instance.deleteFromStockSource();
@@ -143,7 +150,7 @@ public class StockDaoTest {
      * Delete records from stock ticker
      */
     @Test
-    public void testGdeleteAllFromStockTicker () {
+    public void testJdeleteAllFromStockTicker () {
         StockDao instance = StockDao.getInstance();
 
         instance.deleteFromStockTicker();
@@ -156,7 +163,7 @@ public class StockDaoTest {
      * Delete records from stock date map
      */
     @Test
-    public void testIdeleteAllFromStockDateMap() {
+    public void testKdeleteAllFromStockDateMap() {
         StockDao instance = StockDao.getInstance();
 
         instance.deleteFromStockDateMap();
@@ -169,7 +176,7 @@ public class StockDaoTest {
      * Delete records from stock summary
      */
     @Test
-    public void testJdeleteAllFromStockSummary() {
+    public void testLDeleteAllFromStockSummary() {
         StockDao instance = StockDao.getInstance();
 
         instance.deleteFromStockSummary();
@@ -181,7 +188,7 @@ public class StockDaoTest {
     * Delete records from stock historical
      */
     @Test
-    public void testDeleteFromStockHiastorical() {
+    public void testMDeleteFromStockHiastorical() {
         StockDao instance = StockDao.getInstance();
         instance.deleteFromStockHiastorical();
         int recordsCnt = instance.getStockHistoricalCount();
