@@ -13,6 +13,7 @@ import stockreporter.daomodels.StockDateMap;
 import static org.junit.Assert.assertNotNull;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
+import stockreporter.daomodels.StockHistorical;
 
 /**
  * Test DAO methods with CRUD statements
@@ -68,7 +69,7 @@ public class StockDaoTest {
         int tickerId = instance.getStockTickerBySymbol("MSFT");
         stockDateMap.setSourceId(sourceId);
         stockDateMap.setTickerId(tickerId);
-        stockDateMap.setDate("04-01-2019");
+        stockDateMap.setDate("2019-04-01");
         int cntBeforeInsert = instance.getStockDateMapCount();
         instance.insertStockDateMap(stockDateMap);
         int cntAfterInsert = instance.getStockDateMapCount();
@@ -82,7 +83,7 @@ public class StockDaoTest {
     public void testEInsertStockSummaryData() {
         StockDao instance = StockDao.getInstance();
         
-        String date = "04-01-2019";
+        String date = "2019-04-01";
         
         int stockDateMapId = instance.getStockDateMapID(date, "MSFT", "Yahoo");
         
@@ -117,11 +118,30 @@ public class StockDaoTest {
     }
 
     /**
-     * TODO
      * Test of insertStockHistoricalData insert/get, of class StockDao.
      */
+    @Test
     public void testGInsertStockhistoricalData() {
+        StockDao instance = StockDao.getInstance();
         
+         String date = "2019-04-01";
+        
+        int stockDateMapId = instance.getStockDateMapID(date, "MSFT", "Yahoo");
+        
+        StockHistorical historical = new StockHistorical();
+        historical.setOpen(new BigDecimal(120.5));
+        historical.setHigh(new BigDecimal(122.1));
+        historical.setLow(new BigDecimal(119.4));
+        historical.setClose(new BigDecimal(121.7));
+        historical.setAdjClose(new BigDecimal(121.7));
+        historical.setVolume(27991000);
+        historical.setStockDtMapId(stockDateMapId);
+        
+        int cntBeforeInsert = instance.getStockHistoricalCount();
+        instance.insertStockHistoricalData(historical);
+        int cntAfterInsert = instance.getStockHistoricalCount();
+        
+        Assert.assertTrue("Stock historical failed to insert data", cntAfterInsert >= cntBeforeInsert);
     }
     
     /**
