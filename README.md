@@ -28,7 +28,7 @@ src/stockreporter/StockReporter is the main class to run the application. The ap
 
 Note:
 ----
-As of Apr 21, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
+As of Apr 25, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
 
 Running Test
 ------------
