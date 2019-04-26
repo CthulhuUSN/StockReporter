@@ -24,7 +24,7 @@ Use "create tbl_vw_historical.sql" to create stock historical and summary table/
 
 Running application
 -------------------
-src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time. The application scraps the stock summary and historical data based on STOCK_SOURCE and STOCK_TICKER data. When you run test cases, please drop the database to have clean data.
+src/stockreporter/StockReporter is the main class to run the application. The application does not ship with database but "stockreporter.prod" will be auto-created (tables, initial master data for STOCK_SOURCE and STOCK_TICKER, indexes, and views) when the application is executed for the first time. The application scraps the stock summary and historical (Investopedia does not provide the data anymore) data based on STOCK_SOURCE and STOCK_TICKER data. When you run test cases, please drop the database to have clean data.
 
 Note:
 ----
