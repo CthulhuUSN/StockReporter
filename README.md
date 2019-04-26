@@ -32,4 +32,4 @@ As of Apr 25, 2019 the application scraps the data based on STOCK_SOURCE. The ap
 
 Running Test
 ------------
-The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database for StockReporterTestSuite and ScrappersTestSuite (auto-creates if the database does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is recommended to drop the database before running main application as it trunctates data including STOCK_SOURCE and STOCK_TICKER for some test cases.
+The application has three test suites under test/* folder for dao, models, and scraper testing. The system will insert some sample data into the default database for StockReporterTestSuite and ScrappersTestSuite (auto-creates if the database does not exist) and truncates the data at the end of the test. Once all testsuites are executed, it is highly recommended to drop the database before running main application as it trunctates data including STOCK_SOURCE and STOCK_TICKER .
