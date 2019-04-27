@@ -2,9 +2,15 @@ StockReporter will be able to scrape financial data from websites such as Yahoo,
 
 Project setup
 -------------
-Step 1: On local, run "git init" and followed by git clone https://github.com/kennylg2/swen_sa_tool.git.
+Step 1: On local machine, create a folder (e.g. mkdir stockproject).
 
-Step 2: Add project dependencies. 
+Step 2: Switch to the new folder and perform "git init".
+
+Step 3: On local, run "git init" and followed by git clone https://github.com/kennylg2/swen_sa_tool.git.
+
+Note: If you using the project zip, ignore the above steps.
+
+Step 4: Add project dependencies. 
 
   (Netbeans): Right click the project -> properties -> libraries -> Add Jar/Folder and select "jarfiles" folder. 
 
@@ -28,7 +34,7 @@ src/stockreporter/StockReporter is the main class to run the application. The ap
 
 Note:
 ----
-As of Apr 26, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format.
+As of Apr 26, 2019 the application scraps the data based on STOCK_SOURCE. The application may not function if there is a change in the source data format. e.g. The website may be redesigned or change in html format. Recently, Investopedia stopped offering historical data.
 
 Running Test
 ------------
